@@ -1,8 +1,9 @@
 ---
 name: Historia de Usuario
 about: Redacta una historia de usuario con sus criterios de aceptación
-title: '[scope]: Feature Name'
+title: ''
 labels: ''
+projects: 'c19-62-t-csharp-angular'
 assignees: ''
 ---
 
