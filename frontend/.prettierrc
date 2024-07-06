@@ -1,0 +1,35 @@
+{
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "semi": true,
+  "experimentalTernaries": false,
+  "singleQuote": true,
+  "quoteProps": "as-needed",
+  "trailingComma": "es5",
+  "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": false,
+  "proseWrap": "preserve",
+  "insertPragma": false,
+  "requirePragma": false,
+  "useTabs": false,
+  "embeddedLanguageFormatting": "auto",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.component.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ],
+  "endOfLine": "auto"
+}
