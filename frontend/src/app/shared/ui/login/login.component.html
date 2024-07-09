@@ -1,1 +1,26 @@
-<p>login works!</p>,
+<section class="grid place-content-center min-h-dvh">
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" (submit)="onSubmit()">
+    <div>
+      <label for="email"> Email</label>
+      <input id="email" name="email" formControlName="email" type="email" />
+    </div>
+    <div>
+      <label for="password"> Password</label>
+      <input
+        id="password"
+        name="password"
+        formControlName="password"
+        type="password"
+      />
+    </div>
+
+    <button
+      [disabled]="!loginForm.valid"
+      class="disabled:cursor-not-allowed"
+      type="submit"
+    >
+      Ingresar
+    </button>
+  </form>
+</section>
