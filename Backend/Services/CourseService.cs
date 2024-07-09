@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Dtos;
-using Backend.models;
+using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
