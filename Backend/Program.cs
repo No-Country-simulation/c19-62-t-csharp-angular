@@ -1,3 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Backend.Context;
+using Backend.Services;
+using AutoMapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +14,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<CourseService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
