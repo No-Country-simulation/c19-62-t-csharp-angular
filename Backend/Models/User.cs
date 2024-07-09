@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Models
 {
-    public class User
+    public class User : IdentityUser
     {
         [Key]
         public int Id { get; set;}
