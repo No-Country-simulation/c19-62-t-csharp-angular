@@ -8,15 +8,11 @@ namespace Backend.Models
 {
     public class CourseUser
     {
-
         [Key]
         public int Id { get; set;}
-
         public int CourseId { get; set;}
-        public int UserId { get; set;}
-        public Course Course { get; set;}   
-
-        public User User { get; set;}   
-        
+        public string UserId { get; set;} = String.Empty;
+        public Course Course { get; set;} = new Course();
+        public User User { get; set;} = new User();
     }
 }
