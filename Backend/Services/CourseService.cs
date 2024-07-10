@@ -11,9 +11,9 @@ namespace Backend.Services
 {
     public class CourseService
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CourseService(AppDbContext context){
+        public CourseService(ApplicationDbContext context){
             _context = context;
         }
 
