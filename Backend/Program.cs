@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add authorization endpoints
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add controllers and swagger
@@ -26,11 +26,11 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // Use in-memory DB for ease of development
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("AppDb"));
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("AppDb"));
 
 // TODO: switch from in-memory DB to SQLServer later on
-/*builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));*/
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -73,7 +73,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Map API endpoints
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 
 ////////////////////////////////////////////////
 
