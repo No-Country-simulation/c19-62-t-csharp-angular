@@ -29,7 +29,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Add authorization
 builder.Services.AddAuthorization();
-builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI();
 //builder.Services.AddIdentityApiEndpoints<User>()
