@@ -6,26 +6,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Backend.Models
 {
     public class User : IdentityUser
     {
-        [Key]
-        public int Id { get; set;}
-        [Column(TypeName = "varchar(80)")]
-        public string? UserName {get;set;}
+        [PersonalData]
+        public string Name { get; set;} = String.Empty;
 
-         [Column(TypeName = "varchar(80)")]
-        public string Name { get; set;}
-
-         [Column(TypeName = "varchar(80)")]
-        public string Email { get; set; }
-
-         [Column(TypeName = "varchar(80)")]
-        public string Password { get; set; }
-        
-        public ICollection<CourseUser>CourseUsers { get; set; }
-        
+        public ICollection<CourseUser> CourseUsers { get; set; } = new List<CourseUser>();
     }
 }
