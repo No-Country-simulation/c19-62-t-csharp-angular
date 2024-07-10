@@ -7,13 +7,10 @@ namespace Backend.Dtos
 {
     public class CourseUserDto
     {
-         public int Id { get; set;}
-
+        public int Id { get; set;}
         public int CourseId { get; set;}
-        public int UserId { get; set;}
-        public Course Course { get; set;}   
-
-        public User User { get; set;}   
-        
+        public string UserId { get; set;} = String.Empty;
+        public Course Course { get; set;} = new Course();
+        public User User { get; set;} = new User();
     }
 }
