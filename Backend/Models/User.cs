@@ -13,7 +13,6 @@ namespace Backend.Models
 {
     public class User : IdentityUser
     {
-        [PersonalData]
         public string Name { get; set;} = String.Empty;
 
         public ICollection<CourseUser> CourseUsers { get; set; } = new List<CourseUser>();
