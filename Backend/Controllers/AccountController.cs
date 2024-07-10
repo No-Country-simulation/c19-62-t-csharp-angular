@@ -10,10 +10,12 @@ namespace Backend.Controllers
     public class AccountController : Controller
     {
         private readonly AccountService _accountService;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(AccountService accountService)
+        public AccountController(AccountService accountService, RoleManager<IdentityRole> roleManager)
         {
             _accountService = accountService;
+            _roleManager = roleManager;
         }
 
         private void Errors(IdentityResult result)
@@ -42,6 +44,12 @@ namespace Backend.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool roleExists = await _roleManager.RoleExistsAsync(name);
+                if (roleExists)
+                {
+                    return StatusCode(500, "Role already exists");
+                }
+                
                 IdentityResult useResponse = await _accountService.Create(name);
                 if (useResponse.Succeeded)
                     return Ok(useResponse);
