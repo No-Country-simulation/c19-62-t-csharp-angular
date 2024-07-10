@@ -7,6 +7,7 @@ using Backend;
 using Backend.Context;
 using Backend.Models;
 using Backend.Controllers;
+using Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +29,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Add authorization
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<User>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI();
+//builder.Services.AddIdentityApiEndpoints<User>()
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
+    
 
 // Add Identity options
 builder.Services.Configure<IdentityOptions>(options =>
@@ -73,6 +78,9 @@ builder.Services.AddSwaggerGen();
 
 // Add remaining services
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<AccountService>();
 
 // Build App
 var app = builder.Build();

@@ -10,6 +10,7 @@ namespace Backend.Controllers
     public class AccountController : Controller
     {
         private readonly AccountService _accountService;
+
         public AccountController(AccountService accountService)
         {
             _accountService = accountService;
@@ -41,11 +42,11 @@ namespace Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await _accountService.Create(name);
-                if (result.Succeeded)
-                    return RedirectToAction("Index");
+                IdentityResult useResponse = await _accountService.Create(name);
+                if (useResponse.Succeeded)
+                    return Ok(useResponse);
                 else
-                    Errors(result);
+                    Errors(useResponse);
             }
             return View(name);
         }
