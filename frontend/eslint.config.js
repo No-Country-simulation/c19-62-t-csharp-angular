@@ -3,6 +3,7 @@ const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+const ngrx = require('@ngrx/eslint-plugin/v9');
 
 module.exports = tseslint.config(
   {
@@ -25,6 +26,7 @@ module.exports = tseslint.config(
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
+      ...ngrx.configs.all,
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -50,8 +52,8 @@ module.exports = tseslint.config(
       '@angular-eslint/component-max-inline-declarations': [
         'error',
         {
-          template: 8,
-          styles: 4,
+          template: 10,
+          styles: 5,
         },
       ],
       '@angular-eslint/contextual-lifecycle': ['error'],
@@ -64,6 +66,7 @@ module.exports = tseslint.config(
       '@typescript-eslint/no-empty-function': ['error'],
       '@typescript-eslint/no-useless-constructor': ['error'],
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      '@ngrx/no-typed-global-store': ['off'],
     },
   },
   {

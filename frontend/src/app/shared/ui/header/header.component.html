@@ -1,0 +1,22 @@
+<header>
+  <nav class="flex justify-between items-center py-6">
+    <h1 aria-label="learn teach logo">
+      <app-main-logo />
+    </h1>
+    <div class="flex gap-4">
+      <app-basic-button
+        [designBtn]="'selector'"
+        [btnConfig]="{
+          text: 'cursos',
+          icon: 'assets/arrow.svg',
+          label: 'ver cursos',
+        }"
+      />
+      <app-search-bar />
+    </div>
+    <div class="flex gap-8">
+      <app-basic-button [btnConfig]="{ text: 'ingresar' }" />
+      <app-basic-button [btnConfig]="{ text: 'registrarse' }" />
+    </div>
+  </nav>
+</header>
