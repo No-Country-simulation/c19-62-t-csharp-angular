@@ -32,7 +32,8 @@ namespace Backend.Services
                 Id=userGetDto.Id,
                 Email=userGetDto.Email!,
                 UserName=userGetDto.UserName!,
-                Name=userGetDto.Name,
+                FirstName=userGetDto.FirstName,
+                LastName=userGetDto.LastName,
                 }).ToList();
             return userGetDtos;
         }
