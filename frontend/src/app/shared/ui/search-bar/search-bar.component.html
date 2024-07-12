@@ -1,0 +1,26 @@
+<form class="relative" [formGroup]="searchControl">
+  <label for="search">
+    <input
+      class="placeholder:text-[#747474] rounded-2xl bg-second-background border-2 border-transparent pl-8 text-xl h-14"
+      (keydown.enter)="onSearch()"
+      [style]="{
+        borderColor: searchControl.controls['search'].hasError('pattern')
+          ? 'red'
+          : '',
+      }"
+      [ngClass]="{
+        'text-red-600 bg-red-100':
+          searchControl.controls['search'].hasError('pattern'),
+      }"
+      placeholder="Buscar cursos"
+      formControlName="search"
+      type="search"
+      name="search"
+    />
+  </label>
+  @if (searchControl.invalid) {
+    <p class="text-red-500 text-xs absolute pl-4 -bottom-1 translate-y-full">
+      Evite caracteres especiales (< >&#123; &#125;[ ] # ¡ & ?)
+    </p>
+  }
+</form>
