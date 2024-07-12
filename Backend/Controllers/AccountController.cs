@@ -11,7 +11,7 @@ using System.Text;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/")]
     public class AccountController : Controller
     {
         private readonly AccountService _accountService;
@@ -32,18 +32,23 @@ namespace Backend.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
         }
-        
-        private void Errors(IdentityResult result)
-        {
-            foreach (IdentityError error in result.Errors)
-                ModelState.AddModelError("", error.Description);
-        }
 
-        [Route("Register")]
-        [HttpPost]
-        public async Task<IActionResult> Register([Required] string email, [Required] string password, [Required] string firstName, [Required] string lastName)
+        /// <summary>
+        /// Registers a new account.
+        /// </summary>
+        /// <param name="email">The user's email</param>
+        /// <param name="password">The user's password</param>
+        /// <param name="firstName">The user's first name</param>
+        /// <param name="lastName">The user's last name</param>
+        /// <returns></returns>
+        [HttpPost("Account/Register", Name = "Register")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Register(
+            [FromForm, Required] string email,
+            [FromForm, Required] string password,
+            [FromForm, Required] string firstName,
+            [FromForm, Required] string lastName)
         {
-            // TODO: VALIDAR LOS CAMPOS ADICIONALES A LOS QUE PROVEE IDENTITY
             var user = new User { Email = email, UserName = email, FirstName = firstName, LastName = lastName };
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
@@ -53,9 +58,16 @@ namespace Backend.Controllers
             return BadRequest(result.Errors);
         }
 
-        [Route("login")]
-        [HttpPost]
-        public async Task<IActionResult> Login([Required] string email, [Required] string password)
+        /// <summary>
+        /// Logs in the specified user.
+        /// </summary>
+        /// <param name="email">The user's email</param>
+        /// <param name="password">The user's password</param>
+        /// <returns>Returns a JSON Web Token</returns>
+        [HttpPost("Account/Login", Name = "Login")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(401)]
+        public async Task<IActionResult> Login([FromForm, Required] string email, [FromForm, Required] string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
@@ -64,6 +76,57 @@ namespace Backend.Controllers
                 return Ok(new { Token = token });
             }
             return Unauthorized();
+        }
+
+        /// <summary>
+        /// Returns all existing roles.
+        /// </summary>
+        /// <param></param>
+        /// <returns>Returns all existing roles</returns>
+        [HttpGet("Role/GetAll", Name = "GetAllRoles")]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetAll()
+        {
+            List<IdentityRole> useResponse = await _accountService.GetAll();
+
+            if (useResponse.Count == 0)
+            {
+                return NotFound("No Roles found");
+            }
+
+            return Ok(useResponse);
+        }
+
+        /// <summary>
+        /// Creates a new Role.
+        /// </summary>
+        /// <param name="name">The name of the role to be created</param>
+        /// <returns></returns>
+        [HttpPost("Role/Create", Name = "CreateRole")]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> Create([Required] string name)
+        {
+            if (ModelState.IsValid)
+            {
+                bool roleExists = await _roleManager.RoleExistsAsync(name);
+                if (roleExists)
+                {
+                    return StatusCode(500, "Role already exists");
+                }
+                
+                IdentityResult useResponse = await _accountService.Create(name);
+                if (useResponse.Succeeded)
+                    return Ok(useResponse);
+                else
+                    Errors(useResponse);
+            }
+            return StatusCode(500, "ModelState is invalid");
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError("", error.Description);
         }
 
         private string GenerateJwtToken(User user)
@@ -82,41 +145,6 @@ namespace Backend.Controllers
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        [Route("GetRoles")]
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            List<IdentityRole> useResponse = await _accountService.GetAll();
-
-            if (useResponse.Count == 0)
-            {
-                return NotFound("No Roles found");
-            }
-
-            return Ok(useResponse);
-        }
-
-        [Route("CreateRole")]
-        [HttpPost]
-        public async Task<IActionResult> Create([Required] string name)
-        {
-            if (ModelState.IsValid)
-            {
-                bool roleExists = await _roleManager.RoleExistsAsync(name);
-                if (roleExists)
-                {
-                    return StatusCode(500, "Role already exists");
-                }
-                
-                IdentityResult useResponse = await _accountService.Create(name);
-                if (useResponse.Succeeded)
-                    return Ok(useResponse);
-                else
-                    Errors(useResponse);
-            }
-            return View(name);
         }
     }
 }
