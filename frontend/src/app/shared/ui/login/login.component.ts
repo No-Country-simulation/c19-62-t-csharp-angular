@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { InputFieldWrapperComponent } from '../input-field-wrapper/input-field-wrapper.component';
 import { InputValidatorPipe } from '../../pipes/input-validator.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import { InputValidatorPipe } from '../../pipes/input-validator.pipe';
     ReactiveFormsModule,
     InputFieldWrapperComponent,
     InputValidatorPipe,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styles: `
@@ -42,6 +44,8 @@ export class LoginComponent {
   }
 
   public getTypeError(object: ValidationErrors): string {
+    console.log('s');
+
     return Object.keys(object)[0] ?? '';
   }
 }
