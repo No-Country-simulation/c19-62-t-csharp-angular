@@ -12,6 +12,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/")]
+    [Produces("application/json")]
     public class AccountController : Controller
     {
         private readonly AccountService _accountService;
@@ -42,7 +43,7 @@ namespace Backend.Controllers
         /// <param name="lastName">The user's last name</param>
         /// <returns></returns>
         [HttpPost("Account/Register", Name = "Register")]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(
             [FromForm, Required] string email,
             [FromForm, Required] string password,
@@ -64,16 +65,18 @@ namespace Backend.Controllers
         /// <param name="email">The user's email</param>
         /// <param name="password">The user's password</param>
         /// <returns>Returns a JSON Web Token</returns>
+        /// <response code="200">Returns the JSON Web Token</response>
+        /// <response code="401">Wrong credentials</response>
         [HttpPost("Account/Login", Name = "Login")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(401)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromForm, Required] string email, [FromForm, Required] string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 var token = GenerateJwtToken(user);
-                return Ok(new { Token = token });
+                return Ok(token);
             }
             return Unauthorized();
         }
@@ -83,8 +86,9 @@ namespace Backend.Controllers
         /// </summary>
         /// <param></param>
         /// <returns>Returns all existing roles</returns>
+        /// <response code="404">No roles found</response>
         [HttpGet("Role/GetAll", Name = "GetAllRoles")]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAll()
         {
             List<IdentityRole> useResponse = await _accountService.GetAll();
@@ -101,9 +105,10 @@ namespace Backend.Controllers
         /// Creates a new Role.
         /// </summary>
         /// <param name="name">The name of the role to be created</param>
+        /// <response code="500">Role already exists / Internal server error</response>
         /// <returns></returns>
         [HttpPost("Role/Create", Name = "CreateRole")]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([Required] string name)
         {
             if (ModelState.IsValid)
