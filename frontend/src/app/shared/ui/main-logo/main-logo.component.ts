@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'app-main-logo',
   standalone: true,
   imports: [NgOptimizedImage],
-  templateUrl: './main-logo.component.ts',
+  templateUrl: './main-logo.component.html',
   styles: `
     :host {
       display: block;
