@@ -68,7 +68,7 @@ namespace Backend.Controllers
         /// <response code="200">Returns the JSON Web Token</response>
         /// <response code="401">Wrong credentials</response>
         [HttpPost("Account/Login", Name = "Login")]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromForm, Required] string email, [FromForm, Required] string password)
         {
@@ -76,7 +76,7 @@ namespace Backend.Controllers
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 var token = GenerateJwtToken(user);
-                return Ok(token);
+                return Ok( new { access_token = token, token_type = "Bearer", expires_in = 60 * 30 });
             }
             return Unauthorized();
         }
