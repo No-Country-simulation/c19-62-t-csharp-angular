@@ -52,7 +52,8 @@ module.exports = tseslint.config(
       '@angular-eslint/component-max-inline-declarations': [
         'error',
         {
-          template: 5,
+          template: 10,
+          styles: 5,
         },
       ],
       '@angular-eslint/contextual-lifecycle': ['error'],
