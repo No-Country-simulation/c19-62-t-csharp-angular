@@ -15,6 +15,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS, APP_EFFECTS } from './core/store/app.state';
 import { provideEffects } from '@ngrx/effects';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,5 +29,6 @@ export const appConfig: ApplicationConfig = {
     provideStore(ROOT_REDUCERS),
     provideEffects(APP_EFFECTS),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideHttpClient(withFetch()),
   ],
 };

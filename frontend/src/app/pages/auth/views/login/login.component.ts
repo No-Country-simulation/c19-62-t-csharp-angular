@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 import { MainLogoComponent } from '../../../../shared/ui/main-logo/main-logo.component';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { AuthLayoutComponent } from '../../../../layouts/auth-layout/auth-layout.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -51,17 +52,20 @@ export default class LoginComponent {
     this.isViewPassword() ? '/assets/eye-fill.svg' : '/assets/eye-off.svg'
   );
 
-  constructor(private readonly formConstructor: FormBuilder) {
+  constructor(
+    private readonly formConstructor: FormBuilder,
+    private readonly authService: AuthService
+  ) {
     this.loginForm = this.formConstructor.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
 
-  public onSubmit(): void {
+  public async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) return;
-    //TODO Send to Backend
-    this.loginForm.reset();
+
+    // this.loginForm.reset();
   }
 
   public getTypeError(object: ValidationErrors): string {
