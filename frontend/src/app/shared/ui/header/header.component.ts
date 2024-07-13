@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BasicButtonComponent } from '../basic-button/basic-button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { MainLogoComponent } from '../main-logo/main-logo.component';
 
@@ -22,4 +22,10 @@ import { MainLogoComponent } from '../main-logo/main-logo.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  constructor(private readonly router: Router) {}
+
+  public navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
+}

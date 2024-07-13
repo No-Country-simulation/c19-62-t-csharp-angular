@@ -1,7 +1,7 @@
 <form class="relative" [formGroup]="searchControl">
   <label for="search">
     <input
-      class="placeholder:text-[#747474] rounded-2xl bg-second-background border-2 border-transparent pl-8 text-xl h-14"
+      class="placeholder:text-[#747474] rounded-2xl bg-second-background border-2 border-transparent pl-8 text-xl h-14 hover:bg-[#C9C9C9]"
       (keydown.enter)="onSearch()"
       [style]="{
         borderColor: searchControl.controls['search'].hasError('pattern')

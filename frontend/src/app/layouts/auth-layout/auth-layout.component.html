@@ -1,0 +1,18 @@
+<section
+  class="grid lg:grid-cols-2 lg:gap-4 place-content-center place-items-center px-8 bg-[#F6F6F7] gap-8"
+>
+  <div class="grid gap-8 max-w-[580px] place-content-center">
+    <header class="hidden lg:block">
+      <h2><app-main-logo /></h2>
+    </header>
+    <p class="text-5xl font-bold leading-snug">
+      {{ description() || 'Plataforma de educación' }}
+    </p>
+  </div>
+
+  <div>
+    <ng-content>
+      <app-loader loaderMessage="Cargando formulario" />
+    </ng-content>
+  </div>
+</section>

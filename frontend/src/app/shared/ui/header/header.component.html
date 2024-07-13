@@ -15,8 +15,14 @@
       <app-search-bar />
     </div>
     <div class="flex gap-8">
-      <app-basic-button [btnConfig]="{ text: 'ingresar' }" />
-      <app-basic-button [btnConfig]="{ text: 'registrarse' }" />
+      <app-basic-button
+        (click)="navigateTo('/learn-teach/auth/login')"
+        [btnConfig]="{ text: 'ingresar' }"
+      />
+      <app-basic-button
+        (click)="navigateTo('/learn-teach/auth/register')"
+        [btnConfig]="{ text: 'registrarse' }"
+      />
     </div>
   </nav>
 </header>

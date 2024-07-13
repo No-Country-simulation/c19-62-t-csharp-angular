@@ -1,13 +1,19 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+export const APP_ROUTES: Routes = [
+  { path: '', redirectTo: 'learn-teach', pathMatch: 'full' },
   {
-    path: 'home',
-    loadComponent: () => import('./pages/home/home.component'),
+    path: 'learn-teach',
+    loadComponent: () => import('./pages/web/web.component'),
+    loadChildren: () => import('./pages/web/web.routing'),
   },
   {
     path: 'cms',
     loadComponent: () => import('./pages/cms/cms.component'),
+    canActivate: [],
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
   },
 ];
