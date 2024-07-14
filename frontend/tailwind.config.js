@@ -9,6 +9,9 @@ module.exports = {
         'primary-blue-light': 'var(--primary-blue-light)',
         'second-background': 'var(--second-background)',
       },
+      fontFamily: {
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

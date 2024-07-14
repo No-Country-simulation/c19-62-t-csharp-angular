@@ -1,2 +1,14 @@
-<p>courses-carousel works!</p>
-,
+<article class="overflow-x-auto">
+  <header>
+    <h3>Cursos más populares</h3>
+    <p>
+      Descubra nuestros cursos más populares y prepárese para una carrera en
+      demanda.
+    </p>
+  </header>
+  <div class="flex gap-12 overflow-x-hidden">
+    @for (item of slides; track $index) {
+      <app-course-card class="flex-[0_1_100%]" />
+    }
+  </div>
+</article>
