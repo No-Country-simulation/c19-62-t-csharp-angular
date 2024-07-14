@@ -14,6 +14,6 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    loadComponent: () => import('./pages/not-found/not-found.component'),
   },
 ];

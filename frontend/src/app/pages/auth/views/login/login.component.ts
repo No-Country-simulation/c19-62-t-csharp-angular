@@ -18,6 +18,7 @@ import { MainLogoComponent } from '../../../../shared/ui/main-logo/main-logo.com
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { AuthLayoutComponent } from '../../../../layouts/auth-layout/auth-layout.component';
 import { AuthService } from '../../services/auth.service';
+import { AuthCredentials } from '../../interfaces/AuthCredentials.interface';
 
 @Component({
   selector: 'app-login',
@@ -64,8 +65,18 @@ export default class LoginComponent {
 
   public async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) return;
+    const credentials: AuthCredentials = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
+    this.authService.login(credentials).subscribe((res) => console.log(res));
 
     // this.loginForm.reset();
+  }
+
+  public onRegister(): void {
+    // this.authService.register();
+    this.authService.assignRole();
   }
 
   public getTypeError(object: ValidationErrors): string {
