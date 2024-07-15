@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
 using AutoMapper;
@@ -13,6 +14,7 @@ using Backend.Controllers;
 using Backend.Services;
 using System.Text;
 using System.Reflection;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,10 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200");
+            policy.WithOrigins("http://localhost:4200",
+                                "http://127.0.0.1:4200")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType);
         });
 });
 
