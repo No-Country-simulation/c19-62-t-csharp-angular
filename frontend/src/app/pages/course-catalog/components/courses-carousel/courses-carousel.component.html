@@ -1,14 +1,33 @@
-<article class="overflow-x-auto">
-  <header>
-    <h3>Cursos más populares</h3>
-    <p>
-      Descubra nuestros cursos más populares y prepárese para una carrera en
-      demanda.
-    </p>
-  </header>
-  <div class="flex gap-12 overflow-x-hidden">
-    @for (item of slides; track $index) {
-      <app-course-card class="flex-[0_1_100%]" />
-    }
-  </div>
+<article class="text-primary-blue-light">
+  <h3 class="text-3xl font-semibold tracking-wider">
+    {{ carrouselData().title || 'Cursos' }}
+  </h3>
+  <p #description class="py-3 text-xl tracking-wide">
+    {{ carrouselData().description || 'Los mas recientes' }}
+  </p>
+
+  @defer (on viewport(description)) {
+    <swiper-container
+      space-between="30"
+      loop="true"
+      breakpoints='{"400":{"slidesPerView":1},"640":{"slidesPerView":2},"1024":{"slidesPerView":3},"1200":{"slidesPerView":4}}'
+      class="mySwiper active:cursor-grab"
+    >
+      @for (item of carrouselData().slides; track $index) {
+        <swiper-slide>
+          <app-course-card />
+        </swiper-slide>
+      } @empty {
+        <app-error-message />
+      }
+    </swiper-container>
+  } @placeholder {
+    <div class="flex gap-10 overflow-hidden">
+      @for (item of carrouselData().slides; track $index) {
+        <app-card-skeleton class="flex-[1_0_348px]" />
+      }
+    </div>
+  } @error {
+    <app-error-message />
+  }
 </article>

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CoursesCarouselComponent } from '../course-catalog/components/courses-carousel/courses-carousel.component';
+import { CourseCatalogComponent } from '../course-catalog/course-catalog.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CoursesCarouselComponent],
+  imports: [CourseCatalogComponent],
   templateUrl: './home.component.html',
   styles: `
     :host {

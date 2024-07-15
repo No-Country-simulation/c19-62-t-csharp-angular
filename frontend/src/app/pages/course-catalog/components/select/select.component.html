@@ -1,0 +1,43 @@
+<div class="relative inline-block text-left">
+  <button
+    type="button"
+    (click)="toggleDropdown()"
+    class="inline-flex justify-center items-center w-full tracking-wider text-[#E6ECF2] bg-primary-blue-light py-1 px-3 rounded-xl font-normal text-xl capitalize"
+  >
+    {{ categoryName() || 'select' }}
+    <svg
+      class="ml-2 -mr-1 h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </button>
+
+  @if (isOpen()) {
+    <ul
+      class="py-1 absolute text-base flex flex-col gap-2 w-max min-w-32"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="options-menu"
+    >
+      @for (option of selectOptions(); track option) {
+        <li>
+          <button
+            type="button"
+            (click)="selectOption('Principiante')"
+            class="w-full tracking-wider text-primary-blue py-1 px-3 rounded-xl shadow capitalize text-left bg-white hover:text-primary-white hover:bg-primary-blue-light transition-colors"
+          >
+            {{ option }}
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>
