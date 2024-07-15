@@ -120,7 +120,7 @@ var app = builder.Build();
 ////////////////////////////////////////////////
 
 // Map API endpoints
-app.MapIdentityApi<User>();
+//app.MapIdentityApi<User>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
