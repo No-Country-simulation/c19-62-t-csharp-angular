@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Services;
 using Backend.Dtos;
+using Backend.Models;
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
@@ -12,9 +13,11 @@ namespace Backend.Controllers
     public class UserController:ControllerBase
     {
         private readonly UserService _userService;
+        private readonly AccountService _accountService;
 
-        public UserController(UserService userService){
+        public UserController(UserService userService,AccountService accountService){
             _userService = userService;
+            _accountService = accountService;
         }
         
         [Route("GetAll")]
@@ -27,6 +30,5 @@ namespace Backend.Controllers
             }
             return Ok(useResponse);
         }
-        
     }
 }

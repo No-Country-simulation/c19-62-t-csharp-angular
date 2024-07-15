@@ -31,6 +31,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     options.RedirectStatusCode = Status307TemporaryRedirect;
     options.HttpsPort = 443;
 });*/
+//permite que los objetos que tienen relaciones cíclicas (como entidades que se refieren entre sí) se serialicen sin provocar errores o ciclos infinitos.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
 
 // Add authorization
 builder.Services.AddAuthorization();
@@ -106,6 +112,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<CategoryService>();
 
 // Build App
 var app = builder.Build();
