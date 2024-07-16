@@ -12,7 +12,7 @@ using Backend.Dtos;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
     public class AccountController : Controller
     {
