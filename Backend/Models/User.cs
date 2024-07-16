@@ -13,7 +13,9 @@ namespace Backend.Models
 {
     public class User : IdentityUser
     {
+        [Column(TypeName = "varchar(256)")]
         public string FirstName { get; set;} = String.Empty;
+        [Column(TypeName = "varchar(256)")]
         public string LastName { get; set;} = String.Empty;
         public ICollection<CourseUser> CourseUsers { get; set; } = new List<CourseUser>();
     }
