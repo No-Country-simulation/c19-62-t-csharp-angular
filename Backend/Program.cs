@@ -125,8 +125,8 @@ builder.Services.AddSwaggerGen(options =>
 // Add remaining services
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<CourseService>();
-builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<CategoryService>();
 
 // Build App

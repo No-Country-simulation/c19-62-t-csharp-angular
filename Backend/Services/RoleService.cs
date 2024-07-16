@@ -5,13 +5,13 @@ using Backend.Context;
 
 namespace Backend.Services
 {
-    public class AccountService
+    public class RoleService
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _config;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountService(ApplicationDbContext context, IConfiguration config, RoleManager<IdentityRole> roleManager){
+        public RoleService(ApplicationDbContext context, IConfiguration config, RoleManager<IdentityRole> roleManager){
             _context = context;
             _config = config;
             _roleManager = roleManager;
