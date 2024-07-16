@@ -13,36 +13,25 @@ export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
   public login(credentials: AuthCredentials): Observable<AuthResponse> {
-    console.log(credentials);
-
     return this.http.post<AuthResponse>(
       `${environment.LEARN_TEACH_KEY}/Account/Login`,
       credentials
     );
   }
 
-  public register(): void {
-    const data: AuthRegister = {
-      email: 'k@gmail.com',
-      password: 'FieldTest2',
-      firstName: 'FieldTest2',
-      lastName: 'FieldTest2',
-    };
-
+  public register(authData: AuthRegister): void {
     this.http
-      .post(`${environment.LEARN_TEACH_KEY}/Account/Register`, data)
+      .post(
+        `${environment.LEARN_TEACH_KEY}/api/Account/Register`,
+        this.formatBody(authData)
+      )
       .subscribe((res) => console.log(res));
   }
 
-  public getTest(): void {
-    this.http
-      .get(`${environment.LEARN_TEACH_KEY}/User/GetAll`)
-      .subscribe((res) => console.log(res));
-  }
+  private formatBody(data: Record<string, string>): FormData {
+    const formData: FormData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
-  public assignRole(): void {
-    this.http
-      .post(`${environment.LEARN_TEACH_KEY}/Role/Create?name=test2`, {})
-      .subscribe((res) => console.log(res));
+    return formData;
   }
 }
