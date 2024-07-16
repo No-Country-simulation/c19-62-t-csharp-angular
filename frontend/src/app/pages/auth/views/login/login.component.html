@@ -1,6 +1,9 @@
-<app-auth-layout [description]="description">
+<app-auth-layout
+  description="Bienvenido de vuelta, continuemos con tu aprendizaje."
+>
   <article
     class="grid gap-6 shadow-[0px_6px_6px_rgba(0,0,0,0.25)] p-8 sm:16 lg:p-20 xl:px-28 xl:py-20 rounded-2xl max-w-[600px] max-h-[696px] bg-white"
+    *ngrxLet="{ isLoading: isLoading$, error: authError$ } as auth"
   >
     <header class="text-center grid gap-8">
       <h3 class="text-3xl font-medium">Iniciar sesión</h3>
@@ -99,24 +102,29 @@
                 | appInputValidator: { form: loginForm, field: 'password' }
             }}
           </p>
+        } @else if (auth.error && !loginForm.controls['password'].dirty) {
+          <p class="field-feedback">La contraseña es incorrecta</p>
         }
       </div>
 
-      <a class="underline w-max lg:justify-self-end" routerLink="/"
+      <a class="underline text-right text-sm lg:justify-self-end" routerLink="/"
         >¿Olvidaste tu contraseña?</a
       >
-
       <button
         [title]="
           loginForm.invalid
             ? 'completa los campos del formulario'
             : 'registrarse'
         "
-        [disabled]="loginForm.invalid"
+        [disabled]="loginForm.invalid || auth.isLoading"
         class="h-14 w-full disabled:cursor-not-allowed bg-[#1E548D] rounded-[40px] text-white tracking-wider font-medium disabled:bg-[#053B73] transition-colors"
         type="submit"
       >
-        Ingresar
+        @if (auth.isLoading) {
+          Verificando ...
+        } @else {
+          Ingresar
+        }
       </button>
     </form>
   </article>

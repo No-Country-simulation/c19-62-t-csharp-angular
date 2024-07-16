@@ -2,13 +2,13 @@ import { Pipe, type PipeTransform } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 export enum BasicValidators {
-  required = 'Required field',
-  email = 'Invalid email',
-  pattern = 'Invalid format',
-  minlength = 'Minimum length',
-  maxlength = 'Maximum length',
-  min = 'Minimum value',
-  max = 'Maximum value',
+  required = 'Campo requerido',
+  email = 'Formato de email invalido',
+  pattern = 'Formato invalido',
+  minlength = 'La longitud mínima es: ',
+  maxlength = 'La longitud maxima es: ',
+  min = 'Requiere un valor mínimo de: ',
+  max = 'Requiere un valor máximo de:',
 }
 
 interface PipeParams {

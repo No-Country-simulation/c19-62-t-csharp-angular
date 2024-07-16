@@ -17,9 +17,12 @@ import { RouterLink } from '@angular/router';
 import { MainLogoComponent } from '../../../../shared/ui/main-logo/main-logo.component';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { AuthLayoutComponent } from '../../../../layouts/auth-layout/auth-layout.component';
-import { AuthService } from '../../services/auth.service';
 import { AuthCredentials } from '../../interfaces/AuthCredentials.interface';
-import { catchError } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { LetDirective } from '@ngrx/component';
+import AUTH_ACTIONS from '../../../../core/store/auth/auth.actions';
+import { AUTH_SELECTORS } from '../../../../core/store/auth/auth.selectors';
+import { AppState } from '../../../../core/store/app.state';
 
 @Component({
   selector: 'app-login',
@@ -33,16 +36,17 @@ import { catchError } from 'rxjs';
     NgClass,
     AuthLayoutComponent,
     NgOptimizedImage,
+    LetDirective,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoginComponent {
-  private isViewPassword = signal(false);
-  readonly description =
-    'Bienvenido de vuelta, continuemos con tu aprendizaje.';
+  isLoading$ = this.store.select(AUTH_SELECTORS.selectUserLoaded);
+  authError$ = this.store.select(AUTH_SELECTORS.selectError);
   loginForm: FormGroup;
+  private isViewPassword = signal(false);
   isViewPasswordStream = computed(() => this.isViewPassword());
   typeInputStream = computed(() =>
     this.isViewPassword() ? 'text' : 'password'
@@ -56,12 +60,20 @@ export default class LoginComponent {
 
   constructor(
     private readonly formConstructor: FormBuilder,
-    private readonly authService: AuthService
+    private readonly store: Store<AppState>
   ) {
     this.loginForm = this.formConstructor.nonNullable.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+  }
+
+  public getTypeError(object: ValidationErrors): string {
+    return Object.keys(object)[0] ?? '';
+  }
+
+  public onClick(): void {
+    this.isViewPassword.update((value) => !value);
   }
 
   public onSubmit(): void {
@@ -72,20 +84,7 @@ export default class LoginComponent {
       password: this.loginForm.value.password,
     };
 
-    this.authService.login(credentials).pipe(
-      catchError((error) => {
-        console.log(`Error: ${error}`);
-        return [];
-      })
-    );
+    this.store.dispatch(AUTH_ACTIONS.authLogin({ credentials }));
     this.loginForm.reset();
-  }
-
-  public getTypeError(object: ValidationErrors): string {
-    return Object.keys(object)[0] ?? '';
-  }
-
-  public onClick(): void {
-    this.isViewPassword.update((value) => !value);
   }
 }
