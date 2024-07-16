@@ -16,11 +16,9 @@ namespace Backend.Controllers
     public class UserController:ControllerBase
     {
         private readonly UserService _userService;
-        private readonly AccountService _accountService;
 
-        public UserController(UserService userService,AccountService accountService){
+        public UserController(UserService userService){
             _userService = userService;
-            _accountService = accountService;
         }
 
         /// <summary>
@@ -39,31 +37,35 @@ namespace Backend.Controllers
             return BadRequest(result.Errors);
         }
 
-         /// <summary>
+        /// <summary>
         /// Logs in the specified user.
         /// </summary>
-        /// <param name="email">The user's email</param>
-        /// <param name="password">The user's password</param>
-        /// <returns>Returns a JSON Web Token</returns>
+        /// <param name="userDto">The user's credentials</param>
         /// <response code="200">Returns the JSON Web Token</response>
         /// <response code="401">Wrong credentials</response>
-        [HttpPost("Account/Login", Name = "Login")]
+        [HttpPost("Login", Name = "Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Login([FromForm, Required] string email, [FromForm, Required] string password)
+        public async Task<IActionResult> Login([FromForm, Required] UserLoginDto userDto)
         {
-            string token = await _userService.Login(email, password);
+            string token = await _userService.Login(userDto.Email, userDto.Password);
             if (token != "")
-                return Ok( new { access_token = token, token_type = "Bearer", expires_in = 60 * 30 });
+                return Ok( new { user_name = userDto.Email, access_token = token });
             return Unauthorized();
         }
         
-        [Route("GetAll")]
-        [HttpGet]
+        /// <summary>
+        /// Returns all existing users.
+        /// </summary>
+        /// <response code="200">Returns all existing users</response>
+        /// <response code="404">No user exists</response>
+        [HttpGet("Users", Name = "GetAllUsers")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult>GetAll(){
             List<UserGetDto> useResponse= await _userService.GetAll();
             if (useResponse.Count==0)
-                return  NotFound("No Users found");
+                return NotFound("No users found");
             return Ok(useResponse);
         }
     }
