@@ -1,0 +1,131 @@
+<app-auth-layout
+  description="Bienvenido de vuelta, continuemos con tu aprendizaje."
+>
+  <article
+    class="grid gap-6 shadow-[0px_6px_6px_rgba(0,0,0,0.25)] p-8 sm:16 lg:p-20 xl:px-28 xl:py-20 rounded-2xl max-w-[600px] max-h-[696px] bg-white"
+    *ngrxLet="{ isLoading: isLoading$, error: authError$ } as auth"
+  >
+    <header class="text-center grid gap-8">
+      <h3 class="text-3xl font-medium">Iniciar sesión</h3>
+      <p>
+        ¿No tienes una cuenta aún?
+        <a
+          class="underline font-bold capitalize"
+          routerLink="/learn-teach/auth/register"
+        >
+          regístrate</a
+        >
+      </p>
+    </header>
+
+    <form class="grid gap-8" [formGroup]="loginForm" (submit)="onSubmit()">
+      <div class="field">
+        <label
+          class="field-content"
+          [ngClass]="{
+            valid: loginForm.controls['email'].status === 'VALID',
+            invalid:
+              loginForm.controls['email'].status === 'INVALID' &&
+              loginForm.controls['email'].dirty,
+          }"
+        >
+          <span class="field-label">Email</span>
+          <div class="field-wrapperInput">
+            <input
+              class="field-input ring-offset-slate-500"
+              formControlName="email"
+              type="email"
+            />
+          </div>
+        </label>
+
+        @if (
+          loginForm.controls['email'].status === 'INVALID' &&
+          loginForm.controls['email'].dirty
+        ) {
+          <p class="field-feedback">
+            {{
+              getTypeError(loginForm.controls['email'].errors!)
+                | appInputValidator: { form: loginForm, field: 'email' }
+            }}
+          </p>
+        }
+      </div>
+
+      <div class="field">
+        <label
+          class="field-content"
+          [ngClass]="{
+            valid: loginForm.controls['password'].status === 'VALID',
+            invalid:
+              loginForm.controls['password'].status === 'INVALID' &&
+              loginForm.controls['password'].dirty,
+          }"
+        >
+          <div class="field-label">
+            Contraseña
+            <button
+              [title]="messageButtonStream()"
+              class="field-button"
+              [ngClass]="{
+                'view-password': !isViewPasswordStream(),
+              }"
+              (click)="onClick()"
+              type="button"
+            >
+              <img
+                [ngSrc]="iconButtonStream()"
+                width="25"
+                height="25"
+                aria-hidden="true"
+                alt="icon password"
+              />
+            </button>
+          </div>
+          <div class="field-wrapperInput">
+            <input
+              class="field-input"
+              id="password"
+              name="password"
+              formControlName="password"
+              [attr.type]="typeInputStream()"
+            />
+          </div>
+        </label>
+        @if (
+          loginForm.controls['password'].status === 'INVALID' &&
+          loginForm.controls['password'].dirty
+        ) {
+          <p class="field-feedback">
+            {{
+              getTypeError(loginForm.controls['password'].errors!)
+                | appInputValidator: { form: loginForm, field: 'password' }
+            }}
+          </p>
+        } @else if (auth.error && !loginForm.controls['password'].dirty) {
+          <p class="field-feedback">La contraseña es incorrecta</p>
+        }
+      </div>
+
+      <a class="underline text-right text-sm lg:justify-self-end" routerLink="/"
+        >¿Olvidaste tu contraseña?</a
+      >
+      <button
+        [title]="
+          loginForm.invalid
+            ? 'completa los campos del formulario'
+            : 'registrarse'
+        "
+        [disabled]="loginForm.invalid || auth.isLoading"
+        class="h-14 w-full disabled:cursor-not-allowed bg-[#1E548D] rounded-[40px] text-white tracking-wider font-medium disabled:bg-[#053B73] transition-colors"
+        type="submit"
+      >
+        @if (auth.isLoading) {
+          Verificando ...
+        } @else {
+          Ingresar
+        }
+      </button>
+    </form>
+  </article>
+</app-auth-layout>
