@@ -83,11 +83,18 @@ namespace Backend.Services
 
         private string GenerateJwtToken(User user)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            var userRoles = _userManager.GetRolesAsync(user).GetAwaiter();
+            foreach (var userRole in userRoles.GetResult())
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
