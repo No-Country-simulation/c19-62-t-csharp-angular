@@ -81,15 +81,14 @@ namespace Backend.Services
             return userGetDtos;
         }
 
-        private string GenerateJwtToken(User user)
-        {
+        private string GenerateJwtToken(User user){
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var userRoles = _userManager.GetRolesAsync(user).GetAwaiter();
+            var userRoles = GetUserRoles(user).GetAwaiter();
             foreach (var userRole in userRoles.GetResult())
             {
                 claims.Add(new Claim(ClaimTypes.Role, userRole));
@@ -104,6 +103,13 @@ namespace Backend.Services
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task<List<string>> GetUserRoles(User user){
+            IList<string> roles = await _userManager.GetRolesAsync(user);
+            if (roles != null)
+                return [.. roles];
+            return [];
         }
     }
 }
