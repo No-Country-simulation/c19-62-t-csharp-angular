@@ -9,7 +9,7 @@ import { RatingComponent } from '../rating/rating.component';
   templateUrl: './course-card.component.html',
   styles: `
     :host {
-      display: contents;
+      display: block;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

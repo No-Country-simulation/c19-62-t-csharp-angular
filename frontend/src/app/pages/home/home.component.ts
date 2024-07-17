@@ -8,7 +8,7 @@ import { CourseCatalogComponent } from '../course-catalog/course-catalog.compone
   templateUrl: './home.component.html',
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

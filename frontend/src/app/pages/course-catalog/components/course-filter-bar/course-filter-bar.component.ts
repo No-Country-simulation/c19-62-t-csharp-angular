@@ -6,11 +6,7 @@ import { SelectComponent } from '../select/select.component';
   standalone: true,
   imports: [SelectComponent],
   templateUrl: './course-filter-bar.component.html',
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  styleUrls: ['./course-filter-bar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseFilterBarComponent {

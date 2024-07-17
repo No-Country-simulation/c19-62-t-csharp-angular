@@ -1,37 +1,28 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CoursesCarouselComponent } from './components/courses-carousel/courses-carousel.component';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CourseFilterBarComponent } from './components/course-filter-bar/course-filter-bar.component';
+import { GalleryCourseComponent } from './components/gallery-course/gallery-course.component';
+import { GalleryCarouselComponent } from './components/gallery-carousel/gallery-carousel.component';
 
 @Component({
   selector: 'app-course-catalog',
   standalone: true,
-  imports: [CoursesCarouselComponent, CourseFilterBarComponent],
+  imports: [
+    CourseFilterBarComponent,
+    GalleryCourseComponent,
+    GalleryCarouselComponent,
+  ],
   templateUrl: './course-catalog.component.html',
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCatalogComponent {
-  popularCourses = {
-    title: 'Cursos más populares',
-    description:
-      'Descubra nuestros cursos más populares y prepárese para una carrera en demanda.',
-    slides: [1, 2, 3, 4, 5],
-  };
-  newCourses = {
-    title: 'Cursos nuevos',
-    description:
-      'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
-    slides: [1, 2, 3, 4, 5],
-  };
+  isSearchActive = signal(false);
 
-  freeCourses = {
-    title: 'Cursos gratis',
-    description:
-      'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
-    slides: [1, 2, 3, 4, 5],
-  };
+  public activeSearch(): void {
+    this.isSearchActive.set(true);
+  }
 }
