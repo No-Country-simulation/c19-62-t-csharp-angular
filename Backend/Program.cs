@@ -100,7 +100,7 @@ builder.Services.Configure<IdentityOptions>(options =>
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
 
@@ -125,8 +125,8 @@ builder.Services.AddSwaggerGen(options =>
 // Add remaining services
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<CourseService>();
-builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<CategoryService>();
 
 // Build App
