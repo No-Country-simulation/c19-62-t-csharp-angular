@@ -76,7 +76,7 @@ namespace Backend.Controllers
         /// <param name="userData">The user's profile information</param>
         /// <response code="200">Modifies the user's profile information</response>
         /// <response code="404">User doesn't exist</response>
-        [HttpPost("UpdateProfile", Name = "UpdateProfile")]
+        [HttpPut("UpdateProfile", Name = "UpdateProfile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult>UpdateUser([Required] string email, [FromForm, Required] UserUpdateDto userData)
