@@ -16,7 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
   templateUrl: './home.component.html',
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

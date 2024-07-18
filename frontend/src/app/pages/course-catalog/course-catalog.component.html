@@ -1,0 +1,26 @@
+<section class="flex flex-col gap-28 h-full">
+  <h2
+    class="w-fit text-4xl font-bold tracking-wider text-primary-blue-light relative before:absolute before:h-1 before:w-full before:border-t-[#98D5DB] before:border-2 before:border-b-primary-blue before:bottom-0 before:translate-y-1"
+  >
+    Descubre nuestro cursos
+  </h2>
+  <div class="grid grid-rows-[auto_1fr] gap-10 grid-cols-1 h-full">
+    <app-course-filter-bar
+      (click)="activeSearch()"
+      class="justify-self-end z-10 row-[1/2] sticky top-0"
+    />
+    <div class="flex flex-col row-[2/3]">
+      @if (!isSearchActive()) {
+        <app-gallery-carousel />
+      }
+
+      @defer (when isSearchActive()) {
+        @if (isSearchActive()) {
+          <app-gallery-course />
+        }
+      } @loading (minimum 1s) {
+        <div class="content-center mx-auto h-full">Loading...</div>
+      }
+    </div>
+  </div>
+</section>
