@@ -1,2 +1,47 @@
-Home works
-<app-card-info />
+<app-grid-section class="pt-8">
+  <div class="max-w-md xl:max-w-xl flex flex-col gap-4 xl:gap-10 tracking-wide">
+    <h2
+      class="text-3xl md:text-5xl xl:text-6xl font-bold leading-snug md:leading-snug tracking-wider"
+    >
+      Fundamentos de HTML y CSS
+    </h2>
+    <p class="text-lg xl:text-2xl font-normal">
+      Da los primeros pasos en el desarrollo web
+    </p>
+    <div class="flex flex-col gap-6 max-w-md xl:max-w-[500px] pt-4">
+      <h3 class="font-semibold text-xl xl:text-3xl">Descripción del curso:</h3>
+      <div class="text-base xl:text-xl">
+        <p>
+          En este curso, aprenderás los conceptos esenciales de HTML y CSS, las
+          dos tecnologías fundamentales para la creación de páginas web.
+        </p>
+        <p>
+          A lo largo de las lecciones, descubrirás cómo estructurar contenido
+          con HTML y cómo darle estilo con CSS, permitiéndote crear sitios web
+          atractivos y funcionales desde cero.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <app-card-info />
+</app-grid-section>
+<app-grid-section class="min-h-dvh content-center">
+  <h2 class="text-5xl font-bold tracking-wider row-[1/2]">
+    Lo que aprenderás:
+  </h2>
+  <div class="relative w-96 h-56 xl:w-[600px] xl:h-[374px] col-[1/2] row-[2/3]">
+    <img ngSrc="assets/images/card-info2.webp" fill alt="s" />
+  </div>
+  <ul
+    class="list-disc text-base xl:text-xl max-w-[500px] flex flex-col gap-4 col-[2/3] row-[2/3]"
+  >
+    @for (data of dataList; track $index) {
+      <li>
+        {{ data }}
+      </li>
+    }
+  </ul>
+</app-grid-section>
+<button type="button">Comienza ahora</button>
+<app-footer />

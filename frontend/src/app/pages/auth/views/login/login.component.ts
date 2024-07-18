@@ -11,7 +11,6 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { InputFieldWrapperComponent } from '../../../../shared/ui/input-field-wrapper/input-field-wrapper.component';
 import { InputValidatorPipe } from '../../../../shared/pipes/input-validator.pipe';
 import { RouterLink } from '@angular/router';
 import { MainLogoComponent } from '../../../../shared/ui/main-logo/main-logo.component';
@@ -29,7 +28,6 @@ import { AppState } from '../../../../core/store/app.state';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    InputFieldWrapperComponent,
     InputValidatorPipe,
     RouterLink,
     MainLogoComponent,
