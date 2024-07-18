@@ -19,6 +19,9 @@ module.exports = {
           '100%': { opacity: 1 },
         },
       },
+      fontFamily: {
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],
