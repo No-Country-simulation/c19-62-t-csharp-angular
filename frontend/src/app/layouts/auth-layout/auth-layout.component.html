@@ -1,0 +1,20 @@
+<section
+  class="grid lg:grid-cols-2 lg:gap-4 place-content-center place-items-center px-8 bg-[#F6F6F7] gap-8"
+>
+  <div class="grid gap-12 max-w-[580px] grid-rows-[auto_1fr] self-start">
+    <header class="hidden lg:block pt-12">
+      <h2 class="-translate-x-5">
+        <app-main-logo customClass="w-[350px] h-24 xl:w-[500px] xl:h-32" />
+      </h2>
+    </header>
+    <p class="text-4xl xl:text-5xl font-bold leading-snug xl:leading-snug">
+      {{ description() || 'Plataforma de educación' }}
+    </p>
+  </div>
+
+  <div>
+    <ng-content>
+      <app-loader loaderMessage="Cargando formulario" />
+    </ng-content>
+  </div>
+</section>

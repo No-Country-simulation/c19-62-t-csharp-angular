@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
 using AutoMapper;
@@ -13,10 +14,24 @@ using Backend.Controllers;
 using Backend.Services;
 using System.Text;
 using System.Reflection;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Configure CORS, allowing frontend to use the API
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200",
+                                "http://127.0.0.1:4200")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType);
+        });
+});
 
 // Add database connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -31,6 +46,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     options.RedirectStatusCode = Status307TemporaryRedirect;
     options.HttpsPort = 443;
 });*/
+//permite que los objetos que tienen relaciones cíclicas (como entidades que se refieren entre sí) se serialicen sin provocar errores o ciclos infinitos.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
 
 // Add authorization
 builder.Services.AddAuthorization();
@@ -79,7 +100,7 @@ builder.Services.Configure<IdentityOptions>(options =>
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
 
@@ -104,8 +125,9 @@ builder.Services.AddSwaggerGen(options =>
 // Add remaining services
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<CourseService>();
-builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<CategoryService>();
 
 // Build App
 var app = builder.Build();
@@ -113,7 +135,7 @@ var app = builder.Build();
 ////////////////////////////////////////////////
 
 // Map API endpoints
-app.MapIdentityApi<User>();
+//app.MapIdentityApi<User>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -129,10 +151,29 @@ else
     app.UseHsts();
 }
 
+// Migrate the database
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        await context.Database.MigrateAsync();
+    }
+    catch (Exception ex)
+    {
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+    }
+
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors();
 
 app.UseAuthentication();
 app.UseAuthorization();

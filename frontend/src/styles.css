@@ -5,6 +5,15 @@
 
 @layer base {
   :root {
+    --primary-blue: #043466;
+    --primary-white: #e6ecf2;
+    --warn: #ff0000;
+    --successful: #038208;
+    --bg-color: #bababa;
+  }
+
+  body {
+    color: var(--primary-blue);
     --primary-white: #e6ecf2;
     --primary-blue: #043466;
     --primary-blue-light: #1e548d;

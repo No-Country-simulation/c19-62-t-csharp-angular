@@ -20,8 +20,14 @@ const selectUserLoaded = createSelector(
   (auth: AuthState) => auth.isUserLoaded
 );
 
+const selectError = createSelector(
+  selectAuthFeature,
+  (auth: AuthState) => auth.error
+);
+
 export const AUTH_SELECTORS = {
   selectToken,
   selectIsLoggedIn,
   selectUserLoaded,
+  selectError,
 };

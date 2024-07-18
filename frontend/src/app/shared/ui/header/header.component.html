@@ -1,7 +1,7 @@
 <header>
   <nav class="flex justify-between items-center py-6">
-    <h1 aria-label="learn teach logo">
-      <app-main-logo />
+    <h1 aria-label="learn teach">
+      <app-main-logo customClass="h-12 w-36 xl:h-16 xl:w-52" />
     </h1>
     <div class="flex gap-4">
       <app-basic-button
@@ -14,9 +14,23 @@
       />
       <app-search-bar />
     </div>
-    <div class="flex gap-8">
-      <app-basic-button [btnConfig]="{ text: 'ingresar' }" />
-      <app-basic-button [btnConfig]="{ text: 'registrarse' }" />
-    </div>
+    @if (isLogged | async) {
+      <p
+        class="rounded-[50%] bg-primary-blue grid place-content-center text-primary-white size-12 font-bold animate-fadeIn opacity-0"
+      >
+        W
+      </p>
+    } @else {
+      <div class="flex gap-8">
+        <app-basic-button
+          (click)="navigateTo('/learn-teach/auth/login')"
+          [btnConfig]="{ text: 'ingresar' }"
+        />
+        <app-basic-button
+          (click)="navigateTo('/learn-teach/auth/register')"
+          [btnConfig]="{ text: 'registrarse' }"
+        />
+      </div>
+    }
   </nav>
 </header>

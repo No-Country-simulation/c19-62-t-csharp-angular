@@ -1,23 +1,66 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Backend.Context;
-using Backend.Models;
-using Backend.Dtos;
-namespace Backend.Services
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
+using Backend.Context;
+using Backend.Dtos;
+using Backend.Models;
+
+namespace Backend.Services
 {
     public class UserService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _config;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
-        public UserService(ApplicationDbContext context, IConfiguration config){
+        public UserService(
+            ApplicationDbContext context,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration){
             _context = context;
-            _config = config;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _configuration = configuration;
+        }
+
+        public async Task<IdentityResult> Create(UserInputDto newuser, string password){
+            var user = new User
+            {
+                Email = newuser.Email,
+                UserName = newuser.Email,
+                FirstName = newuser.FirstName,
+                LastName = newuser.LastName
+            };
+
+            var result = await _userManager.CreateAsync(user, password);
+            if(result.Succeeded)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var newClaims = new List<Claim>()
+                {
+                    new(ClaimTypes.GivenName, user.FirstName),
+                    new(ClaimTypes.Surname, user.LastName)
+                };
+                await _userManager.AddClaimsAsync(user, newClaims);
+            }
+            return result;
+        }
+
+        public async Task<string> Login(string email, string password){
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null && await _userManager.CheckPasswordAsync(user, password))
+                return GenerateJwtToken(user);
+            return "";
         }
 
         public async Task<List<UserGetDto>> GetAll(){
@@ -31,11 +74,42 @@ namespace Backend.Services
             List<UserGetDto> userGetDtos=user.Select(userGetDto=>new UserGetDto{
                 Id=userGetDto.Id,
                 Email=userGetDto.Email!,
-                UserName=userGetDto.UserName!,
                 FirstName=userGetDto.FirstName,
                 LastName=userGetDto.LastName,
+                PhoneNumber=userGetDto.PhoneNumber!
                 }).ToList();
             return userGetDtos;
+        }
+
+        private string GenerateJwtToken(User user){
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+            var userRoles = GetUserRoles(user).GetAwaiter();
+            foreach (var userRole in userRoles.GetResult())
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task<List<string>> GetUserRoles(User user){
+            IList<string> roles = await _userManager.GetRolesAsync(user);
+            if (roles != null)
+                return [.. roles];
+            return [];
         }
     }
 }

@@ -6,13 +6,27 @@ const initialState: AuthState = {
   token: null,
   isLoggedIn: false,
   isUserLoaded: false,
+  error: null,
 };
 
 export const authReducer = createReducer(
   initialState,
   on(
     AUTH_ACTIONS.authLogin,
-    (state, { token }): AuthState => ({ ...state, isLoggedIn: true, token })
+    (state): AuthState => ({
+      ...state,
+      error: null,
+      isUserLoaded: true,
+    })
+  ),
+  on(
+    AUTH_ACTIONS.saveToken,
+    (state, { token }): AuthState => ({
+      ...state,
+      isLoggedIn: true,
+      token,
+      isUserLoaded: false,
+    })
   ),
   on(
     AUTH_ACTIONS.authLogout,
@@ -20,6 +34,14 @@ export const authReducer = createReducer(
       ...state,
       isLoggedIn: false,
       token: null,
+    })
+  ),
+  on(
+    AUTH_ACTIONS.authError,
+    (state, { error }): AuthState => ({
+      ...state,
+      error,
+      isUserLoaded: false,
     })
   )
 );

@@ -1,18 +1,21 @@
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import AUTH_ACTIONS from './auth.actions';
-import { map } from 'rxjs';
+import { catchError, exhaustMap, map, of } from 'rxjs';
 import { AUTH_SELECTORS } from './auth.selectors';
 import { Router } from '@angular/router';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Injectable } from '@angular/core';
 import { AppState } from '../app.state';
+import { AuthService } from '../../../pages/auth/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly router: Router,
+    private readonly authService: AuthService,
     private readonly store: Store<AppState>
   ) {}
 
@@ -24,6 +27,24 @@ export class AuthEffects {
         if (!token) this.router.navigate(['/home']);
         return AUTH_ACTIONS.authLogout();
       })
+    );
+  });
+
+  public authLogin = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AUTH_ACTIONS.authLogin),
+      exhaustMap(({ credentials }) =>
+        this.authService.login(credentials).pipe(
+          map(({ access_token }) => {
+            // this.router.navigate(['/home']);
+            return AUTH_ACTIONS.saveToken({ token: access_token });
+          }),
+          catchError((e: HttpErrorResponse) => {
+            console.log(e);
+            return of(AUTH_ACTIONS.authError({ error: e.statusText }));
+          })
+        )
+      )
     );
   });
 }
