@@ -63,21 +63,82 @@ namespace Backend.Services
             return "";
         }
 
+        public async Task<bool> ExistsByEmail(string email){
+            User? user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return false;
+            return true;
+        }
+
+        public async Task<UserProfileDto> GetByEmail(string email){
+            User? user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return new UserProfileDto();
+            
+            UserProfileDto userProfileDto = new UserProfileDto
+            {
+                Email = user.Email!,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber!
+            };
+            return userProfileDto;
+        }
+
+        public async Task<List<IdentityResult>> UpdateUser(string email, UserUpdateDto userData){
+            List<IdentityResult> results = [];
+            User? user = await _userManager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                // Update email, password and phone number
+                IdentityResult username_result = new();
+                IdentityResult email_result = new();
+                IdentityResult password_result = new();
+                IdentityResult phone_result = new();
+                
+                if (user.UserName != userData.Email)
+                    username_result = await _userManager.SetUserNameAsync(user, userData.Email);
+                    if (!username_result.Succeeded)
+                        results.Add(email_result);
+                if (user.Email != userData.Email)
+                    email_result = await _userManager.SetEmailAsync(user, userData.Email);
+                    if (!email_result.Succeeded)
+                        results.Add(email_result);
+                if (userData.CurrentPassword != userData.NewPassword)
+                    password_result = await _userManager.ChangePasswordAsync(user, userData.CurrentPassword, userData.NewPassword);
+                    if (!password_result.Succeeded)
+                        results.Add(email_result);
+                if (user.PhoneNumber != userData.PhoneNumber)
+                    phone_result = await _userManager.SetPhoneNumberAsync(user, userData.PhoneNumber);
+                    if (!phone_result.Succeeded)
+                        results.Add(email_result);
+
+                // Update extra details
+                user.FirstName = userData.FirstName;
+                user.LastName = userData.LastName;
+                var update_result = await _userManager.UpdateAsync(user);
+                if (!update_result.Succeeded)
+                    results.Add(email_result);
+            }
+            
+            return results;
+        }
+
         public async Task<List<UserGetDto>> GetAll(){
             List<User> user = await _context.Users.ToListAsync();
 
             if (user.Count==0)
-            {
-                return new List<UserGetDto>();
-            }
+                return [];
             
-            List<UserGetDto> userGetDtos=user.Select(userGetDto=>new UserGetDto{
-                Id=userGetDto.Id,
-                Email=userGetDto.Email!,
-                FirstName=userGetDto.FirstName,
-                LastName=userGetDto.LastName,
-                PhoneNumber=userGetDto.PhoneNumber!
-                }).ToList();
+            List<UserGetDto> userGetDtos = user.Select(userGetDto => new UserGetDto
+            {
+                Id = userGetDto.Id,
+                Email = userGetDto.Email!,
+                FirstName = userGetDto.FirstName,
+                LastName = userGetDto.LastName,
+                PhoneNumber = userGetDto.PhoneNumber!
+            }).ToList();
             return userGetDtos;
         }
 

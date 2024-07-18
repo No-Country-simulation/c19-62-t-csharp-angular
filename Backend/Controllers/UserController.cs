@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Services;
 using Backend.Dtos;
-using Backend.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Controllers
 {
@@ -50,8 +47,49 @@ namespace Backend.Controllers
         {
             string token = await _userService.Login(userDto.Email, userDto.Password);
             if (token != "")
-                return Ok( new { user_name = userDto.Email, access_token = token });
+                return Ok( new { email = userDto.Email, access_token = token });
             return Unauthorized();
+        }
+
+        /// <summary>
+        /// Returns the user's profile information.
+        /// </summary>
+        /// <param name="email">The user's email</param>
+        /// <response code="200">Returns the user's profile information.</response>
+        /// <response code="404">User doesn't exist</response>
+        [HttpGet("{email}", Name = "GetUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult>GetByEmail([Required] string email)
+        {
+            var userExists = await _userService.ExistsByEmail(email);
+            if (!userExists)
+                return NotFound("User doesn't exist");
+            UserProfileDto useResponse = await _userService.GetByEmail(email);
+            return Ok(useResponse);
+        }
+
+        /// <summary>
+        /// Modifies the user's profile information.
+        /// </summary>
+        /// <param name="email">The user's email</param>
+        /// <param name="userData">The user's profile information</param>
+        /// <response code="200">Modifies the user's profile information</response>
+        /// <response code="404">User doesn't exist</response>
+        [HttpPost("UpdateProfile", Name = "UpdateProfile")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult>UpdateUser([Required] string email, [FromForm, Required] UserUpdateDto userData)
+        {
+            var userExists = await _userService.ExistsByEmail(email);
+            if (!userExists)
+                return NotFound("User doesn't exist");
+            List<IdentityResult> useResponse = await _userService.UpdateUser(email, userData);
+            if (useResponse.IsNullOrEmpty())
+                return Ok("User profile updated successfully");
+            else
+                Errors(useResponse);
+            return StatusCode(500, "Something went wrong, user profile could've been updated partially");
         }
         
         /// <summary>
@@ -63,10 +101,19 @@ namespace Backend.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult>GetAll(){
-            List<UserGetDto> useResponse= await _userService.GetAll();
+            List<UserGetDto> useResponse = await _userService.GetAll();
             if (useResponse.Count==0)
                 return NotFound("No users found");
             return Ok(useResponse);
+        }
+
+        private void Errors(List<IdentityResult> results)
+        {
+            foreach (IdentityResult result in results)
+            {
+                foreach (IdentityError error in result.Errors)
+                    ModelState.AddModelError("", error.Description);
+            } 
         }
     }
 }
