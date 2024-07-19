@@ -14,7 +14,12 @@ namespace Backend.Dtos
         public string Name { get; set; } = String.Empty;
         public string Description { get; set; } = String.Empty;
         public string CourseResources { get; set; } = String.Empty;
+       
+        public string Prerequisites { get; set; } = String.Empty;
 
+        public string BulletPoints { get; set; } = String.Empty;
+
+         public DateTime CursoDuration { get; set; }
     
         
     }
