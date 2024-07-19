@@ -1,8 +1,9 @@
 <button
-  class="p-4 rounded-xl h-14 min-w-36 capitalize transition-colors text-xl grid place-content-center items-center border-2"
+  class="btn"
   [ngClass]="{
     'btn-basic-common': designBtn() === 'common' || !designBtn(),
     'btb-basic--selector': designBtn() === 'selector',
+    'btn-basic--large': designBtn() === 'large',
   }"
   [attr.title]="btnConfig().label"
   [attr.aria-label]="btnConfig().label"

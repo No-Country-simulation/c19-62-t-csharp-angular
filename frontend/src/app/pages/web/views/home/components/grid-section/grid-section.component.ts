@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-grid-section',
@@ -12,6 +12,4 @@ import { NgClass } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GridSectionComponent {
-  isReversed = input(false);
-}
+export class GridSectionComponent {}

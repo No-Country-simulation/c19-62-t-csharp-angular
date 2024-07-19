@@ -3,6 +3,8 @@ import { CardInfoComponent } from './components/card-info/card-info.component';
 import { GridSectionComponent } from './components/grid-section/grid-section.component';
 import { NgOptimizedImage } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
+import { BasicButtonComponent } from '../../../../shared/ui/basic-button/basic-button.component';
+import { LoaderComponent } from '../../../../shared/ui/loader/loader.component';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,15 @@ import { FooterComponent } from './components/footer/footer.component';
     GridSectionComponent,
     NgOptimizedImage,
     FooterComponent,
+    BasicButtonComponent,
+    LoaderComponent,
   ],
   templateUrl: './home.component.html',
   styles: `
     :host {
-      display: contents;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

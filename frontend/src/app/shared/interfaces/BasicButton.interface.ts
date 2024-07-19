@@ -4,4 +4,4 @@ export interface BasicButtonConfig {
   label?: string;
 }
 
-export type DesignButton = 'common' | 'selector';
+export type DesignButton = 'common' | 'selector' | 'large';
