@@ -128,6 +128,14 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<TagsService>();
+builder.Services.AddScoped<ModuleService>();
+builder.Services.AddScoped<ResourceService>();
+builder.Services.AddScoped<CourseModuleService>();
+builder.Services.AddScoped<CourseTagsService>();
+builder.Services.AddScoped<ModuleResourceService>();
+
+
 
 // Build App
 var app = builder.Build();

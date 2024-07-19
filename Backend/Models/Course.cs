@@ -20,15 +20,23 @@ namespace Backend.Models
         [Column(TypeName = "varchar(200)")]
         public string CourseResources { get; set; } = String.Empty;
 
-         public int IdCategory {get;set;} 
+        public string Prerequisites { get; set; } = String.Empty;
 
-        [JsonIgnore]
-        
+        public string BulletPoints { get; set; } = String.Empty;
+
+        public DateTime CursoDuration { get; set; }
+
+         public int IdCategory {get;set;} 
         public Category Category { get; set; }
         
         [JsonIgnore]
         public ICollection<CourseUser>CourseUsers { get; set; } = new List<CourseUser>();
-    
+
+        [JsonIgnore]
+        public ICollection<CourseTags> CourseTags { get; set;}= new List<CourseTags>();
+     
+         [JsonIgnore]
+        public ICollection<CourseModule> CourseModules { get; set;}= new List<CourseModule>();
         
 
     }

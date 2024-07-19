@@ -4,14 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Dtos;
+using Backend.models;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Services
 {
     public class CourseService
     {
         private readonly ApplicationDbContext _context; 
+
         public CourseService(ApplicationDbContext context){
             _context = context;
         }
@@ -42,6 +45,38 @@ namespace Backend.Services
             }
         }
 
+        public async Task<CourseGetWhereDto?>GetWhere(int courseId){
+
+        var instructorRoleId = await _context.Roles
+        .Where(r => r.Name == "instructor")
+        .Select(r => r.Id)
+        .FirstOrDefaultAsync();
+           
+        var course = await _context.Courses
+        .Include(c=>c.Category)
+        .Include(c=>c.CourseUsers)
+           .ThenInclude(cu=>cu.User)
+        .Select(c => new CourseGetWhereDto
+        {
+            
+            Id = c.Id,
+            Name = c.Name,
+            Description=c.Description,
+            CategoryName=c.Category.Name,
+            LevelCategory=c.Category.Level,
+            CourseResources=c.CourseResources,
+            UserName=c.CourseUsers
+            .Where(cu=>_context.UserRoles.Any(ur=>ur.UserId==cu.UserId && ur.RoleId==instructorRoleId))
+            .Select(cu => cu.User.FirstName + " " + cu.User.LastName)
+                .FirstOrDefault()?? ""
+        })
+        // Filtra por el id del curso
+        .FirstOrDefaultAsync(c => c.Id == courseId);
+
+        return course;
+
+        }
+
         public async Task <Course>Create(CourseInputDto courseInputDto){
            if (courseInputDto.IdCategory <= 0)
            {
@@ -60,7 +95,10 @@ namespace Backend.Services
             Name = courseNameLower,
             Description = courseInputDto.Description,
             CourseResources = courseInputDto.CourseResources,
-           IdCategory=courseInputDto.IdCategory,
+            IdCategory=courseInputDto.IdCategory,
+            Prerequisites=courseInputDto.Prerequisites,
+            BulletPoints=courseInputDto.BulletPoints,
+            CursoDuration=courseInputDto.CursoDuration,
             };
 
             _context.Courses.Add(course);
@@ -89,6 +127,14 @@ namespace Backend.Services
                 string categoryNameLower = courseGetDto.CategoryName.ToLower();
                query=query.Include(c=> c.Category)
                           .Where(c=>c.Category.Name.Contains(categoryNameLower));
+            }
+
+            if (!string.IsNullOrWhiteSpace(courseGetDto.NameTags))
+            {
+               string nameTags= courseGetDto.NameTags.ToLower();
+               query=query.Include(c=>c.CourseTags)
+                          .ThenInclude(ct=>ct.Tags)
+                          .Where(c => c.CourseTags.Any(ct => ct.Tags.Name.ToLower().Contains(nameTags)));
             }
 
             if(!string.IsNullOrWhiteSpace(courseGetDto.LevelCategory))

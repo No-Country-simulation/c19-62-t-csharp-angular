@@ -40,6 +40,17 @@ namespace Backend.Controllers
             }
         }
 
+        [Route("GetWhere")]
+        [HttpGet]
+        public async Task<IActionResult>GetWhere(int courseId){
+            var course= await _courseService.GetWhere(courseId);
+            if (course==null){
+                return NotFound();
+            }
+
+            return Ok(course);
+        }
+
         [Route("CreateCourse")]
         [HttpPost]
 
@@ -50,7 +61,7 @@ namespace Backend.Controllers
             }
             
             try{
-            var response= await _courseService.Create(courseInputDto);
+            var response= await _courseService.Create(courseInputDto!);
 
             if (response == null){
                 return BadRequest("Hubo un error al crear el curso");
@@ -75,6 +86,7 @@ namespace Backend.Controllers
 {
     if (string.IsNullOrWhiteSpace(courseGetDto.Name) &&
     string.IsNullOrWhiteSpace(courseGetDto.CategoryName) &&
+    string.IsNullOrWhiteSpace(courseGetDto.NameTags)&&
     string.IsNullOrWhiteSpace(courseGetDto.LevelCategory))
     {
     return BadRequest("Al menos uno de los criterios de búsqueda debe ser proporcionado.");
