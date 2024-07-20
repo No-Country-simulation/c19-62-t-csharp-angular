@@ -63,7 +63,7 @@ namespace Backend.Controllers
 
          return Created( string.Empty ,new {
              Message = "Modulo Recurso Registrado" ,
-             ResourceModule=response
+             ModuleResource=response
              });
             } 
             catch (ArgumentException ex)

@@ -7,7 +7,7 @@ namespace Backend.Dtos
 {
     public class CourseTagsDto
     {
-        public int IdCourse { get; set; }   
+        public int CourseId { get; set; }   
 
         public int IdTags { get; set; }
     }

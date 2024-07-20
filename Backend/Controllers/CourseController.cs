@@ -56,8 +56,9 @@ namespace Backend.Controllers
 
         public async Task <IActionResult>CreateCourse(CourseInputDto courseInputDto){
 
-            if (courseInputDto==null){
-                BadRequest("Los datos del cursos son requeridos");
+            var validationErrors=ValidateCourseInputDto(courseInputDto);
+            if (validationErrors.Any()){
+                return BadRequest(new{Errors = validationErrors});
             }
             
             try{
@@ -84,7 +85,7 @@ namespace Backend.Controllers
         [HttpGet]
     public async Task<IActionResult> SearchCourses([FromQuery] CourseGetDto courseGetDto)
 {
-    if (string.IsNullOrWhiteSpace(courseGetDto.Name) &&
+    if (string.IsNullOrWhiteSpace(courseGetDto.Title) &&
     string.IsNullOrWhiteSpace(courseGetDto.CategoryName) &&
     string.IsNullOrWhiteSpace(courseGetDto.NameTags)&&
     string.IsNullOrWhiteSpace(courseGetDto.LevelCategory))
@@ -110,6 +111,35 @@ namespace Backend.Controllers
     }
 }
 
+    private List<string> ValidateCourseInputDto(CourseInputDto dto)
+   {
+    var errors = new List<string>();
+
+    if (dto.IdCategory == 0)
+        errors.Add("IdCategory es requerido.");
+
+    if (string.IsNullOrWhiteSpace(dto.Title))
+        errors.Add("Title es requerido.");
+
+    if (string.IsNullOrWhiteSpace(dto.Description))
+        errors.Add("Description es requerido.");
+
+    if (string.IsNullOrWhiteSpace(dto.Prerequisites))
+        errors.Add("Prerequisites es requerido.");
+
+    if (string.IsNullOrWhiteSpace(dto.BulletPoints))
+        errors.Add("BulletPoints es requerido.");
+
+    if (dto.DurationDays <= 0)
+        errors.Add("DurationDays es requerido y debe ser mayor que 0.");
+
+    if (dto.DurationHours <= 0)
+        errors.Add("DurationHours es requerido y debe ser mayor que 0.");
+
+    return errors;
+    }  
+
         
     }
 }
+

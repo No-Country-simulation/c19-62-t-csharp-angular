@@ -33,7 +33,7 @@ namespace Backend.Controllers
                 BadRequest("Los datos son requeridos");
             }
 
-            if (courseTagsDto!.IdCourse <= 0)
+            if (courseTagsDto!.CourseId <= 0)
            {
            return BadRequest("El id curso debe ser mayor a 0");
            }
@@ -42,7 +42,7 @@ namespace Backend.Controllers
             return BadRequest("El id tag debe ser mayor a 0");
            }
 
-            var curse = await _context.Courses.FindAsync(courseTagsDto.IdCourse);
+            var curse = await _context.Courses.FindAsync(courseTagsDto.CourseId);
             if (curse == null)
              {
              return BadRequest("El id curso no existe");

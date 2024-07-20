@@ -16,11 +16,11 @@ namespace Backend.Services
         }
 
         public async Task <CourseTags>Create(CourseTagsDto courseTagsDto){
-             var curse = await _context.Courses.FindAsync(courseTagsDto.IdCourse);
+             var curse = await _context.Courses.FindAsync(courseTagsDto.CourseId);
              var tags= await _context.Tags.FindAsync(courseTagsDto.IdTags);
 
             var courseTags = new CourseTags{
-              IdCourse=curse!.Id,
+              CourseId=curse!.Id,
               IdTags=tags!.Id,
               Course=curse,
               Tags=tags

@@ -18,7 +18,7 @@ namespace Backend.Models
         public ICollection<CourseModule> CourseModules { get; set;}= new List<CourseModule>();
 
         [JsonIgnore]
-        public ICollection<ResourceModule> ResourceModules { get; set;}= new List<ResourceModule>();
+        public ICollection<ModuleResource> ModuleResources { get; set;}= new List<ModuleResource>();
 
     }
 }
