@@ -1,0 +1,67 @@
+<div class="grid place-content-center h-full gap-8 py-16">
+  <h2 class="text-3xl font-semibold text-center tracking-wide">Perfil</h2>
+  <form
+    class="form"
+    [style]="{ gap: '1.5rem' }"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="formUser"
+  >
+    <button
+      (click)="editToggleForm()"
+      type="button"
+      class="flex gap-2 items-center w-fit"
+    >
+      <app-pencil-svg />
+      <legend>Editar perfil</legend>
+    </button>
+    @for (field of fieldsForm; track field.key) {
+      <div class="field">
+        <div
+          class="field-content"
+          [ngClass]="{
+            invalid:
+              formUser.controls[field.key].status === 'INVALID' &&
+              formUser.controls[field.key].dirty,
+          }"
+        >
+          <label class="field-label" [for]="['user-' + field.key]"
+            >{{ field.name }} *</label
+          >
+          <div class="field-wrapperInput">
+            <input
+              class="field-input ring-offset-slate-500"
+              [type]="field.type"
+              [formControlName]="field.key"
+              [id]="['user-' + field.key]"
+            />
+          </div>
+        </div>
+        @if (
+          formUser.controls[field.key].status === 'INVALID' &&
+          formUser.controls[field.key].dirty
+        ) {
+          <p class="field-feedback">
+            {{
+              getTypeError(formUser.controls[field.key].errors!)
+                | appInputValidator: { form: formUser, field: field.key }
+            }}
+          </p>
+        }
+      </div>
+    }
+    @defer (when hasEditingEnabled()) {
+      @if (hasEditingEnabled()) {
+        <app-basic-button
+          class="animate-fadeIn opacity-0"
+          type="submit"
+          [isDisabled]="hasEditingEnabled() && formUser.invalid"
+          [btnConfig]="{
+            text: 'Guardar cambios',
+            type: 'submit',
+          }"
+          designBtn="common"
+        />
+      }
+    }
+  </form>
+</div>

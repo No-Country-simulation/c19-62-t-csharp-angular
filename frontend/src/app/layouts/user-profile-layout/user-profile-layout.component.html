@@ -1,0 +1,39 @@
+<section class="grid grid-cols-[auto_1fr] h-full py-8 max-w-6xl mx-auto">
+  <div
+    class="flex flex-col gap-8 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] p-4 bg-white rounded-2xl min-w-96"
+  >
+    <header class="flex flex-col justify-center items-center gap-4">
+      <app-avatar [avatarInfo]="{ name: user }" customClass="size-36" />
+      <h2 class="text-primary-blue font-semibold text-3xl">{{ user }}</h2>
+    </header>
+    <nav>
+      <ul class="flex flex-col justify-start gap-1">
+        @for (option of userOptions; track option.label) {
+          <li>
+            <a
+              class="hover:bg-light-blue text-primary-blue block transition-colors rounded-lg p-1 pl-3 tracking-wider"
+              [routerLink]="['/learn-teach/user' + option.link]"
+              routerLinkActive="bg-light-blue"
+              >{{ option.label }}</a
+            >
+          </li>
+        }
+        <li>
+          <button
+            type="button"
+            class="hover:bg-light-blue text-primary-blue flex-grow block transition-colors rounded-lg p-1 px-3 w-full text-left tracking-wider"
+          >
+            Cerrar cuenta
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div
+    class="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] bg-white rounded-2xl p-4"
+  >
+    <ng-content>
+      <app-loader />
+    </ng-content>
+  </div>
+</section>

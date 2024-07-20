@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-my-photo',
   standalone: true,
   imports: [],
-  templateUrl: './home.component.html',
+  templateUrl: './my-photo.component.html',
   styles: `
     :host {
-      display: contents;
+      display: block;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class HomeComponent {}
+export default class MyPhotoComponent {}

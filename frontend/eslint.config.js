@@ -52,7 +52,7 @@ module.exports = tseslint.config(
       '@angular-eslint/component-max-inline-declarations': [
         'error',
         {
-          template: 10,
+          template: 50,
           styles: 5,
         },
       ],

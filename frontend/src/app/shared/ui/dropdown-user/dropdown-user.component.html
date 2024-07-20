@@ -1,0 +1,26 @@
+<div class="relative">
+  <button
+    class="flex gap-4 items-center"
+    type="button"
+    (click)="toggleDropdown()"
+    [attr.aria-label]="labelDropdownStream()"
+  >
+    <app-avatar customClass="size-14" />
+    <app-arrow-svg class="rotate-90" />
+  </button>
+  @if (isOpenDropdown()) {
+    <ul
+      class="flex flex-col shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] overflow-hidden bg-light-white absolute bottom-0 right-0 translate-y-[120%] text-lg min-w-52 rounded-2xl animate-fadeIn opacity-0"
+    >
+      @for (option of dropdownOptions; track $index) {
+        <li>
+          <a
+            class="block py-3 px-4 hover:bg-primary-blue-light hover:text-primary-white transition-colors text-nowrap text-center"
+            [routerLink]="['/learn-teach/user' + option.link]"
+            >{{ option.label }}</a
+          >
+        </li>
+      }
+    </ul>
+  }
+</div>

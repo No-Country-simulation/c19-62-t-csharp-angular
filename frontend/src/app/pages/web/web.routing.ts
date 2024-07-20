@@ -12,8 +12,13 @@ const WEB_ROUTES: Routes = [
   },
   {
     path: 'auth',
-    loadComponent: () => import('../auth/auth.component'),
-    loadChildren: () => import('../auth/auth.routing'),
+    loadComponent: () => import('./views/auth/auth.component'),
+    loadChildren: () => import('./views/auth/auth.routing'),
+  },
+  {
+    path: 'user',
+    loadComponent: () => import('./views/user/user.component'),
+    loadChildren: () => import('./views/user/user.routing'),
   },
 ];
 

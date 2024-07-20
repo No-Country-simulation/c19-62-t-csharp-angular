@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthLayoutComponent } from '../../../../layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from '../../../../../../layouts/auth-layout/auth-layout.component';
 
 @Component({
   selector: 'app-register',
