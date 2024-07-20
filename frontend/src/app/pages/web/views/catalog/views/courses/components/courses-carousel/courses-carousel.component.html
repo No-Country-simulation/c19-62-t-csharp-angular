@@ -12,6 +12,7 @@
       loop="true"
       breakpoints='{"400":{"slidesPerView":1},"640":{"slidesPerView":2},"1024":{"slidesPerView":3},"1200":{"slidesPerView":4}}'
       class="mySwiper active:cursor-grab"
+      autoplay
     >
       @for (item of carrouselData().slides; track $index) {
         <swiper-slide>

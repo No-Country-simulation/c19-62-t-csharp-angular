@@ -4,22 +4,22 @@ import { GalleryCourseComponent } from './components/gallery-course/gallery-cour
 import { GalleryCarouselComponent } from './components/gallery-carousel/gallery-carousel.component';
 
 @Component({
-  selector: 'app-course-catalog',
+  selector: 'app-courses',
   standalone: true,
   imports: [
     CourseFilterBarComponent,
     GalleryCourseComponent,
     GalleryCarouselComponent,
   ],
-  templateUrl: './course-catalog.component.html',
+  templateUrl: './courses.component.html',
   styles: `
     :host {
-      display: contents;
+      display: block;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCatalogComponent {
+export default class CoursesComponent {
   isSearchActive = signal(false);
 
   public activeSearch(): void {

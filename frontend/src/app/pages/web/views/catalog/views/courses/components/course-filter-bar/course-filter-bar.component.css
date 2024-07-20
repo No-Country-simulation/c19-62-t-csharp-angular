@@ -7,7 +7,6 @@
   animation-range: contain 0% exit-crossing 20%;
 }
 
-
 @keyframes fixedTop {
   to {
     /* position: fixed;
@@ -16,6 +15,6 @@
     padding: 2rem 0;
     width: 100%;
     justify-self: flex-end;
-    backdrop-filter: blur(.2rem);
+    backdrop-filter: blur(0.2rem);
   }
 }

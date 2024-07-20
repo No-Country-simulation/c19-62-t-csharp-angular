@@ -11,9 +11,14 @@ const WEB_ROUTES: Routes = [
     loadComponent: () => import('./views/home/home.component'),
   },
   {
+    path: 'catalog',
+    loadComponent: () => import('./views/catalog/catalog.component'),
+    loadChildren: () => import('./views/catalog/catalog.routing'),
+  },
+  {
     path: 'auth',
-    loadComponent: () => import('../auth/auth.component'),
-    loadChildren: () => import('../auth/auth.routing'),
+    loadComponent: () => import('./views/auth/auth.component'),
+    loadChildren: () => import('./views/auth/auth.routing'),
   },
 ];
 

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
 import { AuthCredentials } from '../interfaces/AuthCredentials.interface';
 import { AuthResponse } from '../interfaces/AuthResponse.interface';
 import { AuthRegister } from '../interfaces/AuthRegister.interface';
 import { RegisterResponse } from '../interfaces/RegisterResponse.interface';
+import { environment } from '../../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',

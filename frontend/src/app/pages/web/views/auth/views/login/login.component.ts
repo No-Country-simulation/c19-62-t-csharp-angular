@@ -11,17 +11,18 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { InputValidatorPipe } from '../../../../shared/pipes/input-validator.pipe';
 import { RouterLink } from '@angular/router';
-import { MainLogoComponent } from '../../../../shared/ui/main-logo/main-logo.component';
 import { NgClass, NgOptimizedImage } from '@angular/common';
-import { AuthLayoutComponent } from '../../../../layouts/auth-layout/auth-layout.component';
+
 import { AuthCredentials } from '../../interfaces/AuthCredentials.interface';
 import { Store } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
-import AUTH_ACTIONS from '../../../../core/store/auth/auth.actions';
-import { AUTH_SELECTORS } from '../../../../core/store/auth/auth.selectors';
-import { AppState } from '../../../../core/store/app.state';
+import { AppState } from '../../../../../../core/store/app.state';
+import AUTH_ACTIONS from '../../../../../../core/store/auth/auth.actions';
+import { AUTH_SELECTORS } from '../../../../../../core/store/auth/auth.selectors';
+import { AuthLayoutComponent } from '../../../../../../layouts/auth-layout/auth-layout.component';
+import { InputValidatorPipe } from '../../../../../../shared/pipes/input-validator.pipe';
+import { MainLogoComponent } from '../../../../../../shared/ui/main-logo/main-logo.component';
 
 @Component({
   selector: 'app-login',
