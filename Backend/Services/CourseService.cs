@@ -31,9 +31,8 @@ namespace Backend.Services
 
             List<CourseGetDto>courseGetDtos=course.Select(courseGetDto=>new CourseGetDto{
             Id=courseGetDto.Id,
-            Name=courseGetDto.Name,
+            Title=courseGetDto.Title,
             Description=courseGetDto.Description,
-            CourseResources=courseGetDto.CourseResources,
             IdCategoryName=courseGetDto.IdCategory,
             }).ToList();
             
@@ -60,11 +59,10 @@ namespace Backend.Services
         {
             
             Id = c.Id,
-            Name = c.Name,
+            Title = c.Title,
             Description=c.Description,
             CategoryName=c.Category.Name,
             LevelCategory=c.Category.Level,
-            CourseResources=c.CourseResources,
             UserName=c.CourseUsers
             .Where(cu=>_context.UserRoles.Any(ur=>ur.UserId==cu.UserId && ur.RoleId==instructorRoleId))
             .Select(cu => cu.User.FirstName + " " + cu.User.LastName)
@@ -89,16 +87,16 @@ namespace Backend.Services
              throw new Exception("La categoría especificada no existe.");
              }
 
-            string courseNameLower = courseInputDto.Name.ToLower();
+            string courseNameLower = courseInputDto.Title.ToLower();
 
             var course = new Course{
-            Name = courseNameLower,
+            Title = courseNameLower,
             Description = courseInputDto.Description,
-            CourseResources = courseInputDto.CourseResources,
             IdCategory=courseInputDto.IdCategory,
             Prerequisites=courseInputDto.Prerequisites,
             BulletPoints=courseInputDto.BulletPoints,
-            CursoDuration=courseInputDto.CursoDuration,
+            DurationDays=courseInputDto.DurationDays,
+            DurationHours=courseInputDto.DurationHours,
             };
 
             _context.Courses.Add(course);
@@ -116,10 +114,10 @@ namespace Backend.Services
             
             var query=  _context.Courses.AsQueryable();
 
-            if(!string.IsNullOrWhiteSpace(courseGetDto.Name))
+            if(!string.IsNullOrWhiteSpace(courseGetDto.Title))
             {
-                string courseNameLower = courseGetDto.Name.ToLower();
-                query=query.Where(c=>c.Name.Contains(courseNameLower));
+                string courseNameLower = courseGetDto.Title.ToLower();
+                query=query.Where(c=>c.Title.Contains(courseNameLower));
             }
 
             if(!string.IsNullOrWhiteSpace(courseGetDto.CategoryName))

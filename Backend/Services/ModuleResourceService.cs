@@ -15,18 +15,18 @@ namespace Backend.Services
             _context = context;
         }
 
-        public async Task <ResourceModule>Create(ModuleResourceDto moduleResourceDto){ 
+        public async Task <ModuleResource>Create(ModuleResourceDto moduleResourceDto){ 
              var module = await _context.Modules.FindAsync(moduleResourceDto.ModuleId);
              var resource= await _context.Resources.FindAsync(moduleResourceDto.ResourceId);
 
-            var resourceModule = new ResourceModule{
+            var resourceModule = new ModuleResource{
             ModuleId=module!.Id,
             ResourceId=resource!.Id,
             Module=module,
             Resource=resource,
             };
 
-            _context.ResourceModules.Add(resourceModule);
+            _context.ModuleResources.Add(resourceModule);
 
             try{
             await _context.SaveChangesAsync();

@@ -9,17 +9,26 @@ namespace Backend.Dtos
 {
     public class CourseInputDto
     {
-
+         
+        [Required] 
         public  int IdCategory {get; set; }
-        public string Name { get; set; } = String.Empty;
+
+        [Required] 
+        public string Title { get; set; } = String.Empty;
+        [Required]
         public string Description { get; set; } = String.Empty;
-        public string CourseResources { get; set; } = String.Empty;
+        [Required]
        
         public string Prerequisites { get; set; } = String.Empty;
+        [Required]
 
         public string BulletPoints { get; set; } = String.Empty;
+        [Required]
 
-         public DateTime CursoDuration { get; set; }
+        public short DurationDays { get; set; }
+
+        [Required]
+        public short DurationHours { get; set; }
     
         
     }

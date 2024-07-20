@@ -12,7 +12,7 @@ namespace Backend.Models
 
         public int Id { get; set; }
 
-        public int IdCourse { get; set; }   
+        public int CourseId { get; set; }   
 
         public int IdTags { get; set; }
 

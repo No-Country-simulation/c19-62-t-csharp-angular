@@ -25,7 +25,7 @@ namespace Backend.Context
 
         public DbSet<Module>Modules { get; set; }
 
-        public DbSet<ResourceModule>ResourceModules { get; set; }
+        public DbSet<ModuleResource>ModuleResources { get; set; }
 
         public DbSet<CourseModule>CourseModule { get; set; }
 
@@ -48,21 +48,11 @@ namespace Backend.Context
                 .WithMany(ca => ca.Courses) // Relación inversa en Category
                 .HasForeignKey(c => c.IdCategory) // Clave foránea en Course
                 .OnDelete(DeleteBehavior.Restrict); // Comportamiento al eliminar
-            
-           /* modelBuilder.Entity<CourseTags>()
-                .HasOne(cu=>cu.Course)
-                .WithMany(c=>c.CourseTags)
-                .HasForeignKey(cu=>cu.IdCourse);
-
-            modelBuilder.Entity<CourseTags>()
-                .HasOne(t=>t.Tags)
-                .WithMany(c=>c.CourseTags)
-                .HasForeignKey(t=>t.IdTags);*/
 
             modelBuilder.Entity<CourseTags>()
               .HasOne(ct => ct.Course)
               .WithMany(c => c.CourseTags)
-              .HasForeignKey(ct => ct.IdCourse)
+              .HasForeignKey(ct => ct.CourseId)
               .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CourseTags>()
@@ -81,14 +71,14 @@ namespace Backend.Context
                 .WithMany(cm=>cm.CourseModules)
                 .HasForeignKey(m=>m.ModuleId);
 
-            modelBuilder.Entity<ResourceModule>()
+            modelBuilder.Entity<ModuleResource>()
                 .HasOne(m=>m.Module)
-                .WithMany(rm=>rm.ResourceModules)
+                .WithMany(rm=>rm.ModuleResources)
                 .HasForeignKey(m=>m.ModuleId);
 
-            modelBuilder.Entity<ResourceModule>()
+            modelBuilder.Entity<ModuleResource>()
                 .HasOne(r=>r.Resource)
-                .WithMany(rm=>rm.ResourceModules)
+                .WithMany(rm=>rm.ModuleResources)
                 .HasForeignKey(r=>r.ResourceId);                    
 
         }

@@ -13,18 +13,19 @@ namespace Backend.Models
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "varchar(200)")]
-        public string Name { get; set; } = String.Empty;
-        [Column(TypeName = "varchar(200)")]
+        [Column(TypeName = "nvarchar(256)")]
+        public string Title { get; set; } = String.Empty;
+        [Column(TypeName = "nvarchar(max)")]
         public string Description { get; set; } = String.Empty;
-        [Column(TypeName = "varchar(200)")]
-        public string CourseResources { get; set; } = String.Empty;
-
+       [Column(TypeName = "nvarchar(max)")]
         public string Prerequisites { get; set; } = String.Empty;
-
+       [Column(TypeName = "nvarchar(max)")]
         public string BulletPoints { get; set; } = String.Empty;
+        [Column(TypeName = "smallint")]
+        public short DurationDays { get; set; }
 
-        public DateTime CursoDuration { get; set; }
+        [Column(TypeName = "smallint")]
+        public short DurationHours { get; set; }
 
          public int IdCategory {get;set;} 
         public Category Category { get; set; }
