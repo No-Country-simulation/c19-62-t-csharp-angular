@@ -14,10 +14,10 @@ namespace Backend.Context
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<User>(options)
     {
         public DbSet<Course> Courses { get; set; }
-        public DbSet<UserCourse> UserCourses { get; set;}
-        
+        public DbSet<UserCourse> UserCourses { get; set; }
+
         public DbSet<CourseTags> CourseTags { get; set; }
-        public DbSet<Category> Categories { get; set; } 
+        public DbSet<Category> Categories { get; set; }
 
         public DbSet<Tags> Tags { get; set; }
 
@@ -28,9 +28,10 @@ namespace Backend.Context
         public DbSet<CourseModule> CourseModule { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder){
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<UserCourse>()
                 .HasOne(cu => cu.Course)
                 .WithMany(c => c.UserCourses)
@@ -41,43 +42,43 @@ namespace Backend.Context
                 .WithMany(u => u.UserCourses)
                 .HasForeignKey(cu => cu.UserId);
 
-           modelBuilder.Entity<Course>()
+            modelBuilder.Entity<Course>()
                 .HasOne(c => c.Category) // Referencia a Category
                 .WithMany(ca => ca.Courses) // Relación inversa en Category
                 .HasForeignKey(c => c.IdCategory) // Clave foránea en Course
                 .OnDelete(DeleteBehavior.Restrict); // Comportamiento al eliminar
 
             modelBuilder.Entity<CourseTags>()
-              .HasOne(ct => ct.Course)
-              .WithMany(c => c.CourseTags)
-              .HasForeignKey(ct => ct.CourseId)
-              .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(ct => ct.Course)
+                .WithMany(c => c.CourseTags)
+                .HasForeignKey(ct => ct.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CourseTags>()
-              .HasOne(ct => ct.Tags)
-              .WithMany(t => t.CourseTags)
-              .HasForeignKey(ct => ct.IdTags)
-              .OnDelete(DeleteBehavior.Cascade);    
+                .HasOne(ct => ct.Tags)
+                .WithMany(t => t.CourseTags)
+                .HasForeignKey(ct => ct.IdTags)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CourseModule>()
-                .HasOne(cu=>cu.Course)
-                .WithMany(cm=>cm.CourseModules)
-                .HasForeignKey(cu=>cu.CourseId);
+                .HasOne(cu => cu.Course)
+                .WithMany(cm => cm.CourseModules)
+                .HasForeignKey(cu => cu.CourseId);
 
             modelBuilder.Entity<CourseModule>()
-                .HasOne(m=>m.Module)
-                .WithMany(cm=>cm.CourseModules)
-                .HasForeignKey(m=>m.ModuleId);
+                .HasOne(m => m.Module)
+                .WithMany(cm => cm.CourseModules)
+                .HasForeignKey(m => m.ModuleId);
 
             modelBuilder.Entity<ModuleResource>()
-                .HasOne(m=>m.Module)
-                .WithMany(rm=>rm.ModuleResources)
-                .HasForeignKey(m=>m.ModuleId);
+                .HasOne(m => m.Module)
+                .WithMany(rm => rm.ModuleResources)
+                .HasForeignKey(m => m.ModuleId);
 
             modelBuilder.Entity<ModuleResource>()
-                .HasOne(r=>r.Resource)
-                .WithMany(rm=>rm.ModuleResources)
-                .HasForeignKey(r=>r.ResourceId);
+                .HasOne(r => r.Resource)
+                .WithMany(rm => rm.ModuleResources)
+                .HasForeignKey(r => r.ResourceId);
         }
     }
 }
