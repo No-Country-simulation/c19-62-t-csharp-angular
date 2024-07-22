@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Dtos;
 using Backend.Models;
 
 namespace Backend.Services
 {
-    public class CourseModuleService
+    public class CourseModuleService(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context; 
-        public CourseModuleService(ApplicationDbContext context){
-            _context = context;
-        }
-     
-     public async Task <CourseModule>Create(CourseModuleDto courseModuleDto){
+        private readonly ApplicationDbContext _context = context;
+
+        public async Task <CourseModule>Create(CourseModuleDto courseModuleDto){
             var curse = await _context.Courses.FindAsync(courseModuleDto.CourseId);
             var module= await _context.Modules.FindAsync(courseModuleDto.ModuleId);
 
@@ -36,6 +29,5 @@ namespace Backend.Services
             }
             return courseModule;
         }
-
     }
 }

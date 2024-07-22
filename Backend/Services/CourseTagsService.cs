@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Dtos;
 using Backend.Models;
 
 namespace Backend.Services
 {
-    public class CourseTagsService
+    public class CourseTagsService(ApplicationDbContext context)
     {
-          private readonly ApplicationDbContext _context; 
-        public CourseTagsService(ApplicationDbContext context){
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task <CourseTags>Create(CourseTagsDto courseTagsDto){
              var curse = await _context.Courses.FindAsync(courseTagsDto.CourseId);
