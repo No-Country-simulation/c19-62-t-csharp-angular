@@ -6,7 +6,8 @@
   }"
   [attr.title]="btnConfig().label"
   [attr.aria-label]="btnConfig().label"
-  type="button"
+  [type]="btnConfig().type || 'button'"
+  [disabled]="isDisabled()"
 >
   {{ btnConfig().text }}
 

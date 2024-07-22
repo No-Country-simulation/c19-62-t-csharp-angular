@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthCredentials } from '../../../pages/auth/interfaces/AuthCredentials.interface';
+import { AuthCredentials } from '../../../pages/web/views/auth/interfaces/AuthCredentials.interface';
 
 const authLogin = createAction(
   '[Login Form] Login user',

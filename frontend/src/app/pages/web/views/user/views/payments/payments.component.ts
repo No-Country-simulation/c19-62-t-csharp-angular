@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-payments',
   standalone: true,
   imports: [],
-  templateUrl: './home.component.html',
+  templateUrl: './payments.component.html',
   styles: `
     :host {
-      display: contents;
+      display: block;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class HomeComponent {}
+export default class PaymentsComponent {}

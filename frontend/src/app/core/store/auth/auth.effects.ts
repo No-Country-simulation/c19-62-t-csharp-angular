@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Injectable } from '@angular/core';
 import { AppState } from '../app.state';
-import { AuthService } from '../../../pages/auth/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../../pages/web/views/auth/services/auth.service';
 
 @Injectable()
 export class AuthEffects {

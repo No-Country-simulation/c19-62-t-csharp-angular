@@ -14,12 +14,8 @@
       />
       <app-search-bar />
     </div>
-    @if (isLogged | async) {
-      <p
-        class="rounded-[50%] bg-primary-blue grid place-content-center text-primary-white size-12 font-bold animate-fadeIn opacity-0"
-      >
-        W
-      </p>
+    @if ((isLogged | async) === false) {
+      <app-navbar-user />
     } @else {
       <div class="flex gap-8">
         <app-basic-button

@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AUTH_SELECTORS } from '../../../core/store/auth/auth.selectors';
 import { AppState } from '../../../core/store/app.state';
 import { AsyncPipe } from '@angular/common';
+import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ import { AsyncPipe } from '@angular/common';
     BasicButtonComponent,
     SearchBarComponent,
     MainLogoComponent,
+    NavbarUserComponent,
     AsyncPipe,
   ],
   templateUrl: './header.component.html',
