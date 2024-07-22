@@ -15,8 +15,8 @@ namespace Backend.Controllers
     public class CategoryController:ControllerBase
     {
         private readonly CategoryService _categoryService;
-         private readonly ILogger<CourseController> _logger;
-        public CategoryController(CategoryService categoryService,ILogger<CourseController> logger){
+         private readonly ILogger<CategoryController> _logger;
+        public CategoryController(CategoryService categoryService,ILogger<CategoryController> logger){
               _categoryService=categoryService;
                _logger = logger; 
         }
@@ -31,7 +31,7 @@ namespace Backend.Controllers
             }
             
             try{
-            var response= await _categoryService.Create(categoryDto);
+            var response= await _categoryService.Create(categoryDto!);
 
             if (response == null){
                 return BadRequest("Hubo un error al crear la categoria");

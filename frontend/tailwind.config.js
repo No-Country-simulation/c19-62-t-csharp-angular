@@ -9,9 +9,11 @@ module.exports = {
         'primary-blue-light': 'var(--primary-blue-light)',
         'second-background': 'var(--second-background)',
         warn: 'var(--warn)',
+        'light-blue': 'var(--light-blue)',
+        'light-white': 'var(--light-white)',
       },
       animation: {
-        fadeIn: 'fadeIn .3s ease-in forwards',
+        fadeIn: 'fadeIn .2s ease-in forwards',
       },
       keyframes: {
         fadeIn: {

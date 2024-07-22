@@ -4,14 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Dtos;
+using Backend.models;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Services
 {
     public class CourseService
     {
         private readonly ApplicationDbContext _context; 
+
         public CourseService(ApplicationDbContext context){
             _context = context;
         }
@@ -28,9 +31,8 @@ namespace Backend.Services
 
             List<CourseGetDto>courseGetDtos=course.Select(courseGetDto=>new CourseGetDto{
             Id=courseGetDto.Id,
-            Name=courseGetDto.Name,
+            Title=courseGetDto.Title,
             Description=courseGetDto.Description,
-            CourseResources=courseGetDto.CourseResources,
             IdCategoryName=courseGetDto.IdCategory,
             }).ToList();
             
@@ -40,6 +42,37 @@ namespace Backend.Services
             Console.WriteLine($"Error al recuperar cursos: {ex.Message}");
                 throw;
             }
+        }
+
+        public async Task<CourseGetWhereDto?>GetWhere(int courseId){
+
+        var instructorRoleId = await _context.Roles
+        .Where(r => r.Name == "instructor")
+        .Select(r => r.Id)
+        .FirstOrDefaultAsync();
+           
+        var course = await _context.Courses
+        .Include(c=>c.Category)
+        .Include(c=>c.CourseUsers)
+           .ThenInclude(cu=>cu.User)
+        .Select(c => new CourseGetWhereDto
+        {
+            
+            Id = c.Id,
+            Title = c.Title,
+            Description=c.Description,
+            CategoryName=c.Category.Name,
+            LevelCategory=c.Category.Level,
+            UserName=c.CourseUsers
+            .Where(cu=>_context.UserRoles.Any(ur=>ur.UserId==cu.UserId && ur.RoleId==instructorRoleId))
+            .Select(cu => cu.User.FirstName + " " + cu.User.LastName)
+                .FirstOrDefault()?? ""
+        })
+        // Filtra por el id del curso
+        .FirstOrDefaultAsync(c => c.Id == courseId);
+
+        return course;
+
         }
 
         public async Task <Course>Create(CourseInputDto courseInputDto){
@@ -54,13 +87,16 @@ namespace Backend.Services
              throw new Exception("La categoría especificada no existe.");
              }
 
-            string courseNameLower = courseInputDto.Name.ToLower();
+            string courseNameLower = courseInputDto.Title.ToLower();
 
             var course = new Course{
-            Name = courseNameLower,
+            Title = courseNameLower,
             Description = courseInputDto.Description,
-            CourseResources = courseInputDto.CourseResources,
-           IdCategory=courseInputDto.IdCategory,
+            IdCategory=courseInputDto.IdCategory,
+            Prerequisites=courseInputDto.Prerequisites,
+            BulletPoints=courseInputDto.BulletPoints,
+            DurationDays=courseInputDto.DurationDays,
+            DurationHours=courseInputDto.DurationHours,
             };
 
             _context.Courses.Add(course);
@@ -78,10 +114,10 @@ namespace Backend.Services
             
             var query=  _context.Courses.AsQueryable();
 
-            if(!string.IsNullOrWhiteSpace(courseGetDto.Name))
+            if(!string.IsNullOrWhiteSpace(courseGetDto.Title))
             {
-                string courseNameLower = courseGetDto.Name.ToLower();
-                query=query.Where(c=>c.Name.Contains(courseNameLower));
+                string courseNameLower = courseGetDto.Title.ToLower();
+                query=query.Where(c=>c.Title.Contains(courseNameLower));
             }
 
             if(!string.IsNullOrWhiteSpace(courseGetDto.CategoryName))
@@ -89,6 +125,14 @@ namespace Backend.Services
                 string categoryNameLower = courseGetDto.CategoryName.ToLower();
                query=query.Include(c=> c.Category)
                           .Where(c=>c.Category.Name.Contains(categoryNameLower));
+            }
+
+            if (!string.IsNullOrWhiteSpace(courseGetDto.NameTags))
+            {
+               string nameTags= courseGetDto.NameTags.ToLower();
+               query=query.Include(c=>c.CourseTags)
+                          .ThenInclude(ct=>ct.Tags)
+                          .Where(c => c.CourseTags.Any(ct => ct.Tags.Name.ToLower().Contains(nameTags)));
             }
 
             if(!string.IsNullOrWhiteSpace(courseGetDto.LevelCategory))

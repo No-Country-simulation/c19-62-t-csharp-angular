@@ -18,7 +18,7 @@
       </p>
     </header>
 
-    <form class="grid gap-8" [formGroup]="loginForm" (submit)="onSubmit()">
+    <form class="form" [formGroup]="loginForm" (submit)="onSubmit()">
       <div class="field">
         <label
           class="field-content"
@@ -31,11 +31,7 @@
         >
           <span class="field-label">Email</span>
           <div class="field-wrapperInput">
-            <input
-              class="field-input ring-offset-slate-500"
-              formControlName="email"
-              type="email"
-            />
+            <input class="field-input" formControlName="email" type="email" />
           </div>
         </label>
 

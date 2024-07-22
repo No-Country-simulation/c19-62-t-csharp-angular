@@ -8,8 +8,10 @@
     --primary-blue: #043466;
     --primary-white: #e6ecf2;
     --warn: #ff0000;
+    --light-white: #fff;
     --successful: #038208;
     --bg-color: #bababa;
+    --light-blue: #d1edf0;
   }
 
   body {

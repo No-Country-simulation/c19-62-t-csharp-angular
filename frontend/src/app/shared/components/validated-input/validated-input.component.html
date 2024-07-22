@@ -1,0 +1,34 @@
+<div class="field">
+  <div
+    class="field-content"
+    [ngClass]="{
+      valid: form().controls['email'].status === 'VALID',
+      invalid:
+        form().controls[inputField().key].status === 'INVALID' &&
+        form().controls[inputField().key].dirty,
+    }"
+  >
+    <label class="field-label" [for]="['user-' + inputField().key]">{{
+      inputField().name
+    }}</label>
+    <div class="field-wrapperInput">
+      <input
+        class="field-input ring-offset-slate-500"
+        [type]="inputField().type"
+        [formControlName]="inputField().key"
+        [id]="['user-' + inputField().key]"
+      />
+    </div>
+  </div>
+  @if (
+    form().controls[inputField().key].status === 'INVALID' &&
+    form().controls[inputField().key].dirty
+  ) {
+    <p class="field-feedback">
+      {{
+        getTypeError(form().controls[inputField().key].errors!)
+          | appInputValidator: { form: form(), field: inputField().key }
+      }}
+    </p>
+  }
+</div>

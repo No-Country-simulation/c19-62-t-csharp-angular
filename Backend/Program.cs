@@ -117,6 +117,29 @@ builder.Services.AddSwaggerGen(options =>
         Description = "An ASP.NET Core Web API for Learn&Teach"
     });
 
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme(){
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Name = "Authorization",
+        Description = "Please enter the token",
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement(){
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer",
+                }
+            },
+            new List<string>()
+        }
+    });
+
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -128,6 +151,14 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<TagsService>();
+builder.Services.AddScoped<ModuleService>();
+builder.Services.AddScoped<ResourceService>();
+builder.Services.AddScoped<CourseModuleService>();
+builder.Services.AddScoped<CourseTagsService>();
+builder.Services.AddScoped<ModuleResourceService>();
+
+
 
 // Build App
 var app = builder.Build();

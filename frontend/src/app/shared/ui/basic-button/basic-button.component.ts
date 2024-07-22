@@ -16,4 +16,5 @@ import { NgClass, NgOptimizedImage } from '@angular/common';
 export class BasicButtonComponent {
   btnConfig = input.required<BasicButtonConfig>();
   designBtn = input<DesignButton>('common');
+  isDisabled = input<boolean>(false);
 }
