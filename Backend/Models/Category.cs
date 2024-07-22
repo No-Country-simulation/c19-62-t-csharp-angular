@@ -14,14 +14,13 @@ namespace Backend.models
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName ="varchar(100)")]
-        public string Name { get; set; }=string.Empty;    
+
 
         [Column(TypeName ="varchar(100)")]
-        public string Level { get; set; }=string.Empty;   
+        public string Name { get; set; } = String.Empty; 
+
 
         [JsonIgnore] 
-        public ICollection<Course>Courses   { get; set; }=new List<Course>();
-        
+        public ICollection<Course>Courses { get; set; } = [];
     }
 }

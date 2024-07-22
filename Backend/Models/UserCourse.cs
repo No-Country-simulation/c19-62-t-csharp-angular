@@ -3,17 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
-    public class CourseModule
+    public class UserCourse
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set;}
 
+        
+        [Column(TypeName = "nvarchar(450)")]
+        public string UserId { get; set; } = string.Empty;
         [Column(TypeName = "int")]
         public int CourseId { get; set; }
-        [Column(TypeName = "int")]
-        public int ModuleId { get; set; }
 
+        
+        public User User { get; set; } = new User();
         public Course Course { get; set; } = new Course();
-        public Module Module { get; set; } = new Module();
     }
 }

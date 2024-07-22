@@ -11,17 +11,18 @@ namespace Backend.Models
     public class Resource
     {
         [Key]
-
         public int Id { get; set; } 
+
+
         [Column(TypeName = "nvarchar(256)")]
-        public string Name { get; set; }=string.Empty;
+        public string Name { get; set; } = string.Empty;
         [Column(TypeName = "nvarchar(256)")]
-        public string Tipe { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
          [Column(TypeName = "nvarchar(max)")]
         public string Link { get; set; } = string.Empty ;
         
-          [JsonIgnore]
-
-         public ICollection<ModuleResource> ModuleResources { get; set;}= new List<ModuleResource>();
+        
+        [JsonIgnore]
+         public ICollection<ModuleResource> ModuleResources { get; set; } = [];
     }
 }
