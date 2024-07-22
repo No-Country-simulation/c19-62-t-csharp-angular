@@ -9,9 +9,9 @@ namespace Backend.Dtos
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string CategoryName {get; set; } = string.Empty;
-        public int IdCategoryName {get; set; }
-        public string LevelCategory {get; set; } = string.Empty;    
+        public string CategoryName { get; set; } = string.Empty;
+        public int IdCategoryName { get; set; }
+        public string LevelCategory { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string NameTags { get; set; } = string.Empty;
     }
