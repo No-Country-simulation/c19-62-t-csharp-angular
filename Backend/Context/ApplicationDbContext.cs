@@ -11,11 +11,8 @@ using NuGet.Protocol;
 
 namespace Backend.Context
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<User>(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){
-        }
-
         public DbSet<Course> Courses { get; set; }
         public DbSet<UserCourse> UserCourses { get; set;}
         
