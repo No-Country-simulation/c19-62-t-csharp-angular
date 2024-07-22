@@ -8,27 +8,23 @@ using Backend.Models;
 
 namespace Backend.Services
 {
-    public class TagsService
+    public class TagsService(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
-
-        public TagsService(ApplicationDbContext context){
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<Tags>Create(TagsDto tagsDto){
-
             var tags= new Tags{
-            Name=tagsDto.Name,
+                Name=tagsDto.Name,
             };
             
             _context.Tags.Add(tags);
 
             try{
                 await _context.SaveChangesAsync();
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
-              throw new Exception("hubo un error al crear el tags",ex);
+                throw new Exception("hubo un error al crear el tags",ex);
             }
 
             return tags;

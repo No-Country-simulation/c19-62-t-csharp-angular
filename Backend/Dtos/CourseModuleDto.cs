@@ -8,9 +8,7 @@ namespace Backend.Dtos
     public class CourseModuleDto
     {
         public int Id { get; set; }
-
         public int CourseId { get; set; }   
-
         public int ModuleId { get; set; }
     }
 }

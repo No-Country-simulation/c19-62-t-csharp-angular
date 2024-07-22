@@ -8,28 +8,25 @@ using Backend.Dtos;
 
 namespace Backend.Services
 {
-    public class ResourceService
+    public class ResourceService(ApplicationDbContext context)
     {
-           private readonly ApplicationDbContext _context;
-           public ResourceService(ApplicationDbContext context){
-               _context = context;
-           }
+        private readonly ApplicationDbContext _context = context;
 
-           public async Task<Resource>Create(ResourceDto resourceDto){
-
+        public async Task<Resource>Create(ResourceDto resourceDto){
             var resource= new Resource{
-            Name=resourceDto.Name,
-            Tipe=resourceDto.Tipe,
-            Link=resourceDto.Link,
+                Name=resourceDto.Name,
+                Type=resourceDto.Type,
+                Link=resourceDto.Link,
             };
             
             _context.Resources.Add(resource);
 
             try{
                 await _context.SaveChangesAsync();
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
-              throw new Exception("hubo un error al crear el Recurso",ex);
+                throw new Exception("hubo un error al crear el Recurso",ex);
             }
 
             return resource;

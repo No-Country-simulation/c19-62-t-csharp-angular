@@ -9,27 +9,23 @@ using Backend.Models;
 using BackendModule = Backend.Models.Module;
 namespace Backend.Services
 {
-    public class ModuleService
+    public class ModuleService(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
-
-        public ModuleService(ApplicationDbContext context){
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<BackendModule>Create(ModuleDto moduleDto){
-
             var module= new BackendModule{
-              Name=moduleDto.Name,
+                Name=moduleDto.Name,
             };
             
             _context.Modules.Add(module);
 
             try{
                 await _context.SaveChangesAsync();
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
-              throw new Exception("hubo un error al crear el modulo",ex);
+                throw new Exception("hubo un error al crear el modulo",ex);
             }
 
             return module;

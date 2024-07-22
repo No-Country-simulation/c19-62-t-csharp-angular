@@ -9,17 +9,12 @@ namespace Backend.Models
     public class CourseTags
     {
         [Key]
-
         public int Id { get; set; }
 
         public int CourseId { get; set; }   
-
         public int IdTags { get; set; }
 
-        public Course Course { get; set; }=new Course();
+        public Course Course { get; set; } = new Course();
         public Tags Tags { get; set; } = new Tags();
-
-        
-
     }
 }

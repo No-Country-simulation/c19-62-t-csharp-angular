@@ -11,26 +11,18 @@ using Backend.Models;
 
 namespace Backend.Services
 {
-    public class UserService
+    public class UserService(
+        ApplicationDbContext context,
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
+        RoleManager<IdentityRole> roleManager,
+        IConfiguration configuration)
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
-
-        public UserService(
-            ApplicationDbContext context,
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration){
-            _context = context;
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _roleManager = roleManager;
-            _configuration = configuration;
-        }
+        private readonly ApplicationDbContext _context = context;
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly SignInManager<User> _signInManager = signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+        private readonly IConfiguration _configuration = configuration;
 
         public async Task<IdentityResult> Create(UserInputDto newuser, string password){
             var user = new User

@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Backend.Models
@@ -12,13 +9,17 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }=string.Empty;
+
+        [Column(TypeName = "smallint")]
+        public int Number { get; set; }
+        [Column(TypeName = "nvarchar(256)")]
+        public string Name { get; set; } = string.Empty;
+
 
         [JsonIgnore]
-        public ICollection<CourseModule> CourseModules { get; set;}= new List<CourseModule>();
-
+        public ICollection<CourseModule> CourseModules { get; set; } = [];
         [JsonIgnore]
-        public ICollection<ModuleResource> ModuleResources { get; set;}= new List<ModuleResource>();
+        public ICollection<ModuleResource> ModuleResources { get; set; } = [];
 
     }
 }

@@ -10,13 +10,9 @@ namespace Backend.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class UserController:ControllerBase
+    public class UserController(UserService userService) : ControllerBase
     {
-        private readonly UserService _userService;
-
-        public UserController(UserService userService){
-            _userService = userService;
-        }
+        private readonly UserService _userService = userService;
 
         /// <summary>
         /// Registers a new account.
@@ -25,8 +21,7 @@ namespace Backend.Controllers
         /// <returns></returns>
         [HttpPost("Register", Name = "Register")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register(
-            [FromForm, Required] UserInputDto userDto)
+        public async Task<IActionResult> Register([FromForm, Required] UserInputDto userDto)
         {
             var result = await _userService.Create(userDto, userDto.Password);
             if (result.Succeeded)

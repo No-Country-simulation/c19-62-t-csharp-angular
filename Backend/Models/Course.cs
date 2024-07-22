@@ -13,32 +13,35 @@ namespace Backend.Models
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "nvarchar(256)")]
-        public string Title { get; set; } = String.Empty;
-        [Column(TypeName = "nvarchar(max)")]
-        public string Description { get; set; } = String.Empty;
-       [Column(TypeName = "nvarchar(max)")]
-        public string Prerequisites { get; set; } = String.Empty;
-       [Column(TypeName = "nvarchar(max)")]
-        public string BulletPoints { get; set; } = String.Empty;
-        [Column(TypeName = "smallint")]
-        public short DurationDays { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; } = string.Empty;
 
+
+        [Column(TypeName = "nvarchar(256)")]
+        public string Title { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(256)")]
+        public string Subtitle { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(max)")]
+        public string Description { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(max)")]
+        public string Prerequisites { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(max)")]
+        public string BulletPoints { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(256)")]
+        public string Level { get; set; } = string.Empty;
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
 
-         public int IdCategory {get;set;} 
-        public Category Category { get; set; }
+
+        public int IdCategory {get;set;} 
+        public Category Category { get; set; } = new Category();
         
-        [JsonIgnore]
-        public ICollection<CourseUser>CourseUsers { get; set; } = new List<CourseUser>();
 
         [JsonIgnore]
-        public ICollection<CourseTags> CourseTags { get; set;}= new List<CourseTags>();
-     
+        public ICollection<UserCourse> UserCourses { get; set; } = [];
+        [JsonIgnore]
+        public ICollection<CourseTags> CourseTags { get; set; } = [];
          [JsonIgnore]
-        public ICollection<CourseModule> CourseModules { get; set;}= new List<CourseModule>();
-        
-
+        public ICollection<CourseModule> CourseModules { get; set; } = [];
     }
 }
