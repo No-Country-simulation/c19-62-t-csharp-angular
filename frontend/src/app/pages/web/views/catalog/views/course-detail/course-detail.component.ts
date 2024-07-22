@@ -3,7 +3,7 @@ import {
   Component,
   afterNextRender,
 } from '@angular/core';
-import { LoaderComponent } from '../../../../../../shared/ui/loader/loader.component';
+import { LoaderComponent } from '../../../../../../shared/components/loader/loader.component';
 import { CardVideoComponent } from './components/card-video/card-video.component';
 import { CourseApiService } from '../../services/course-api.service';
 import { Observable } from 'rxjs';

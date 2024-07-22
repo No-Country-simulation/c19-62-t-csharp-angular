@@ -14,7 +14,7 @@
       />
       <app-search-bar />
     </div>
-    @if ((isLogged | async) === false) {
+    @if (isLogged | async) {
       <app-navbar-user />
     } @else {
       <div class="flex gap-8">

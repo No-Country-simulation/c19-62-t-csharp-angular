@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AccordionPanelComponent } from '../accordion-panel/accordion-panel.component';
 import { SectionCourse } from '../../../../interfaces/CourseInfo.interface';
-import { ErrorMessageComponent } from 'app/shared/ui/error-message/error-message.component';
+import { ErrorMessageComponent } from 'app/shared/components/error-message/error-message.component';
 import { TitleComponent } from 'app/shared/components/title/title.component';
 
 @Component({

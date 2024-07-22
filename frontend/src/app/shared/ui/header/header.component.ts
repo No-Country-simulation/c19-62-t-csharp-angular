@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BasicButtonComponent } from '../basic-button/basic-button.component';
+import { BasicButtonComponent } from '../../components/basic-button/basic-button.component';
 import { Router, RouterLink } from '@angular/router';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { MainLogoComponent } from '../main-logo/main-logo.component';
+import { MainLogoComponent } from '../../components/main-logo/main-logo.component';
 import { Store } from '@ngrx/store';
 import { AUTH_SELECTORS } from '../../../core/store/auth/auth.selectors';
 import { AppState } from '../../../core/store/app.state';

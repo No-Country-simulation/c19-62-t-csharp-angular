@@ -14,7 +14,7 @@ import { TrophySvgComponent } from '@icons/trophy-svg.component';
 import { InfiniteSvgComponent } from '@icons/infinite-svg.component';
 import { UpdateSvgComponent } from '@icons/update-svg.component';
 import { CircleCheckSvgComponent } from '@icons/circle-check-svg.component';
-import { BasicButtonComponent } from 'app/shared/ui/basic-button/basic-button.component';
+import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-button.component';
 import { HeartFillSvgComponent } from '@icons/heart-fill-svg.component';
 import { CustomClass } from 'app/shared/interfaces/CustomClass.interface';
 import { PlaySvgComponent } from '@icons/play-svg.component';

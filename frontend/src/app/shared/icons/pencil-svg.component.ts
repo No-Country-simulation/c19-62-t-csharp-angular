@@ -1,12 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InputSignal,
+  input,
+} from '@angular/core';
+import { SvgProps } from 'app/shared/interfaces/SvgProps.interface';
 
 @Component({
   selector: 'app-pencil-svg',
   standalone: true,
   imports: [],
   template: `<svg
-    width="24"
-    height="24"
+    [class]="customClass()"
+    [attr.width]="size()"
+    [attr.height]="size()"
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -39,4 +46,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PencilSvgComponent {}
+export class PencilSvgComponent implements SvgProps {
+  size: InputSignal<number> = input(46);
+  customClass = input<string>('');
+}

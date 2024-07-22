@@ -6,7 +6,7 @@
     [attr.aria-label]="labelDropdownStream()"
   >
     <app-avatar customClass="size-14" />
-    <app-arrow-svg class="rotate-90" />
+    <app-arrow-svg [size]="24" class="rotate-90" />
   </button>
   @if (isOpenDropdown()) {
     <ul
@@ -16,8 +16,8 @@
         <li>
           <a
             class="block py-3 px-4 hover:bg-primary-blue-light hover:text-primary-white transition-colors text-nowrap text-center"
-            [routerLink]="['/learn-teach/user' + option.link]"
-            >{{ option.label }}</a
+            [routerLink]="['/learn-teach/user' + option.url]"
+            >{{ option.text }}</a
           >
         </li>
       }
