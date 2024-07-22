@@ -7,8 +7,7 @@ namespace Backend.Dtos
 {
     public class ModuleResourceDto
     {
-          public int ModuleId { get; set; }   
-
+        public int ModuleId { get; set; }   
         public int ResourceId { get; set; }
     }
 }

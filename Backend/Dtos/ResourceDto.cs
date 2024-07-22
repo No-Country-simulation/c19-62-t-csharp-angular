@@ -7,10 +7,8 @@ namespace Backend.Dtos
 {
     public class ResourceDto
     {
-        public string Name { get; set; }=string.Empty;
-
-        public string Tipe { get; set; } = string.Empty;
-
+        public string Name { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
         public string Link { get; set; } = string.Empty ;
     }
 }

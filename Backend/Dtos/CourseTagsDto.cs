@@ -8,7 +8,6 @@ namespace Backend.Dtos
     public class CourseTagsDto
     {
         public int CourseId { get; set; }   
-
         public int IdTags { get; set; }
     }
 }

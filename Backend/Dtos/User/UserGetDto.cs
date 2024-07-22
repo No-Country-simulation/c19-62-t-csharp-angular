@@ -8,6 +8,6 @@ namespace Backend.Dtos
         public string LastName { get; set; } = String.Empty;
         public string PhoneNumber { get; set; } = String.Empty;
         
-        public List<CourseUserDto> CourseUsers { get; set; } = new List<CourseUserDto>();
+        public List<UserCourseDto> UserCourses { get; set; } = new List<UserCourseDto>();
     }
 }
