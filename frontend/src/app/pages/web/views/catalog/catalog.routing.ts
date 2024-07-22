@@ -9,11 +9,13 @@ const CATALOG_ROUTES: Routes = [
   {
     path: 'courses',
     loadComponent: () => import('./views/courses/courses.component'),
+    title: 'Learn-teach | course catalog',
   },
   {
     path: 'courses/:id',
     loadComponent: () =>
       import('./views/course-detail/course-detail.component'),
+    title: 'Learn-teach | details course',
   },
   {
     path: '**',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CourseCardComponent } from '../course-card/course-card.component';
-import { CardSkeletonComponent } from '../../../../../../../../shared/skeletons/card-skeleton/card-skeleton.component';
+import { CardSkeletonComponent } from 'app/shared/skeletons/card-skeleton/card-skeleton.component';
 
 @Component({
   selector: 'app-gallery-course',

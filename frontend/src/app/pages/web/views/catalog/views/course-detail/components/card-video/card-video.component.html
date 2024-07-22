@@ -1,0 +1,89 @@
+<figure
+  [ngClass]="[
+    'shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden w-fit h-fit',
+    customClass(),
+  ]"
+>
+  <div
+    class="m-w-72 h-56 sm:m-w-96 sm:h-72 xl:m-w-[500px] xl:h-[310px] relative grid place-content-center w-full"
+  >
+    <img
+      class="w-full object-fill"
+      ngSrc="assets/images/card-info.webp"
+      alt="Monitor con código en pantalla rodeado de bloques flotantes."
+      fill
+    />
+    <button class="z-10 hover:opacity-70 transition-opacity" type="button">
+      <app-play-svg [size]="100" />
+    </button>
+  </div>
+  <div class="p-6 flex flex-col gap-4">
+    <div class="flex flex-col gap-6">
+      <div class="flex justify-between items-center">
+        <app-rating [size]="46" [rating]="4" customClass="sm:gap-3" />
+        <button
+          (click)="onClick()"
+          [title]="isFavoriteStream()"
+          [attr.aria-label]="isFavoriteStream()"
+          type="button"
+        >
+          @if (isFavorite()) {
+            <app-heart-fill-svg customClass="size-6 sm:size-10 xl:size-14" />
+          } @else {
+            <app-heart-svg customClass="size-6 sm:size-10 xl:size-14" />
+          }
+        </button>
+      </div>
+      <app-basic-button
+        class="mx-auto py-2"
+        [btnConfig]="{ text: 'Añadir al carrito' }"
+        designBtn="common"
+      />
+    </div>
+
+    <div
+      class="flex flex-col text-primary-blue-light gap-5 text-sm lg:text-base"
+    >
+      <app-paragraph text="4 semanas, con un total de 16 horas de contenido.">
+        <app-clock-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph text="No se requieren conocimientos previos. ">
+        <app-circle-check-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph text="última actualización: Julio de 2024 ">
+        <app-update-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph text="Acceso de por vida ">
+        <app-infinite-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph text="Certificado de finalización">
+        <app-trophy-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+    </div>
+  </div>
+</figure>

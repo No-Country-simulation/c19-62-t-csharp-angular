@@ -1,0 +1,13 @@
+<details class="accordion" name="syllabus">
+  <summary #summary class="accordion-title">
+    Sección 1: {{ syllabus().sectionName }}
+    <app-arrow-svg class="accordion-mark" [size]="20" />
+  </summary>
+  <ul class="accordion-content animate-fadeIn">
+    @for (course of syllabus().contentCourse; track course.title) {
+      <li class="accordion-item">
+        {{ course.title }}
+      </li>
+    }
+  </ul>
+</details>

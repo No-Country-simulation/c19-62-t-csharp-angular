@@ -8,7 +8,6 @@
   height: 3.5rem;
   width: max-content;
   min-width: 9rem;
-  text-transform: capitalize;
   transition-property: color;
   transition-duration: 0.3s;
   font-size: 1.25rem;
@@ -17,6 +16,10 @@
   place-content: center;
   align-items: center;
   border-width: 2px;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .btn-basic-common {
