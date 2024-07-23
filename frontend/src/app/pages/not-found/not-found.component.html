@@ -1,1 +1,23 @@
-<p>not-found works!</p>
+<app-basic-layout>
+  <div class="p-4 h-full">
+    <div class="mb-7">
+      <h1 class="text-4xl mb-2">
+        <span class="text-red-500">Error 404</span> - Página no encontrada
+      </h1>
+      <p>
+        Lo sentimos, pero la página que buscas no está disponible. Puede que el
+        enlace esté roto o la página haya sido eliminada.
+      </p>
+    </div>
+    <div class="w-full p-2">
+      <img class="mx-auto" src="/assets/images/not-found.png" alt="Not Found" />
+    </div>
+
+    <div class="mx-auto flex justify-center mt-4">
+      <app-basic-button
+        (click)="navigateTo('/learn-teach/home')"
+        [btnConfig]="{ text: 'Volver a inicio' }"
+      />
+    </div>
+  </div>
+</app-basic-layout>
