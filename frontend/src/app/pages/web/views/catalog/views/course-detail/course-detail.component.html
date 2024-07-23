@@ -1,11 +1,8 @@
 <section class="grid gap-8">
   <div class="grid grid-cols-2 gap-4">
-    <div class="flex flex-col gap-20 max-w-[38rem]">
-      @if (courseInfo$ | async; as courseInfo) {
-        <article class="grid gap-4">
-          <app-title contentTitle="Descripción:" [level]="3" />
-          <p class="text-lg">{{ courseInfo.description }}</p>
-        </article>
+    @if (courseInfo$ | async; as courseInfo) {
+      <div class="flex flex-col gap-20 max-w-[38rem]">
+        <app-presentation-course [detailsCourse]="courseInfo.details" />
         <app-syllabus [contentSyllabus]="courseInfo.syllabus" />
         <app-article-list
           [isViewMarker]="true"
@@ -19,14 +16,19 @@
           [listData]="courseInfo.requirements"
           title="Requisitos:"
         />
-      } @else {
-        <app-loader />
-      }
-    </div>
-    <app-card-video customClass="sticky top-0 mx-auto" />
+      </div>
+      <app-card-video
+        [cardData]="courseInfo.courseSummary"
+        customClass="sticky top-0 mx-auto"
+        [isPaid]="courseInfo?.isPaid"
+        [priceCourse]="courseInfo.paidInfo?.price"
+      />
+    } @else {
+      <p class="text-center grid-col-[1/end]">aquí debe ir un Skeleton</p>
+    }
   </div>
   @defer (on viewport()) {
-    <app-community-info class="self-center" />
+    <app-community-info #community class="self-center" />
   } @placeholder {
     <p>loading...</p>
   }

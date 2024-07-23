@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, delay, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import courseTest from '../../../data/course.example.json';
 import { CourseInfo } from '../interfaces/CourseInfo.interface';
 
@@ -13,6 +13,6 @@ export class CourseApiService {
   public fakeDataCourse(): Observable<CourseInfo> {
     const data = courseTest as CourseInfo;
 
-    return of(data).pipe(delay(1000));
+    return of(data);
   }
 }

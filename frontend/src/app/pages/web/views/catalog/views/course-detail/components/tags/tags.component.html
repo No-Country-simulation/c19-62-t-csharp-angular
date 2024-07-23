@@ -1,0 +1,12 @@
+<figure class="grid gap-4">
+  <figcaption class="font-semibold">Tags</figcaption>
+  <div class="flex flex-wrap gap-4">
+    @for (tag of tags(); track tag) {
+      <a
+        class="border-primary-blue-light border-2 font-medium px-2 py-1 rounded-lg flex flex-wrap gap-2 text-sm bg-light-white hover:bg-primary-blue hover:text-light-white transition-colors"
+        routerLink=""
+        >{{ tag }}</a
+      >
+    }
+  </div>
+</figure>

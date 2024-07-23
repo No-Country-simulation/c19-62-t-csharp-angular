@@ -13,6 +13,7 @@ import { SyllabusComponent } from './components/syllabus/syllabus.component';
 import { TitleComponent } from 'app/shared/components/title/title.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { CommunityInfoComponent } from './components/community-info/community-info.component';
+import { PresentationCourseComponent } from './components/presentation-course/presentation-course.component';
 
 @Component({
   selector: 'app-course-detail',
@@ -26,6 +27,7 @@ import { CommunityInfoComponent } from './components/community-info/community-in
     TitleComponent,
     ArticleListComponent,
     CommunityInfoComponent,
+    PresentationCourseComponent,
   ],
   templateUrl: './course-detail.component.html',
   styles: `
@@ -36,19 +38,11 @@ import { CommunityInfoComponent } from './components/community-info/community-in
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CourseDetailComponent {
-  dataList: string[] = [
-    'Estructura y sintaxis básicas de HTML',
-    'Uso de etiquetas HTML para organizar contenido',
-    'Incorporación de imágenes, enlaces y formularios en páginas web',
-    'Fundamentos de CSS para estilizar y presentar contenido',
-    'Aplicación de colores, fuentes y diseños de página',
-    'Uso de cajas, bordes y espaciado en el diseño web',
-    'Principios de diseño responsivo para diferentes dispositivos',
-  ];
   courseInfo$: Observable<CourseInfo>;
 
   constructor(private readonly courseApi: CourseApiService) {
     this.courseInfo$ = this.courseApi.fakeDataCourse();
+
     afterNextRender(() => {
       window.scrollTo(0, 0);
     });

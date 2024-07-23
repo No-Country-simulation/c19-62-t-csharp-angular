@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DataLink } from 'app/shared/interfaces/DataLink.interface';
+import { SocialMediaComponent } from 'app/shared/ui/social-media/social-media.component';
 
 @Component({
-  selector: 'app-catalog-footer',
+  selector: 'app-footer',
   standalone: true,
-  imports: [],
-  templateUrl: './catalog-footer.component.html',
+  imports: [SocialMediaComponent, RouterLink],
+  templateUrl: './footer.component.html',
   styles: `
     :host {
       display: block;
@@ -13,7 +15,7 @@ import { DataLink } from 'app/shared/interfaces/DataLink.interface';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogFooterComponent {
+export class FooterComponent {
   links: DataLink[][] = [
     [
       {

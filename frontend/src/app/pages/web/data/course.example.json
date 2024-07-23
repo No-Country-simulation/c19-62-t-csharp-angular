@@ -1,14 +1,24 @@
 {
-  "title": "Introducción a Angular",
-  "overview": "Aprende los conceptos básicos de Angular y cómo construir aplicaciones web modernas.",
   "details": {
+    "title": "Introducción de HTML y CSS",
+    "overview": "Da los primeros pasos en el desarrollo y la maquetación web sin experiencia previa y sin costo.",
     "instructor": "Juan Pérez",
     "level": "intermedio",
     "students": 100,
-    "ratings": 4.5
+    "tags": ["Angular", "TypeScript", "Desarrollo web"],
+    "description": "Este curso ofrece una introducción completa y práctica a las dos tecnologías esenciales para la creación de páginas web: HTML y CSS. Comenzando desde los conceptos básicos, aprenderás cómo estructurar y organizar el contenido con HTML y cómo darle estilo y formato con CSS, permitiéndote construir sitios web visualmente atractivos y funcionales.",
+    "rating": 4
   },
-  "tags": ["Angular", "TypeScript", "Desarrollo web"],
-  "description": "Este curso ofrece una introducción completa y práctica a las dos tecnologías esenciales para la creación de páginas web: HTML y CSS. Comenzando desde los conceptos básicos, aprenderás cómo estructurar y organizar el contenido con HTML y cómo darle estilo y formato con CSS, permitiéndote construir sitios web visualmente atractivos y funcionales.",
+  "courseSummary": {
+    "introVideo": "https://example.com/intro-video",
+    "weeksLong": 4,
+    "hoursContent": 16,
+    "prerequisites": "No se requieren conocimientos previos.",
+    "lastUpdated": "2024-07-01",
+    "access": "permanent",
+    "certificate": true,
+    "rating": 4
+  },
   "syllabus": [
     {
       "sectionName": "Introducción",
@@ -77,5 +87,9 @@
     "Uso de cajas, bordes y espaciado en el diseño web",
     "Principios de diseño responsivo para diferentes dispositivos"
   ],
-  "requirements": ["PC, Mac o Linux", "Editor de código", "Navegador web"]
+  "requirements": ["PC, Mac o Linux", "Editor de código", "Navegador web"],
+  "isPaid": false,
+  "paidInfo": {
+    "price": 20
+  }
 }

@@ -1,0 +1,16 @@
+<footer
+  class="flex justify-between items-center bg-[#1E548D] text-light-white py-20 px-8"
+>
+  <div class="flex flex-wrap gap-8 max-w-2xl lg:justify-between w-full">
+    @for (link of links; track $index) {
+      <ul class="flex gap-6 flex-col">
+        @for (li of link; track li.text) {
+          <li>
+            <a class="hover:underline" [routerLink]="li.url">{{ li.text }}</a>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+  <app-social-media />
+</footer>

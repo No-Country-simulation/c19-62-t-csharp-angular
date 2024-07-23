@@ -3,6 +3,7 @@ import { InstagramSvgComponent } from '@icons/instagram-svg.component';
 import { LinkedInSvgComponent } from '@icons/linked- in-svg.component';
 import { XSvgComponent } from '@icons/x-svg.component';
 import { InfiniteSvgComponent } from '../../icons/infinite-svg.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-social-media',
@@ -12,6 +13,7 @@ import { InfiniteSvgComponent } from '../../icons/infinite-svg.component';
     InstagramSvgComponent,
     LinkedInSvgComponent,
     InfiniteSvgComponent,
+    RouterLink,
   ],
   templateUrl: './social-media.component.html',
   styles: `
@@ -21,4 +23,6 @@ import { InfiniteSvgComponent } from '../../icons/infinite-svg.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SocialMediaComponent {}
+export class SocialMediaComponent {
+  iconSize = 40;
+}

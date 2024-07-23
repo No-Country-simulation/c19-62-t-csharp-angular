@@ -14,5 +14,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class ParagraphComponent {
   text = input.required<string>();
+  textComplementary = input<string | null>();
   customClass = input<string>();
 }

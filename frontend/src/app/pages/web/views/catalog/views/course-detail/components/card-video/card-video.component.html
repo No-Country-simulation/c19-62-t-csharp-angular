@@ -20,7 +20,17 @@
   <div class="p-6 flex flex-col gap-4">
     <div class="flex flex-col gap-6">
       <div class="flex justify-between items-center">
-        <app-rating [size]="46" [rating]="4" customClass="sm:gap-3" />
+        @if (isPaid()) {
+          <strong class="text-5xl">
+            {{ priceCourse() | currency }}
+          </strong>
+        } @else {
+          <app-rating
+            [size]="46"
+            [rating]="cardData().rating"
+            customClass="sm:gap-3"
+          />
+        }
         <button
           (click)="onClick()"
           [title]="isFavoriteStream()"
@@ -34,17 +44,31 @@
           }
         </button>
       </div>
-      <app-basic-button
-        class="mx-auto py-2"
-        [btnConfig]="{ text: 'Añadir al carrito' }"
-        designBtn="common"
-      />
+
+      @if (isPaid()) {
+        <div class="flex justify-around">
+          <app-basic-button
+            [btnConfig]="{ text: 'Comprar ahora', size: 'base' }"
+            designBtn="selector"
+          />
+          <app-basic-button
+            [btnConfig]="{ text: 'Añadir al carrito', size: 'base' }"
+            designBtn="common"
+          />
+        </div>
+      } @else {
+        <app-basic-button
+          class="mx-auto py-2"
+          [btnConfig]="{ text: 'Añadir al carrito' }"
+          designBtn="large"
+        />
+      }
     </div>
 
     <div
       class="flex flex-col text-primary-blue-light gap-5 text-sm lg:text-base"
     >
-      <app-paragraph text="4 semanas, con un total de 16 horas de contenido.">
+      <app-paragraph [text]="durationStream()">
         <app-clock-svg
           aria-hidden="true"
           class="text-primary-blue"
@@ -52,7 +76,7 @@
           [customClass]="sizeIcon"
         />
       </app-paragraph>
-      <app-paragraph text="No se requieren conocimientos previos. ">
+      <app-paragraph [text]="cardData().prerequisites">
         <app-circle-check-svg
           aria-hidden="true"
           class="text-primary-blue"
@@ -60,7 +84,10 @@
           [customClass]="sizeIcon"
         />
       </app-paragraph>
-      <app-paragraph text="última actualización: Julio de 2024 ">
+      <app-paragraph
+        text="última actualización: "
+        [textComplementary]="'Julio de 2024' | date"
+      >
         <app-update-svg
           aria-hidden="true"
           class="text-primary-blue"
@@ -68,7 +95,7 @@
           [customClass]="sizeIcon"
         />
       </app-paragraph>
-      <app-paragraph text="Acceso de por vida ">
+      <app-paragraph [text]="typAccess()">
         <app-infinite-svg
           aria-hidden="true"
           class="text-primary-blue"
@@ -76,7 +103,7 @@
           [customClass]="sizeIcon"
         />
       </app-paragraph>
-      <app-paragraph text="Certificado de finalización">
+      <app-paragraph [text]="typeCertificate()">
         <app-trophy-svg
           aria-hidden="true"
           class="text-primary-blue"

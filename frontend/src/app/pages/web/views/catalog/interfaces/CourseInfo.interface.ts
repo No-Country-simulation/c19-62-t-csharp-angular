@@ -1,19 +1,33 @@
 export interface CourseInfo {
-  title: string;
-  overview: string;
   details: DetailsCourse;
-  tags: string[];
-  description: string;
+  courseSummary: CourseSummary;
   syllabus: SectionCourse[];
   skillsToBeGained: string[];
   requirements: string[];
+  isPaid?: boolean;
+  paidInfo?: InfoPaidCourse;
 }
 
 export interface DetailsCourse {
+  title: string;
+  overview: string;
   instructor: string;
-  level: level;
+  level: Level;
   students: number;
-  ratings: number;
+  rating: number;
+  description: string;
+  tags: string[];
+}
+
+export interface CourseSummary {
+  introVideo: string;
+  weeksLong: number;
+  hoursContent: number;
+  prerequisites: string;
+  lastUpdated: string;
+  access: string;
+  certificate: boolean;
+  rating: number;
 }
 
 export interface SectionCourse {
@@ -22,9 +36,14 @@ export interface SectionCourse {
 }
 
 export interface ClassContent {
-  type: contentPage;
+  type: ContentPage;
   title: string;
 }
 
-export type level = 'principiante' | 'intermedio' | 'avanzado';
-export type contentPage = 'video' | 'documentation' | 'evaluation';
+export interface InfoPaidCourse {
+  price: number;
+}
+
+export type Level = 'principiante' | 'intermedio' | 'avanzado';
+export type ContentPage = 'video' | 'documentation' | 'evaluation';
+export type CourseDurationType = 'temporary' | 'permanent';

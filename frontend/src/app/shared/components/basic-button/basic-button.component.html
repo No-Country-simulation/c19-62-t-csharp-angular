@@ -4,6 +4,7 @@
     'btn-basic-common': designBtn() === 'common' || !designBtn(),
     'btb-basic--selector': designBtn() === 'selector',
     'btn-basic--large': designBtn() === 'large',
+    'btn-basic--base-size': btnConfig().size === 'base',
   }"
   [attr.title]="btnConfig().label"
   [attr.aria-label]="btnConfig().label"
