@@ -1,11 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InputSignal,
+  input,
+} from '@angular/core';
+import { SvgProps } from '../interfaces/SvgProps.interface';
 
 @Component({
   selector: 'app-arrow-svg',
   standalone: true,
+  imports: [],
   template: `<svg
-    width="13"
-    height="19"
+    [class]="customClass()"
+    [attr.width]="size()"
+    [attr.height]="size()"
     viewBox="0 0 13 19"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -15,6 +23,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       fill="currentColor"
     />
   </svg> `,
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArrowSvgComponent {}
+export class ArrowSvgComponent implements SvgProps {
+  size: InputSignal<number> = input(46);
+  customClass = input<string>('');
+}

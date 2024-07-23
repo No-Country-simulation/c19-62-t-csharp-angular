@@ -1,0 +1,26 @@
+<button
+  class="btn"
+  [ngClass]="{
+    'btn-basic-common': designBtn() === 'common' || !designBtn(),
+    'btb-basic--selector': designBtn() === 'selector',
+    'btn-basic--large': designBtn() === 'large',
+    'btn-basic--base-size': btnConfig().size === 'base',
+  }"
+  [attr.title]="btnConfig().label"
+  [attr.aria-label]="btnConfig().label"
+  [type]="btnConfig().type || 'button'"
+  [disabled]="isDisabled()"
+>
+  {{ btnConfig().text }}
+
+  @defer (when btnConfig().icon && designBtn() === 'selector') {
+    <img
+      aria-hidden="true"
+      class="pointer-events-none scale-90 mt-[.1rem] block"
+      [ngSrc]="btnConfig().icon ?? ''"
+      alt="arrow icon"
+      width="13"
+      height="19"
+    />
+  }
+</button>

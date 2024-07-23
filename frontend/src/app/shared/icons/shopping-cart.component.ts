@@ -1,13 +1,19 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ImageDimensions } from './heart-svg.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InputSignal,
+  input,
+} from '@angular/core';
+import { SvgProps } from '../interfaces/SvgProps.interface';
 
 @Component({
   selector: 'app-shopping-cart-svg',
   standalone: true,
   template: `<svg
+    [class]="customClass()"
     xmlns="http://www.w3.org/2000/svg"
-    [attr.width]="sizes().width"
-    [attr.height]="sizes().height"
+    [attr.width]="size()"
+    [attr.height]="size()"
     viewBox="0 0 48 48"
     fill="none"
   >
@@ -31,9 +37,7 @@ import { ImageDimensions } from './heart-svg.component';
   </svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShoppingCartSvgComponent {
-  sizes = input<ImageDimensions>({
-    width: 48,
-    height: 48,
-  });
+export class ShoppingCartSvgComponent implements SvgProps {
+  size: InputSignal<number> = input(46);
+  customClass = input<string>('');
 }

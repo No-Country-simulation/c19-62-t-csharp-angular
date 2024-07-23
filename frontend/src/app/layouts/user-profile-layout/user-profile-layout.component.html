@@ -8,13 +8,13 @@
     </header>
     <nav>
       <ul class="flex flex-col justify-start gap-1">
-        @for (option of userOptions; track option.label) {
+        @for (option of userOptions; track option.text) {
           <li>
             <a
               class="hover:bg-light-blue text-primary-blue block transition-colors rounded-lg p-1 pl-3 tracking-wider"
-              [routerLink]="['/learn-teach/user' + option.link]"
+              [routerLink]="['/learn-teach/user' + option.url]"
               routerLinkActive="bg-light-blue"
-              >{{ option.label }}</a
+              >{{ option.text }}</a
             >
           </li>
         }

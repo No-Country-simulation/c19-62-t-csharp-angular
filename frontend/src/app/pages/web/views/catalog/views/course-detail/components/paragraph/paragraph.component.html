@@ -1,0 +1,6 @@
+<div class="flex gap-2 items-center">
+  <ng-content />
+  <p [class]="['text-primary-blue-light font-normal text-lg' + customClass()]">
+    {{ text() || 'empty paragraph' }} {{ textComplementary() }}
+  </p>
+</div>

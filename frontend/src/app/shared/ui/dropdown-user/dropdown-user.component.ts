@@ -24,11 +24,11 @@ import { AvatarComponent } from '../../components/avatar/avatar.component';
 })
 export class DropdownUserComponent {
   dropdownOptions: DataLink[] = [
-    { label: 'Mi Perfil', link: '/profile' },
-    { label: 'Mis Cursos', link: '/courses' },
-    { label: 'Comunidad', link: '/community' },
-    { label: 'Ayuda', link: '/help' },
-    { label: 'Cerrar sesión', link: '/logout' },
+    { text: 'Mi Perfil', url: '/profile' },
+    { text: 'Mis Cursos', url: '/courses' },
+    { text: 'Comunidad', url: '/community' },
+    { text: 'Ayuda', url: '/help' },
+    { text: 'Cerrar sesión', url: '/logout' },
   ];
   isOpenDropdown = signal(false);
   labelDropdownStream = computed(() =>

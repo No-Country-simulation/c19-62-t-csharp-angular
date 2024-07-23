@@ -1,0 +1,95 @@
+{
+  "details": {
+    "title": "Introducción de HTML y CSS",
+    "overview": "Da los primeros pasos en el desarrollo y la maquetación web sin experiencia previa y sin costo.",
+    "instructor": "Juan Pérez",
+    "level": "intermedio",
+    "students": 100,
+    "tags": ["Angular", "TypeScript", "Desarrollo web"],
+    "description": "Este curso ofrece una introducción completa y práctica a las dos tecnologías esenciales para la creación de páginas web: HTML y CSS. Comenzando desde los conceptos básicos, aprenderás cómo estructurar y organizar el contenido con HTML y cómo darle estilo y formato con CSS, permitiéndote construir sitios web visualmente atractivos y funcionales.",
+    "rating": 4
+  },
+  "courseSummary": {
+    "introVideo": "https://example.com/intro-video",
+    "weeksLong": 4,
+    "hoursContent": 16,
+    "prerequisites": "No se requieren conocimientos previos.",
+    "lastUpdated": "2024-07-01",
+    "access": "permanent",
+    "certificate": true,
+    "rating": 4
+  },
+  "syllabus": [
+    {
+      "sectionName": "Introducción",
+      "contentCourse": [
+        { "type": "video", "title": "Primera clase: Introducción" },
+        {
+          "type": "documentation",
+          "title": "Segunda clase: preparando el entorno"
+        },
+        { "type": "video", "title": "Tercera clase: clase 3" },
+        { "type": "video", "title": "Cuarta clase: clase 4" },
+        { "type": "video", "title": "Cuarta clase: clase 5" },
+        { "type": "video", "title": "Documentación" },
+        { "type": "video", "title": "Evaluación de saberes sección 1" }
+      ]
+    },
+    {
+      "sectionName": "Componentes",
+      "contentCourse": [
+        { "type": "video", "title": "Creación de componentes" },
+        { "type": "documentation", "title": "Comunicación entre componentes" }
+      ]
+    },
+    {
+      "sectionName": "Servicios",
+      "contentCourse": [
+        { "type": "video", "title": "Uso de servicios" },
+        { "type": "documentation", "title": "Inyección de dependencias" }
+      ]
+    },
+    {
+      "sectionName": "Directivas",
+      "contentCourse": [
+        { "type": "video", "title": "Directivas estructurales" },
+        { "type": "documentation", "title": "Directivas personalizadas" }
+      ]
+    },
+    {
+      "sectionName": "Enrutamiento",
+      "contentCourse": [
+        { "type": "video", "title": "Configuración de rutas" },
+        { "type": "documentation", "title": "Navegación entre vistas" }
+      ]
+    },
+    {
+      "sectionName": "Pruebas",
+      "contentCourse": [
+        { "type": "video", "title": "Pruebas unitarias" },
+        { "type": "documentation", "title": "Pruebas de integración" }
+      ]
+    },
+    {
+      "sectionName": "Despliegue",
+      "contentCourse": [
+        { "type": "video", "title": "Despliegue en la nube" },
+        { "type": "documentation", "title": "Despliegue local" }
+      ]
+    }
+  ],
+  "skillsToBeGained": [
+    "Estructura y sintaxis básicas de HTML",
+    "Uso de etiquetas HTML para organizar contenido",
+    "Incorporación de imágenes, enlaces y formularios en páginas web",
+    "Fundamentos de CSS para estilizar y presentar contenido",
+    "Aplicación de colores, fuentes y diseños de página",
+    "Uso de cajas, bordes y espaciado en el diseño web",
+    "Principios de diseño responsivo para diferentes dispositivos"
+  ],
+  "requirements": ["PC, Mac o Linux", "Editor de código", "Navegador web"],
+  "isPaid": false,
+  "paidInfo": {
+    "price": 20
+  }
+}

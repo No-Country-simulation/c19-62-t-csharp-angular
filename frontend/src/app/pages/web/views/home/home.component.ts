@@ -5,11 +5,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './home.component.html',
-  styles: `
-    :host {
-      display: contents;
-    }
-  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class HomeComponent {}

@@ -1,0 +1,11 @@
+<div class="flex gap-1">
+  @for (star of starsList; track star; let i = $index) {
+    <app-star-svg
+      [class]="{ 'cursor-pointer': hasInteractive() }"
+      [customClass]="customClass()"
+      (click)="onClick(i + 1)"
+      [isFill]="rating() >= i + 1"
+      [size]="size()"
+    />
+  }
+</div>
