@@ -61,7 +61,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.Requi
     .AddDefaultUI();
 //builder.Services.AddIdentityApiEndpoints<User>()
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
-    
+
 
 // Add Identity options
 builder.Services.Configure<IdentityOptions>(options =>
@@ -85,24 +85,24 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
- builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
-        };
-    });
+builder.Services.AddAuthentication(options =>
+   {
+       options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+       options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+   })
+   .AddJwtBearer(options =>
+   {
+       options.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuer = true,
+           ValidateAudience = true,
+           ValidateLifetime = true,
+           ValidateIssuerSigningKey = true,
+           ValidIssuer = builder.Configuration["Jwt:Issuer"],
+           ValidAudience = builder.Configuration["Jwt:Audience"],
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+       };
+   });
 
 // Add controllers and swagger
 builder.Services.AddControllers();
@@ -117,7 +117,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "An ASP.NET Core Web API for Learn&Teach"
     });
 
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme(){
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Name = "Authorization",
@@ -155,7 +156,7 @@ builder.Services.AddScoped<TagsService>();
 builder.Services.AddScoped<ModuleService>();
 builder.Services.AddScoped<ResourceService>();
 builder.Services.AddScoped<CourseModuleService>();
-builder.Services.AddScoped<CourseTagsService>();
+builder.Services.AddScoped<CourseTagService>();
 builder.Services.AddScoped<ModuleResourceService>();
 
 
@@ -183,7 +184,7 @@ else
 }
 
 // Migrate the database
-using(var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();

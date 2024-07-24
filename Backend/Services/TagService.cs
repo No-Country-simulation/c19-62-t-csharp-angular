@@ -12,19 +12,22 @@ namespace Backend.Services
     {
         private readonly ApplicationDbContext _context = context;
 
-        public async Task<Tags>Create(TagsDto tagsDto){
-            var tags= new Tags{
-                Name=tagsDto.Name,
+        public async Task<Tag> Create(TagsDto tagsDto)
+        {
+            var tags = new Tag
+            {
+                Name = tagsDto.Name,
             };
-            
+
             _context.Tags.Add(tags);
 
-            try{
+            try
+            {
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("hubo un error al crear el tags",ex);
+                throw new Exception("hubo un error al crear el tags", ex);
             }
 
             return tags;

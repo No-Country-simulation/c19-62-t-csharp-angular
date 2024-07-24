@@ -58,7 +58,7 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(100)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,7 +100,7 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(256)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,22 +219,21 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     Subtitle = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prerequisites = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BulletPoints = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Level = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    DurationHours = table.Column<short>(type: "smallint", nullable: false),
-                    IdCategory = table.Column<int>(type: "int", nullable: false)
+                    DurationHours = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Categories_IdCategory",
-                        column: x => x.IdCategory,
+                        name: "FK_Courses_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -299,7 +298,7 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    IdTags = table.Column<int>(type: "int", nullable: false)
+                    TagId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -311,8 +310,8 @@ namespace Backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseTags_Tags_IdTags",
-                        column: x => x.IdTags,
+                        name: "FK_CourseTags_Tags_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -394,9 +393,9 @@ namespace Backend.Migrations
                 column: "ModuleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_IdCategory",
+                name: "IX_Courses_CategoryId",
                 table: "Courses",
-                column: "IdCategory");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseTags_CourseId",
@@ -404,9 +403,9 @@ namespace Backend.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseTags_IdTags",
+                name: "IX_CourseTags_TagId",
                 table: "CourseTags",
-                column: "IdTags");
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModuleResources_ModuleId",
