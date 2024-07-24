@@ -34,15 +34,15 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<short>("DurationHours")
                         .HasColumnType("smallint");
-
-                    b.Property<int>("IdCategory")
-                        .HasColumnType("int");
 
                     b.Property<string>("Level")
                         .IsRequired()
@@ -60,13 +60,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategory");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Courses");
                 });
@@ -94,7 +90,7 @@ namespace Backend.Migrations
                     b.ToTable("CourseModule");
                 });
 
-            modelBuilder.Entity("Backend.Models.CourseTags", b =>
+            modelBuilder.Entity("Backend.Models.CourseTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,14 +101,14 @@ namespace Backend.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTags")
+                    b.Property<int>("TagId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("IdTags");
+                    b.HasIndex("TagId");
 
                     b.ToTable("CourseTags");
                 });
@@ -185,7 +181,7 @@ namespace Backend.Migrations
                     b.ToTable("Resources");
                 });
 
-            modelBuilder.Entity("Backend.Models.Tags", b =>
+            modelBuilder.Entity("Backend.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +191,7 @@ namespace Backend.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -309,7 +305,7 @@ namespace Backend.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -453,7 +449,7 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.models.Category", "Category")
                         .WithMany("Courses")
-                        .HasForeignKey("IdCategory")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -479,7 +475,7 @@ namespace Backend.Migrations
                     b.Navigation("Module");
                 });
 
-            modelBuilder.Entity("Backend.Models.CourseTags", b =>
+            modelBuilder.Entity("Backend.Models.CourseTag", b =>
                 {
                     b.HasOne("Backend.Models.Course", "Course")
                         .WithMany("CourseTags")
@@ -487,9 +483,9 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Models.Tags", "Tags")
+                    b.HasOne("Backend.Models.Tag", "Tags")
                         .WithMany("CourseTags")
-                        .HasForeignKey("IdTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -608,7 +604,7 @@ namespace Backend.Migrations
                     b.Navigation("ModuleResources");
                 });
 
-            modelBuilder.Entity("Backend.Models.Tags", b =>
+            modelBuilder.Entity("Backend.Models.Tag", b =>
                 {
                     b.Navigation("CourseTags");
                 });

@@ -10,10 +10,10 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TagsController(TagsService tagsService, ILogger<TagsController> logger) : ControllerBase
+    public class TagController(TagsService tagsService, ILogger<TagController> logger) : ControllerBase
     {
         private readonly TagsService _tagsService = tagsService;
-        private readonly ILogger<TagsController> _logger = logger;
+        private readonly ILogger<TagController> _logger = logger;
 
         [Route("CreateTags")]
         [HttpPost]

@@ -4,29 +4,34 @@ using Backend.Models;
 
 namespace Backend.Services
 {
-    public class CourseTagsService(ApplicationDbContext context)
+    public class CourseTagService(ApplicationDbContext context)
     {
         private readonly ApplicationDbContext _context = context;
 
-        public async Task <CourseTags>Create(CourseTagsDto courseTagsDto){
-             var curse = await _context.Courses.FindAsync(courseTagsDto.CourseId);
-             var tags= await _context.Tags.FindAsync(courseTagsDto.IdTags);
+        public async Task<CourseTag> Create(CourseTagsDto courseTagsDto)
+        {
+            var curse = await _context.Courses.FindAsync(courseTagsDto.CourseId);
+            var tags = await _context.Tags.FindAsync(courseTagsDto.TagId);
 
-            var courseTags = new CourseTags{
-              CourseId=curse!.Id,
-              IdTags=tags!.Id,
-              Course=curse,
-              Tags=tags
+            var courseTags = new CourseTag
+            {
+                CourseId = curse!.Id,
+                TagId = tags!.Id,
+                Course = curse,
+                Tags = tags
             };
 
             _context.CourseTags.Add(courseTags);
 
-            try{
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 var innerExceptionMessage = ex.InnerException?.Message ?? ex.Message;
-                throw new Exception($"An error occurred while saving the courseTags: {innerExceptionMessage}", ex);            }
+                throw new Exception($"An error occurred while saving the courseTags: {innerExceptionMessage}", ex);
+            }
             return courseTags;
         }
     }
