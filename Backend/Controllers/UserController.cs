@@ -25,7 +25,17 @@ namespace Backend.Controllers
         {
             var result = await _userService.Create(userDto, userDto.Password);
             if (result.Succeeded)
-                return Ok();
+            {
+                var result_role = await _userService.AddRole(userDto.Email, "User");
+                if (result_role.Succeeded)
+                {
+                    return Ok(new { message = "User created succesfully." });
+                }
+                else
+                {
+                    return StatusCode(500, "User created succesfully but the user role wasn't assigned.");
+                }
+            }
             return BadRequest(result.Errors);
         }
 
@@ -46,8 +56,12 @@ namespace Backend.Controllers
             return Unauthorized();
         }
 
-
-        //recibe un usuario y asigno a instructor
+        /// <summary>
+        /// Returns the user's profile information.
+        /// </summary>
+        [HttpPost("MakeInstructor", Name = "MakeInstructor")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> MakeInstructor(string email)
         {
             var result = await _userService.AddRole(email, "Instructor");
