@@ -66,26 +66,29 @@ namespace Backend.Services
 
         public async Task<Course> Create(CourseInputDto courseInputDto)
         {
-            if (courseInputDto.IdCategory <= 0)
+            if (courseInputDto.CategoryId <= 0)
             {
-                throw new ArgumentException("El IdCategory debe ser un valor válido mayor que 0.");
+                throw new ArgumentException("El CategoryId debe ser un valor válido mayor que 0.");
             }
 
-            var category = await _context.Categories.FindAsync(courseInputDto.IdCategory);
+            var category = await _context.Categories.FindAsync(courseInputDto.CategoryId);
             if (category == null)
             {
                 throw new Exception("La categoría especificada no existe.");
             }
 
-            string courseNameLower = courseInputDto.Title.ToLower();
+            string courseTitleLower = courseInputDto.Title.ToLower();
+            string courseSubtitleLower = courseInputDto.Subtitle.ToLower();
 
             var course = new Course
             {
-                Title = courseNameLower,
+                Title = courseTitleLower,
+                Subtitle = courseSubtitleLower,
                 Description = courseInputDto.Description,
-                CategoryId = courseInputDto.IdCategory,
                 Prerequisites = courseInputDto.Prerequisites,
                 BulletPoints = courseInputDto.BulletPoints,
+                CategoryId = courseInputDto.CategoryId,
+                Level = courseInputDto.Level,
                 DurationHours = courseInputDto.DurationHours,
             };
 

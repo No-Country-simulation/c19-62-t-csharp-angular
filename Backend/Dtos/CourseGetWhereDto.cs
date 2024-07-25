@@ -13,7 +13,12 @@ namespace Backend.Dtos
         public short DurationHours { get; set; }
 
 
-        public string NameRol { get; set; } = string.Empty;
-        public string IdRol { get; set; } = string.Empty;
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; } = string.Empty;
+
+
+        public string UserName { get; internal set; } = string.Empty;
+        public string RoleId { get; set; } = string.Empty;
+        public string RoleName { get; set; } = string.Empty;
     }
 }
