@@ -92,7 +92,7 @@ namespace Backend.Controllers
 
         [Route("")]
         [HttpPut]
-        public async Task<IActionResult> UpdateById(TagUpdateDto tagDto)
+        public async Task<IActionResult> UpdateById(TagDto tagDto)
         {
             if (tagDto.Name.IsNullOrEmpty())
                 return BadRequest("Los datos son requeridos");

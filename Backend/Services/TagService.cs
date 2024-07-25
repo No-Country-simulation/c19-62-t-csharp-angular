@@ -2,6 +2,7 @@ using Backend.Context;
 using Backend.Dtos;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Services
 {
@@ -40,10 +41,10 @@ namespace Backend.Services
             return await _context.Tags.FindAsync(id);
         }
 
-        public async Task<Tag?> Update(TagUpdateDto tagDto)
+        public async Task<Tag?> Update(TagDto tagDto)
         {
             var tag = await _context.Tags.FindAsync(tagDto.Id);
-            if (tag == null)
+            if (tag == null || tagDto.Name.IsNullOrEmpty())
                 return tag;
 
             tag.Name = tagDto.Name;
