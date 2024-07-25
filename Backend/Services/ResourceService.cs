@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Backend.Context;
 using Backend.Models;
 using Backend.Dtos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Services
 {
@@ -13,17 +10,7 @@ namespace Backend.Services
     {
         private readonly ApplicationDbContext _context = context;
 
-        public async Task<List<Resource>> GetAll()
-        {
-            return await _context.Resources.ToListAsync();
-        }
-
-        public async Task<Resource?> GetById(int id)
-        {
-            return await _context.Resources.FindAsync(id);
-        }
-
-        public async Task<Resource> Create(ResourceDto resourceDto)
+        public async Task<Resource> Create(ResourceCreateDto resourceDto)
         {
             var resource = new Resource
             {
@@ -46,10 +33,20 @@ namespace Backend.Services
             return resource;
         }
 
-        public async Task<Resource?> Update(ResourceUpdateDto resourceDto)
+        public async Task<List<Resource>> GetAll()
+        {
+            return await _context.Resources.ToListAsync();
+        }
+
+        public async Task<Resource?> GetById(int id)
+        {
+            return await _context.Resources.FindAsync(id);
+        }
+
+        public async Task<Resource?> Update(ResourceDto resourceDto)
         {
             var resource = await _context.Resources.FindAsync(resourceDto.Id);
-            if (resource == null)
+            if (resource == null || resourceDto.Name.IsNullOrEmpty() || resourceDto.Type.IsNullOrEmpty() || resourceDto.Link.IsNullOrEmpty())
                 return resource;
 
             resource.Name = resourceDto.Name;
