@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Backend.Dtos;
-using Backend.Models;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +14,7 @@ namespace Backend.Controllers
 
         [Route("")]
         [HttpPost]
-        public async Task<IActionResult> CreateResource(ResourceDto resourceDto)
+        public async Task<IActionResult> CreateResource(ResourceCreateDto resourceDto)
         {
             if (resourceDto.Name.IsNullOrEmpty() || resourceDto.Type.IsNullOrEmpty() || resourceDto.Link.IsNullOrEmpty())
             {
@@ -102,7 +97,7 @@ namespace Backend.Controllers
 
         [Route("")]
         [HttpPut]
-        public async Task<IActionResult> UpdateById(ResourceUpdateDto resourceDto)
+        public async Task<IActionResult> UpdateById(ResourceDto resourceDto)
         {
             if (resourceDto.Name.IsNullOrEmpty() || resourceDto.Type.IsNullOrEmpty() || resourceDto.Link.IsNullOrEmpty())
                 return BadRequest("Los datos son requeridos");
