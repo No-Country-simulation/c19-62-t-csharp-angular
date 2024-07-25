@@ -25,7 +25,17 @@ namespace Backend.Controllers
         {
             var result = await _userService.Create(userDto, userDto.Password);
             if (result.Succeeded)
-                return Ok();
+            {
+                var result_role = await _userService.AddRole(userDto.Email, "User");
+                if (result_role.Succeeded)
+                {
+                    return Ok(new { message = "User created succesfully." });
+                }
+                else
+                {
+                    return StatusCode(500, "User created succesfully but the user role wasn't assigned.");
+                }
+            }
             return BadRequest(result.Errors);
         }
 
@@ -42,8 +52,22 @@ namespace Backend.Controllers
         {
             string token = await _userService.Login(userDto.Email, userDto.Password);
             if (token != "")
-                return Ok( new { email = userDto.Email, access_token = token });
+                return Ok(new { email = userDto.Email, access_token = token });
             return Unauthorized();
+        }
+
+        /// <summary>
+        /// Returns the user's profile information.
+        /// </summary>
+        [HttpPost("MakeInstructor", Name = "MakeInstructor")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> MakeInstructor(string email)
+        {
+            var result = await _userService.AddRole(email, "Instructor");
+            if (result.Succeeded)
+                return Ok(new { message = "Role added succesfully." });
+            return BadRequest(result.Errors);
         }
 
         /// <summary>
@@ -55,7 +79,7 @@ namespace Backend.Controllers
         [HttpGet("{email}", Name = "GetUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult>GetByEmail([Required] string email)
+        public async Task<IActionResult> GetByEmail([Required] string email)
         {
             var userExists = await _userService.ExistsByEmail(email);
             if (!userExists)
@@ -74,7 +98,7 @@ namespace Backend.Controllers
         [HttpPut("UpdateProfile", Name = "UpdateProfile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult>UpdateUser([Required] string email, [FromForm, Required] UserUpdateDto userData)
+        public async Task<IActionResult> UpdateUser([Required] string email, [FromForm, Required] UserUpdateDto userData)
         {
             var userExists = await _userService.ExistsByEmail(email);
             if (!userExists)
@@ -86,7 +110,7 @@ namespace Backend.Controllers
                 Errors(useResponse);
             return StatusCode(500, "Something went wrong, user profile could've been updated partially");
         }
-        
+
         /// <summary>
         /// Returns all existing users.
         /// </summary>
@@ -95,9 +119,10 @@ namespace Backend.Controllers
         [HttpGet("Users", Name = "GetAllUsers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult>GetAll(){
+        public async Task<IActionResult> GetAll()
+        {
             List<UserGetDto> useResponse = await _userService.GetAll();
-            if (useResponse.Count==0)
+            if (useResponse.Count == 0)
                 return NotFound("No users found");
             return Ok(useResponse);
         }
@@ -108,7 +133,7 @@ namespace Backend.Controllers
             {
                 foreach (IdentityError error in result.Errors)
                     ModelState.AddModelError("", error.Description);
-            } 
+            }
         }
     }
 }
