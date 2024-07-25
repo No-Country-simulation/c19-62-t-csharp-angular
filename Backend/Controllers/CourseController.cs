@@ -111,7 +111,7 @@ namespace Backend.Controllers
         {
             var errors = new List<string>();
 
-            if (dto.IdCategory == 0)
+            if (dto.CategoryId == 0)
                 errors.Add("IdCategory es requerido.");
 
             if (string.IsNullOrWhiteSpace(dto.Title))
