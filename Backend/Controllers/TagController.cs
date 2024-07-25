@@ -130,7 +130,7 @@ namespace Backend.Controllers
                 var response = await _tagsService.Delete(tagId);
 
                 if (response == null)
-                    return BadRequest("Hubo un error al actualizar el Tag");
+                    return BadRequest("Hubo un error al borrar el Tag");
 
                 return Created(string.Empty, new
                 {

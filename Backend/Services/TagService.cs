@@ -9,17 +9,6 @@ namespace Backend.Services
     {
         private readonly ApplicationDbContext _context = context;
 
-        public async Task<List<Tag>> GetAll()
-        {
-            return await _context.Tags.ToListAsync();
-        }
-
-        public async Task<Tag?> GetById(int id)
-        {
-            var result = await _context.Tags.FindAsync(id);
-            return result;
-        }
-
         public async Task<Tag> Create(TagCreateDto tagsDto)
         {
             var tags = new Tag
@@ -35,10 +24,20 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("hubo un error al crear el tags", ex);
+                throw new Exception("Hubo un error al crear el Tag", ex);
             }
 
             return tags;
+        }
+
+        public async Task<List<Tag>> GetAll()
+        {
+            return await _context.Tags.ToListAsync();
+        }
+
+        public async Task<Tag?> GetById(int id)
+        {
+            return await _context.Tags.FindAsync(id);
         }
 
         public async Task<Tag?> Update(TagUpdateDto tagDto)
@@ -56,7 +55,7 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Hubo un error al actualizar el tag", ex);
+                throw new Exception("Hubo un error al actualizar el Tag", ex);
             }
 
             return tag;
@@ -76,7 +75,7 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Hubo un error al actualizar el tag", ex);
+                throw new Exception("Hubo un error al borrar el tag", ex);
             }
 
             return tag;
