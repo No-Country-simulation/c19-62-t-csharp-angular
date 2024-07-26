@@ -1,0 +1,35 @@
+<form class="form" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+  @for (field of fields; track field.name) {
+    <app-validated-input
+      [parentForm]="formRegister"
+      [control]="field.control"
+      [formControlName]="field.control"
+      [config]="{
+        type: field.type,
+        label: field.name,
+      }"
+    />
+  }
+  <div class="flex gap-2 justify-center items-center relative">
+    <input formControlName="terms" id="terms" type="checkbox" />
+    <label class="max-w-96 text-xs" for="terms">
+      Creando esta cuenta acepto los términos y condiciones de la plataforma y
+      sus políticas de uso
+    </label>
+    @if (
+      formRegister.controls['terms'].status === 'INVALID' &&
+      formRegister.controls['terms'].dirty
+    ) {
+      <p
+        class="field-feedback absolute text-xs text-warn bottom-0 translate-y-full text-left w-full"
+      >
+        Debes aceptar los términos.
+      </p>
+    }
+  </div>
+  <app-basic-button
+    [isDisabled]="formRegister.invalid"
+    [btnConfig]="{ text: 'Crear cuenta', type: 'submit' }"
+    designBtn="large"
+  />
+</form>

@@ -1,1 +1,42 @@
-<app-auth-layout [description]="description"> </app-auth-layout>
+<app-auth-layout [description]="description">
+  <app-wrapper-image
+    ngProjectAs="image"
+    imageUrl="assets/images/register-image.webp"
+    alt="community photo"
+    [isFill]="true"
+    customClass="w-[90%] h-[18rem] xl:w-full xl:h-[19.5rem] mt-6 hidden lg:block"
+  />
+
+  <article
+    class="grid gap-6 shadow-[0px_6px_6px_rgba(0,0,0,0.25)] p-8 sm:16 xl:p-20 xl:px-28 xl:py-20 rounded-xl max-w-[600px] bg-white"
+  >
+    <header class="text-center grid gap-8">
+      <h3 class="text-3xl font-medium">Regístrate</h3>
+      <p>
+        ¿Ya tienes una cuenta?
+        <a
+          class="underline font-bold capitalize"
+          routerLink="/learn-teach/auth/login"
+        >
+          Inicia sesión</a
+        >
+      </p>
+    </header>
+    <ng-container
+      *ngrxLet="{ isLoading: isSubmitted$, isError: isErrored$ } as formState"
+    >
+      @if (formState.isLoading) {
+        <app-loader textContent="Registrándose 🚀🚀🚀" />
+      } @else if (formState.isError) {
+        <app-error-message [customMessage]="formState.isError" />
+        <app-basic-button
+          (click)="resetError()"
+          designBtn="large"
+          [btnConfig]="{ text: 'Reintentar' }"
+        />
+      } @else {
+        <app-register-form />
+      }
+    </ng-container>
+  </article>
+</app-auth-layout>
