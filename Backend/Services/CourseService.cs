@@ -135,7 +135,7 @@ namespace Backend.Services
 
             return result;
 
-        }  
+        }
 
         public async Task<UserCourse> Registration(CourseRegistrationDto courseRegistrationDto)
         {

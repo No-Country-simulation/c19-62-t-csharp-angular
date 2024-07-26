@@ -26,7 +26,6 @@ namespace Backend.Controllers
         private readonly ApplicationDbContext _context = context;
         private readonly ILogger<CourseController> _logger = logger;
 
-
         [Route("")]
         [HttpPost]
         public async Task<IActionResult> CreateCourse(CourseInputDto courseInputDto)
@@ -275,7 +274,7 @@ namespace Backend.Controllers
 
         [Route("Registration")]
         [HttpPost]
-        public async Task<IActionResult>Registration(CourseRegistrationDto courseRegistrationDto)
+        public async Task<IActionResult> Registration(CourseRegistrationDto courseRegistrationDto)
         {
             if (string.IsNullOrEmpty(courseRegistrationDto!.UserId))
                 return BadRequest("El ID de usuario no puede ser vacío.");
