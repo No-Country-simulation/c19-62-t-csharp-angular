@@ -31,12 +31,9 @@ namespace Backend.Models
         public string Level { get; set; } = string.Empty;
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
-
-
         public int IdCategory {get;set;} 
-        public Category Category { get; set; } = new Category();
+        public Category Category{ get; set; }=null!;
         
-
         [JsonIgnore]
         public ICollection<UserCourse> UserCourses { get; set; } = [];
         [JsonIgnore]

@@ -28,6 +28,7 @@ namespace Backend.Context
         public DbSet<CourseModule> CourseModule { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
