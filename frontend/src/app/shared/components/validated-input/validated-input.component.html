@@ -2,33 +2,42 @@
   <div
     class="field-content"
     [ngClass]="{
-      valid: form().controls['email'].status === 'VALID',
+      valid: parentForm().controls[control()].status === 'VALID',
       invalid:
-        form().controls[inputField().key].status === 'INVALID' &&
-        form().controls[inputField().key].dirty,
+        parentForm().controls[control()].status === 'INVALID' &&
+        parentForm().controls[control()].dirty,
     }"
   >
-    <label class="field-label" [for]="['user-' + inputField().key]">{{
-      inputField().name
-    }}</label>
+    <div class="flex justify-between items-center">
+      <label class="field-label" [for]="[config().label]">{{
+        config().label
+      }}</label>
+      @if (config().type === 'password') {
+        <app-show-toggle-btn [(isView)]="isViewPassword" />
+      }
+    </div>
     <div class="field-wrapperInput">
       <input
-        class="field-input ring-offset-slate-500"
-        [type]="inputField().type"
-        [formControlName]="inputField().key"
-        [id]="['user-' + inputField().key]"
+        [id]="[config().label]"
+        class="field-input"
+        [disabled]="isDisabled"
+        [attr.formControl]="customInput"
+        [type]="!isViewPassword() ? config().type : 'text'"
+        [attr.placeholder]="config().placeholder"
+        (input)="onChangeValue($event)"
+        (blur)="registerOnTouched(touched)"
       />
     </div>
+    @if (
+      parentForm().controls[control()].status === 'INVALID' &&
+      parentForm().controls[control()].dirty
+    ) {
+      <p class="field-feedback text-xs">
+        {{
+          getTypeError(parentForm().controls[control()].errors!)
+            | appInputValidator: { form: parentForm(), field: control() }
+        }}
+      </p>
+    }
   </div>
-  @if (
-    form().controls[inputField().key].status === 'INVALID' &&
-    form().controls[inputField().key].dirty
-  ) {
-    <p class="field-feedback">
-      {{
-        getTypeError(form().controls[inputField().key].errors!)
-          | appInputValidator: { form: form(), field: inputField().key }
-      }}
-    </p>
-  }
 </div>

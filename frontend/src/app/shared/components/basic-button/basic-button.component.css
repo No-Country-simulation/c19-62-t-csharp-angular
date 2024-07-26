@@ -16,9 +16,14 @@
   place-content: center;
   align-items: center;
   border-width: 2px;
+  text-wrap: nowrap;
 
   &::first-letter {
     text-transform: capitalize;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 }
 
@@ -40,7 +45,6 @@
 
   &:disabled {
     background-color: #a9a9a9;
-    cursor: not-allowed;
     border-color: #a9a9a9;
   }
 }
@@ -53,11 +57,16 @@
 }
 
 .btn-basic--large {
+  width: 100%;
   border-radius: 2.5rem;
   font-size: 1.25rem;
   background-color: var(--primary-blue-light);
   color: var(--primary-white);
   padding: 0.75rem 2rem;
+
+  &:disabled {
+    background-color: var(--primary-blue);
+  }
 
   @media (width >= 768px) {
     padding: 0.75rem 7rem;

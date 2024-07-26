@@ -1,0 +1,12 @@
+<button
+  [attr.aria-label]="titleStream()"
+  class="w-fit"
+  (click)="onCLick()"
+  type="button"
+>
+  @if (isView()) {
+    <app-eye-fill-svg [size]="sizeIcon" />
+  } @else {
+    <app-eye-off-svg [size]="sizeIcon" />
+  }
+</button>
