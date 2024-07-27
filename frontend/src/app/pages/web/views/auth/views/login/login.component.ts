@@ -11,9 +11,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-
 import { RouterLink } from '@angular/router';
-
 import { NgClass, NgOptimizedImage } from '@angular/common';
 
 import { AuthCredentials } from '../../interfaces/AuthCredentials.interface';
@@ -24,15 +22,13 @@ import AUTH_ACTIONS from '../../../../../../core/store/auth/auth.actions';
 import { AUTH_SELECTORS } from '../../../../../../core/store/auth/auth.selectors';
 import { AuthLayoutComponent } from '../../../../../../layouts/auth-layout/auth-layout.component';
 import { InputValidatorPipe } from '../../../../../../shared/pipes/input-validator.pipe';
-import { InputFieldWrapperComponent } from '../../../../../../shared/ui/input-field-wrapper/input-field-wrapper.component';
-import { MainLogoComponent } from '../../../../../../shared/ui/main-logo/main-logo.component';
+import { MainLogoComponent } from '../../../../../../shared/components/main-logo/main-logo.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    InputFieldWrapperComponent,
     InputValidatorPipe,
     RouterLink,
     MainLogoComponent,
@@ -42,6 +38,7 @@ import { MainLogoComponent } from '../../../../../../shared/ui/main-logo/main-lo
     LetDirective,
   ],
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoginComponent {

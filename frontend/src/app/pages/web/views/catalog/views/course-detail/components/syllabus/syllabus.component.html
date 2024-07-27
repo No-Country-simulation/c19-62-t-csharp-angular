@@ -1,0 +1,25 @@
+<article class="grid gap-4">
+  <app-title contentTitle="Contenido del curso:" [level]="3" />
+  @for (data of firstsSectionStream(); track data.sectionName; let i = $index) {
+    <app-accordion-panel [syllabus]="data" />
+  } @empty {
+    El temario se subirá próximamente
+  }
+
+  @if (isMayorFive() && !isLoadAllSections()) {
+    <button
+      (click)="onClick()"
+      class="hover:underline text-primary-blue font-bold text-xl py-2 mx-auto text-center tracking-wide"
+      type="button"
+    >
+      Ver {{ totalSections() - MAX_SECTIONS }}
+      @if (totalSections() - MAX_SECTIONS === 1) {
+        sección más
+      }
+
+      @if (totalSections() - MAX_SECTIONS > 1) {
+        secciones más
+      }
+    </button>
+  }
+</article>

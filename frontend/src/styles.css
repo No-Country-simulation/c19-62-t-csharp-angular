@@ -21,4 +21,22 @@
     --primary-blue-light: #1e548d;
     --second-background: #d8d8d8;
   }
+
+  p::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+@layer utilities {
+  .btn-animation {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(0.9);
+    }
+
+    &:active {
+      transform: scale(1.1);
+    }
+  }
 }

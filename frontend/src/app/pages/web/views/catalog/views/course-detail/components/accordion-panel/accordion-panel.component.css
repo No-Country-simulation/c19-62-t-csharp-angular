@@ -1,0 +1,66 @@
+.accordion {
+  border-bottom: solid 2px var(--primary-blue);
+  padding-block: 1.5rem;
+  user-select: none;
+
+  & .accordion-title {
+    font-size: 1.6rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    transition: padding-inline 0.1s ease-in-out;
+
+    &:hover {
+      color: var(--primary-blue-light);
+
+      .accordion-mark {
+        opacity: 0.8;
+        transform: rotate(90deg) scale(0.8);
+      }
+    }
+  }
+
+  & .accordion-mark {
+    transform: rotate(90deg);
+    transform-origin: center;
+    padding-left: 0.5rem;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  & .accordion-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  & .accordion-item {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    padding-left: 2rem;
+  }
+}
+
+.accordion[open] {
+  border-color: var(--primary-blue-light);
+
+  & .accordion-mark {
+    transform: rotate(-90deg);
+  }
+
+  & .accordion-title {
+    color: var(--primary-blue-light);
+    padding-inline: 1rem;
+
+    &:hover .accordion-mark {
+      transform: rotate(-90deg) scale(0.8);
+    }
+  }
+}

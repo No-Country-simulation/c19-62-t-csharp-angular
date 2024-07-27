@@ -13,8 +13,10 @@ namespace Backend.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("User")]
-        public string UserId { get; set; } = string.Empty;
+        // [ForeignKey("User")]
+        // public string UserId { get; set; } = string.Empty;
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
 
 
         [Column(TypeName = "nvarchar(256)")]
@@ -31,14 +33,15 @@ namespace Backend.Models
         public string Level { get; set; } = string.Empty;
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
+
         public int IdCategory {get;set;} 
         public Category Category{ get; set; }=null!;
         
         [JsonIgnore]
         public ICollection<UserCourse> UserCourses { get; set; } = [];
         [JsonIgnore]
-        public ICollection<CourseTags> CourseTags { get; set; } = [];
-         [JsonIgnore]
+        public ICollection<CourseTag> CourseTags { get; set; } = [];
+        [JsonIgnore]
         public ICollection<CourseModule> CourseModules { get; set; } = [];
     }
 }

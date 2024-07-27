@@ -36,13 +36,34 @@ export class AuthEffects {
       exhaustMap(({ credentials }) =>
         this.authService.login(credentials).pipe(
           map(({ access_token }) => {
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/learn-teach/user/profile']);
             return AUTH_ACTIONS.saveToken({ token: access_token });
           }),
-          catchError((e: HttpErrorResponse) => {
-            console.log(e);
-            return of(AUTH_ACTIONS.authError({ error: e.statusText }));
-          })
+          catchError((e: HttpErrorResponse) =>
+            of(AUTH_ACTIONS.authError({ error: e.statusText }))
+          )
+        )
+      )
+    );
+  });
+
+  public authRegister = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AUTH_ACTIONS.AuthRegister),
+      exhaustMap(({ credentials }) =>
+        this.authService.register(credentials).pipe(
+          map((res) => {
+            console.log(res);
+            return AUTH_ACTIONS.authLogin({
+              credentials: {
+                email: credentials.email,
+                password: credentials.password,
+              },
+            });
+          }),
+          catchError((e: HttpErrorResponse) =>
+            of(AUTH_ACTIONS.authError({ error: e.statusText }))
+          )
         )
       )
     );

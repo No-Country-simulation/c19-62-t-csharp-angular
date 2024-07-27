@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.btn {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  height: 3.5rem;
+  width: max-content;
+  min-width: 9rem;
+  transition-property: color;
+  transition-duration: 0.3s;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  display: grid;
+  place-content: center;
+  align-items: center;
+  border-width: 2px;
+  text-wrap: nowrap;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.btn-basic-common {
+  background-color: var(--primary-blue-light);
+  color: var(--primary-white);
+  border-color: var(--primary-blue-light);
+  transition: color linear 0.2s;
+
+  &:hover {
+    background-color: var(--primary-blue);
+  }
+
+  &:active {
+    border-radius: 12px;
+    background-color: #053b73;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25) inset;
+  }
+
+  &:disabled {
+    background-color: #a9a9a9;
+    border-color: #a9a9a9;
+  }
+}
+
+.btb-basic--selector {
+  grid-template-columns: 1fr auto;
+  background-color: var(--primary-white);
+  border-color: var(--primary-blue);
+  letter-spacing: 0.1rem;
+}
+
+.btn-basic--large {
+  width: 100%;
+  border-radius: 2.5rem;
+  font-size: 1.25rem;
+  background-color: var(--primary-blue-light);
+  color: var(--primary-white);
+  padding: 0.75rem 2rem;
+
+  &:disabled {
+    background-color: var(--primary-blue);
+  }
+
+  @media (width >= 768px) {
+    padding: 0.75rem 7rem;
+  }
+}
+
+.btn-basic--base-size {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
