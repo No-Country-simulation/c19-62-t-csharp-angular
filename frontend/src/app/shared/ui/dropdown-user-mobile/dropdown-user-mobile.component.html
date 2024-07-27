@@ -1,12 +1,10 @@
 <div class="relative">
   <button
-    class="flex gap-4 items-center"
+    class="h-fit rounded-[50%] hover:bg-second-background block p-3"
     type="button"
     (click)="toggleDropdown()"
-    [attr.aria-label]="labelDropdownStream()"
   >
-    <app-avatar customClass="size-14" />
-    <app-arrow-svg [size]="24" class="rotate-90" />
+    <app-hamburger-bar-svg [size]="25" />
   </button>
   @if (isOpenDropdown()) {
     <app-body-dropdown [dropdownOptions]="dropdownOptions" />

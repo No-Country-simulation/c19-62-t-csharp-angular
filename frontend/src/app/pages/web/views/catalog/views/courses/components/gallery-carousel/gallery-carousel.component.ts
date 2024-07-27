@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CoursesCarouselComponent } from '../courses-carousel/courses-carousel.component';
+import { DetailsCourse } from '../../../../interfaces/CourseInfo.interface';
 
 @Component({
   selector: 'app-gallery-carousel',
@@ -14,23 +15,25 @@ import { CoursesCarouselComponent } from '../courses-carousel/courses-carousel.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryCarouselComponent {
-  popularCourses = {
-    title: 'Cursos más populares',
-    description:
-      'Descubra nuestros cursos más populares y prepárese para una carrera en demanda.',
-    slides: [1, 2, 3, 4, 5],
-  };
-  newCourses = {
-    title: 'Cursos nuevos',
-    description:
-      'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
-    slides: [1, 2, 3, 4, 5],
-  };
-
-  freeCourses = {
-    title: 'Cursos gratis',
-    description:
-      'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
-    slides: [1, 2, 3, 4, 5],
-  };
+  courseList = input.required<DetailsCourse[]>();
+  popularCourses = [
+    {
+      title: 'Cursos más populares',
+      description:
+        'Descubra nuestros cursos más populares y prepárese para una carrera en demanda.',
+      slides: [1, 2, 3, 4, 5],
+    },
+    {
+      title: 'Cursos nuevos',
+      description:
+        'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
+      slides: [1, 2, 3, 4, 5],
+    },
+    {
+      title: 'Cursos gratis',
+      description:
+        'Explora nuestros cursos nuevos y actualizados y mantente al día con las últimas tendencias.',
+      slides: [1, 2, 3, 4, 5],
+    },
+  ];
 }

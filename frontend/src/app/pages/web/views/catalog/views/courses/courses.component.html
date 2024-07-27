@@ -1,8 +1,9 @@
-<section class="flex flex-col gap-28 h-full">
+<section class="flex flex-col gap-12 h-full">
   <h2
-    class="w-fit text-4xl font-bold tracking-wider text-primary-blue-light relative before:absolute before:h-1 before:w-full before:border-t-[#98D5DB] before:border-2 before:border-b-primary-blue before:bottom-0 before:translate-y-1"
+    class="w-fit text-4xl font-bold tracking-wider text-primary-blue-light relative"
   >
     Descubre nuestro cursos
+    <app-divider class="pt-2" />
   </h2>
   <div class="grid grid-rows-[auto_1fr] gap-10 grid-cols-1 h-full">
     <app-course-filter-bar
@@ -11,12 +12,12 @@
     />
     <div class="flex flex-col row-[2/3]">
       @if (!isSearchActive()) {
-        <app-gallery-carousel />
+        <app-gallery-carousel [courseList]="(coursesList | async) ?? []" />
       }
 
       @defer (when isSearchActive()) {
         @if (isSearchActive()) {
-          <app-gallery-course />
+          <app-gallery-course [courseList]="(coursesList | async) ?? []" />
         }
       } @loading (minimum 1s) {
         <div class="content-center mx-auto h-full">Loading...</div>

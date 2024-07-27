@@ -3,12 +3,13 @@ import {
   BasicButtonConfig,
   DesignButton,
 } from '../../interfaces/BasicButton.interface';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
+import { ArrowSvgComponent } from '@icons/arrow-svg.component';
 
 @Component({
   selector: 'app-basic-button',
   standalone: true,
-  imports: [NgClass, NgOptimizedImage],
+  imports: [NgClass, ArrowSvgComponent],
   templateUrl: './basic-button.component.html',
   styleUrls: ['./basic-button.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

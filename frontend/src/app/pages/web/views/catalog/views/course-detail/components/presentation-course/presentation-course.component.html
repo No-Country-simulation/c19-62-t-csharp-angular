@@ -12,8 +12,9 @@
       <li class="flex gap-2 items-center">
         Calificaciones: <app-rating [rating]="4" [size]="20" />
       </li>
-      <li>
-        <app-tags [tags]="detailsCourse().tags" />
+      <li class="grid gap-4">
+        <span class="font-semibold">Tags</span>
+        <app-list-tag [tags]="detailsCourse().tags" />
       </li>
     </ul>
   </div>

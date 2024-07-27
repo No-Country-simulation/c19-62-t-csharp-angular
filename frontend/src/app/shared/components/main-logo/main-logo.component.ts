@@ -1,11 +1,12 @@
 import { NgClass, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CustomClass } from 'app/shared/interfaces/CustomClass.interface';
 
 @Component({
   selector: 'app-main-logo',
   standalone: true,
-  imports: [NgOptimizedImage, NgClass],
+  imports: [NgClass, RouterLink, NgOptimizedImage],
   templateUrl: './main-logo.component.html',
   styles: `
     :host {

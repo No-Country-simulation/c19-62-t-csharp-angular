@@ -1,7 +1,7 @@
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
-  @for (item of courses; track $index) {
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14">
+  @for (item of courseList(); track $index) {
     @defer (on viewport()) {
-      <app-course-card />
+      <app-course-card [detailsCourse]="item" />
     } @placeholder (minimum 500ms) {
       <app-card-skeleton />
     }

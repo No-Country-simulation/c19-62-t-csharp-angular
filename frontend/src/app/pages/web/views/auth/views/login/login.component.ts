@@ -23,6 +23,7 @@ import { AUTH_SELECTORS } from '../../../../../../core/store/auth/auth.selectors
 import { AuthLayoutComponent } from '../../../../../../layouts/auth-layout/auth-layout.component';
 import { InputValidatorPipe } from '../../../../../../shared/pipes/input-validator.pipe';
 import { MainLogoComponent } from '../../../../../../shared/components/main-logo/main-logo.component';
+import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-button.component';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ import { MainLogoComponent } from '../../../../../../shared/components/main-logo
     AuthLayoutComponent,
     NgOptimizedImage,
     LetDirective,
+    BasicButtonComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -54,7 +56,7 @@ export default class LoginComponent {
     this.isViewPassword() ? 'ocultar contraseña' : 'mostrar contraseña'
   );
   iconButtonStream = computed(() =>
-    this.isViewPassword() ? '/assets/eye-fill.svg' : '/assets/eye-off.svg'
+    this.isViewPassword() ? 'assets/eye-fill.svg' : 'assets/eye-off.svg'
   );
 
   constructor(

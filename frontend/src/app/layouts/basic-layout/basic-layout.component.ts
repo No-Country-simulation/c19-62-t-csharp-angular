@@ -10,7 +10,7 @@ import { FooterComponent } from 'app/shared/ui/footer/footer.component';
     <main
       class="grid grid-rows-[auto_1fr] grid-cols-[2rem_1fr_2rem] min-h-dvh bg-[#F6F6F7]"
     >
-      <app-header class="col-[1/4] row-[1/2] px-8 z-10" />
+      <app-header class="col-[1/4] row-[1/2] px-8 z-20" />
       <div class="col-[2/3] content-center py-10 min-h-dvh">
         <ng-content>
           <p class="text-center text-xl font-medium">Cargando ...</p>
