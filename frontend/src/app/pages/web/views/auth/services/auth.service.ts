@@ -5,7 +5,6 @@ import { AuthCredentials } from '../interfaces/AuthCredentials.interface';
 import { AuthResponse } from '../interfaces/AuthResponse.interface';
 import { AuthRegister } from '../interfaces/AuthRegister.interface';
 import { RegisterResponse } from '../interfaces/RegisterResponse.interface';
-import { environment } from '../../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +14,14 @@ export class AuthService {
 
   public login(credentials: AuthCredentials): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
-      `${environment.LEARN_TEACH_KEY}/api/Account/Login`,
+      `${'<YOUR_GoogleAPIKey_HERE>'}/api/Account/Login`,
       this.formatBody(credentials)
     );
   }
 
   public register(authData: AuthRegister): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
-      `${environment.LEARN_TEACH_KEY}/api/Account/Register`,
+      `${'<YOUR_GoogleAPIKey_HERE>'}/api/Account/Register`,
       this.formatBody(authData)
     );
   }
