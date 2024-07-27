@@ -12,6 +12,7 @@ export interface DetailsCourse {
   title: string;
   overview: string;
   instructor: string;
+  hoursContent: number;
   level: Level;
   students: number;
   rating: number;

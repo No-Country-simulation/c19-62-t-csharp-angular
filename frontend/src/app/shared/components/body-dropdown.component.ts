@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DataLink } from '../interfaces/DataLink.interface';
 
 @Component({
-  selector: 'app-tags',
+  selector: 'app-body-dropdown',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './tags.component.html',
+  templateUrl: './body-dropdown.component.html',
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagsComponent {
-  tags = input.required<string[]>();
+export class BodyDropdownComponent {
+  dropdownOptions = input.required<DataLink[]>();
 }

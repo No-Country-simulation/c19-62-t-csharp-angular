@@ -1,0 +1,13 @@
+<ul
+  class="flex flex-col shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] py-4 px-2 gap-6 bg-light-white absolute bottom-0 right-0 translate-y-[113%] text-lg min-w-52 rounded-2xl animate-fadeIn opacity-0 before:w-10 before:h-8 before:top-0 before:absolute before:bg-white before:-z-10 before:right-[.4rem] before:-translate-y-full before:clip-path-triangle"
+>
+  @for (option of dropdownOptions(); track $index) {
+    <li>
+      <a
+        class="block text-xl hover:bg-light-blue transition-colors text-nowrap text-left rounded-xl px-2 py-1"
+        [routerLink]="option.url"
+        >{{ option.text }}</a
+      >
+    </li>
+  }
+</ul>

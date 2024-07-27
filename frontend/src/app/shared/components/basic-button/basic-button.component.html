@@ -5,22 +5,17 @@
     'btb-basic--selector': designBtn() === 'selector',
     'btn-basic--large': designBtn() === 'large',
     'btn-basic--base-size': btnConfig().size === 'base',
+    'btn-basic--light': designBtn() === 'light',
   }"
   [attr.title]="btnConfig().label"
   [attr.aria-label]="btnConfig().label"
   [type]="btnConfig().type || 'button'"
   [disabled]="isDisabled()"
 >
-  {{ btnConfig().text }}
-
-  @defer (when btnConfig().icon && designBtn() === 'selector') {
-    <img
-      aria-hidden="true"
-      class="pointer-events-none scale-90 mt-[.1rem] block"
-      [ngSrc]="btnConfig().icon ?? ''"
-      alt="arrow icon"
-      width="13"
-      height="19"
-    />
-  }
+  <span class="flex gap-2 justify-center items-center">
+    {{ btnConfig().text }}
+    @if (btnConfig().icon && designBtn() === 'selector') {
+      <app-arrow-svg [size]="17" />
+    }
+  </span>
 </button>

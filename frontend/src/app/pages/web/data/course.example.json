@@ -5,6 +5,7 @@
     "instructor": "Juan Pérez",
     "level": "intermedio",
     "students": 100,
+    "hoursContent": 16,
     "tags": ["Angular", "TypeScript", "Desarrollo web"],
     "description": "Este curso ofrece una introducción completa y práctica a las dos tecnologías esenciales para la creación de páginas web: HTML y CSS. Comenzando desde los conceptos básicos, aprenderás cómo estructurar y organizar el contenido con HTML y cómo darle estilo y formato con CSS, permitiéndote construir sitios web visualmente atractivos y funcionales.",
     "rating": 4

@@ -2,7 +2,7 @@
   <button
     type="button"
     (click)="toggleDropdown()"
-    class="inline-flex justify-center items-center w-full tracking-wider text-[#E6ECF2] bg-primary-blue-light py-1 px-3 rounded-xl font-normal text-xl capitalize"
+    class="inline-flex justify-center items-center w-full tracking-wider text-[#E6ECF2] bg-primary-blue-light py-[.1rem] px-3 rounded-xl font-normal text-xl capitalize"
   >
     {{ categoryName() || 'select' }}
     <svg
@@ -22,7 +22,7 @@
 
   @if (isOpen()) {
     <ul
-      class="py-1 absolute text-base flex flex-col gap-2 w-max min-w-32"
+      class="py-1 absolute text-base flex flex-col gap-3 w-max min-w-32"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="options-menu"
@@ -32,7 +32,7 @@
           <button
             type="button"
             (click)="selectOption('Principiante')"
-            class="w-full tracking-wider text-primary-blue py-1 px-3 rounded-xl shadow capitalize text-left bg-white hover:text-primary-white hover:bg-primary-blue-light transition-colors"
+            class="w-full tracking-wider text-primary-blue py-[.1rem] px-3 rounded-xl shadow capitalize text-left bg-white hover:text-primary-blue hover:bg-primary-white active:bg-primary-blue-light active:text-light-white transition-colors"
           >
             {{ option }}
           </button>

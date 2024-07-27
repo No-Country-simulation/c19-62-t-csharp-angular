@@ -81,7 +81,7 @@
 
   & .field-wrapperInput {
     &::before {
-      background-image: url('/assets/check.svg');
+      background-image: url('/assets/svg/check.svg');
     }
   }
 }
@@ -95,7 +95,7 @@
 
   & .field-wrapperInput {
     &::before {
-      background-image: url('/assets/warn.svg');
+      background-image: url('/assets/svg/warn.svg');
     }
   }
 }

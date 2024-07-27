@@ -12,11 +12,6 @@ import {
   standalone: true,
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './search-bar.component.html',
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent {

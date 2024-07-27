@@ -5,21 +5,20 @@
 
 @layer base {
   :root {
-    --primary-blue: #043466;
     --primary-white: #e6ecf2;
     --warn: #ff0000;
     --light-white: #fff;
     --successful: #038208;
     --bg-color: #bababa;
     --light-blue: #d1edf0;
+    --mid-blue: #05b1bc;
+    --primary-blue: #043466;
+    --primary-blue-light: #1e548d;
+    --second-background: #d8d8d8;
   }
 
   body {
     color: var(--primary-blue);
-    --primary-white: #e6ecf2;
-    --primary-blue: #043466;
-    --primary-blue-light: #1e548d;
-    --second-background: #d8d8d8;
   }
 
   p::first-letter {
@@ -38,5 +37,9 @@
     &:active {
       transform: scale(1.1);
     }
+  }
+
+  .clip-path-triangle {
+    clip-path: polygon(50% 0%, 15% 100%, 85% 100%);
   }
 }
