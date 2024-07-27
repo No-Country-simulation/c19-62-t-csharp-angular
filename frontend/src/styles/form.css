@@ -28,6 +28,14 @@
     gap: 0.5rem;
   }
 
+  & .field-label {
+    user-select: none;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
   & .field-label:has(.field-button) {
     display: flex;
     justify-content: space-between;

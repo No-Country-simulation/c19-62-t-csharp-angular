@@ -27,8 +27,11 @@ export class AuthService {
   }
 
   private formatBody(data: Record<string, string>): FormData {
+    console.log(data);
+
     const formData: FormData = new FormData();
     Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    console.log(formData);
 
     return formData;
   }
