@@ -9,7 +9,12 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         <div></div>
         <div></div>
       </div>
-      <p class="loader-message">{{ loaderMessage() ?? 'Cargando...' }}</p>
+      <div class="loader-message">
+        <p>{{ loaderMessage() ?? 'Cargando...' }}</p>
+        @if (emoji()) {
+          <span>{{ emoji() }}</span>
+        }
+      </div>
     </div>
   `,
   styleUrl: './loader.component.css',
@@ -17,4 +22,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class LoaderComponent {
   loaderMessage = input<string>();
+  emoji = input<string>();
 }

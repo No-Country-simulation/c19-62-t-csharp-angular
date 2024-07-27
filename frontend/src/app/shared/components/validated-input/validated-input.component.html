@@ -32,12 +32,14 @@
       parentForm().controls[control()].status === 'INVALID' &&
       parentForm().controls[control()].dirty
     ) {
-      <p class="field-feedback text-xs">
+      <p class="field-feedback">
         {{
           getTypeError(parentForm().controls[control()].errors!)
             | appInputValidator: { form: parentForm(), field: control() }
         }}
       </p>
     }
+
+    <ng-content />
   </div>
 </div>

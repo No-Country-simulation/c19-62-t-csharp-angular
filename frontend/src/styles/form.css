@@ -71,6 +71,7 @@
   }
 
   & .field-feedback {
+    font-size: 0.75rem;
     width: 100%;
     position: absolute;
     transform: translateY(100%);

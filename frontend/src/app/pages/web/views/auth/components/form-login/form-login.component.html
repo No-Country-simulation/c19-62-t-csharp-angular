@@ -1,2 +1,38 @@
-<p>form-login works!</p>
-,
+<form
+  *ngrxLet="{ isLoading: isLoading$, error: authError$ } as auth"
+  class="form"
+  [formGroup]="loginForm"
+  (submit)="onSubmit()"
+>
+  @for (field of fields; track field.name) {
+    <app-validated-input
+      class="relative"
+      [config]="{
+        type: field.type,
+        label: field.name,
+      }"
+      [parentForm]="loginForm"
+      [control]="field.control"
+      [formControlName]="field.control"
+    >
+    </app-validated-input>
+  }
+  <a
+    class="underline text-right text-sm lg:justify-self-end"
+    routerLink="/"
+    rel="noopener noreferrer"
+    >¿Olvidaste tu contraseña?</a
+  >
+  <app-basic-button
+    class="realtive"
+    [isDisabled]="loginForm.invalid || auth.isLoading"
+    designBtn="large"
+    [btnConfig]="{
+      text: auth.isLoading ? 'Verificando ...' : 'Ingresar',
+      type: 'submit',
+      label: loginForm.invalid
+        ? 'completa los campos del formulario'
+        : 'registrarse',
+    }"
+  />
+</form>

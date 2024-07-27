@@ -14,13 +14,7 @@ import { AppState } from 'app/core/store/app.state';
 import AUTH_ACTIONS from 'app/core/store/auth/auth.actions';
 import { InputValidatorPipe } from 'app/shared/pipes/input-validator.pipe';
 import passwordConfirmationValidator from 'app/shared/utils/confirmPasswordValidator';
-
-interface Field {
-  name: string;
-  type: 'text' | 'number' | 'email' | 'password';
-  control: string;
-  placeholder?: string;
-}
+import { FieldInput } from 'app/shared/interfaces/FieldInput.interface';
 
 @Component({
   selector: 'app-register-form',
@@ -41,7 +35,7 @@ interface Field {
 })
 export class RegisterFormComponent {
   formRegister: FormGroup;
-  readonly fields: Field[] = [
+  readonly fields: FieldInput[] = [
     { name: 'nombre', type: 'text', control: 'name' },
     { name: 'apellidos', type: 'text', control: 'lastName' },
     { name: 'email', type: 'email', control: 'email' },
@@ -57,7 +51,6 @@ export class RegisterFormComponent {
     required: true,
     pattern: this.REGEX,
   });
-  private readonly emailValidators = factoryValidators({ email: true });
   private readonly primaryValidators = factoryValidators({
     minLength: 3,
     maxLength: 20,
@@ -74,7 +67,7 @@ export class RegisterFormComponent {
       {
         name: ['', [...this.basicValidators, ...this.primaryValidators]],
         lastName: ['', [...this.basicValidators, ...this.primaryValidators]],
-        email: ['', [...this.basicValidators, ...this.emailValidators]],
+        email: ['', [...this.basicValidators, Validators.email]],
         password: ['', [...this.basicValidators, ...this.passwordValidators]],
         confirmPassword: [''],
         terms: [false, [Validators.requiredTrue]],
