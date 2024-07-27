@@ -134,6 +134,35 @@ namespace Backend.Services
             var result = await query.ToListAsync();
 
             return result;
+
+        }  
+
+        public async Task<UserCourse> Registration(CourseRegistrationDto courseRegistrationDto)
+        {
+            var user = await _context.Users.FindAsync(courseRegistrationDto.UserId);
+            var course = await _context.Courses.FindAsync(courseRegistrationDto.CourseId);
+
+            var userCourse = new UserCourse
+            {
+                UserId = user!.Id,
+                CourseId = course!.Id,
+                User = user!,
+                Course = course
+            };
+
+            _context.UserCourses.Add(userCourse);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("hubo un error al inscribir curso", ex);
+            }
+
+            return userCourse;
+
         }
     }
 }

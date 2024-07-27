@@ -1,14 +1,18 @@
 using Backend.Dtos;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Backend.Context;
+
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseController(CourseService courseService, ILogger<CourseController> logger) : ControllerBase
+    public class CourseController(CourseService courseService, ILogger<CourseController> logger,ApplicationDbContext context) : ControllerBase
     {
         private readonly CourseService _courseService = courseService;
         private readonly ILogger<CourseController> _logger = logger;
+
+        private readonly ApplicationDbContext _context = context;
 
         [Route("GetAll")]
         [HttpGet]
@@ -104,6 +108,45 @@ namespace Backend.Controllers
             {
                 // Manejo de excepciones general
                 return StatusCode(500, $"Se produjo un error en el servidor: {ex.Message}");
+            }
+        }
+
+        [Route("Registration")]
+        [HttpPost]
+        public async Task<IActionResult>Registration(CourseRegistrationDto courseRegistrationDto)
+        {
+            if (string.IsNullOrEmpty(courseRegistrationDto!.UserId))
+                return BadRequest("El ID de usuario no puede ser vacío.");
+
+            if (courseRegistrationDto.CourseId <= 0)
+                return BadRequest("El ID del curso debe ser mayor a 0.");
+
+            var course = await _context.Courses.FindAsync(courseRegistrationDto.CourseId);
+            if (course == null)
+                return BadRequest("El ID del curso no existe.");
+
+            var user = await _context.Users.FindAsync(courseRegistrationDto.UserId);
+            if (user == null)
+                return BadRequest("El ID de usuario no existe.");
+
+            try
+            {
+                var response = await _courseService.Registration(courseRegistrationDto);
+
+                if (response == null)
+                    return BadRequest("Hubo un error al inscribir el curso.");
+
+                return Created(string.Empty, new
+                {
+                    Message = "La inscripción al curso se ha realizado correctamente.",
+                    UserCourse = response
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                _logger.LogError(ex, "Error al inscribir curso");
+                return StatusCode(500, "Ocurrió un error interno al inscribir curso. Por favor, intente nuevamente más tarde.");
             }
         }
 
