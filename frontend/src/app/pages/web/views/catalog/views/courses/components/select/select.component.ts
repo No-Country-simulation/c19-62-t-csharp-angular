@@ -15,11 +15,7 @@ export interface Overload {
   standalone: true,
   imports: [],
   templateUrl: './select.component.html',
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  styleUrls: ['./select.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {

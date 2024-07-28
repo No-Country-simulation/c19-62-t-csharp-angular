@@ -11,12 +11,12 @@
       space-between="30"
       loop="true"
       breakpoints='{"400":{"slidesPerView":1},"640":{"slidesPerView":2},"1024":{"slidesPerView":3},"1200":{"slidesPerView":4}}'
-      class="mySwiper active:cursor-grab"
+      class="mySwiper active:cursor-grab flex items-center justify-center"
       autoplay
     >
-      @for (item of carrouselData().slides; track $index) {
+      @for (item of data(); track $index) {
         <swiper-slide>
-          <app-course-card />
+          <app-course-card [detailsCourse]="item" />
         </swiper-slide>
       } @empty {
         <app-error-message />
@@ -24,7 +24,7 @@
     </swiper-container>
   } @placeholder {
     <div class="flex gap-10 overflow-hidden">
-      @for (item of carrouselData().slides; track $index) {
+      @for (item of data(); track $index) {
         <app-card-skeleton class="flex-[1_0_348px]" />
       }
     </div>

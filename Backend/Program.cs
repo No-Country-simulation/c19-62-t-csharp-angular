@@ -159,8 +159,6 @@ builder.Services.AddScoped<CourseModuleService>();
 builder.Services.AddScoped<CourseTagService>();
 builder.Services.AddScoped<ModuleResourceService>();
 
-
-
 // Build App
 var app = builder.Build();
 

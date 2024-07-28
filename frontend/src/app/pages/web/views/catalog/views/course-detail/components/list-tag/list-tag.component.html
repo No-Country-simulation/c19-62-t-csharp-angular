@@ -1,0 +1,10 @@
+<figure class="grid gap-4">
+  @if (title()) {
+    <figcaption class="font-semibold">{{ title() }}</figcaption>
+  }
+  <div class="flex flex-wrap gap-4" [ngClass]="customClass()">
+    @for (tag of tags(); track tag) {
+      <app-tag [contentTag]="tag" />
+    }
+  </div>
+</figure>

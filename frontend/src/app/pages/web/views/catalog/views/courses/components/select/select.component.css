@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.animate-select {
+  animation: moveDown linear forwards;
+  animation-timeline: scroll();
+  animation-range: 250px 500px;
+}
+
+@keyframes moveDown {
+  to {
+    transform: translateY(2.5rem);
+  }
+}

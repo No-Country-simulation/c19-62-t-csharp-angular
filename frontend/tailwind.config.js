@@ -11,6 +11,7 @@ module.exports = {
         warn: 'var(--warn)',
         'light-blue': 'var(--light-blue)',
         'light-white': 'var(--light-white)',
+        'mid-blue': 'var(--mid-blue)',
       },
       animation: {
         fadeIn: 'fadeIn .2s ease-in forwards',

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CourseCardComponent } from '../course-card/course-card.component';
 import { CardSkeletonComponent } from 'app/shared/skeletons/card-skeleton/card-skeleton.component';
+import { DetailsCourse } from '../../../../interfaces/CourseInfo.interface';
 
 @Component({
   selector: 'app-gallery-course',
@@ -16,4 +17,5 @@ import { CardSkeletonComponent } from 'app/shared/skeletons/card-skeleton/card-s
 })
 export class GalleryCourseComponent {
   courses = Array<string>(10).fill('');
+  courseList = input.required<DetailsCourse[]>();
 }

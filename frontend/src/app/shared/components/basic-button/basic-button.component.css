@@ -1,24 +1,28 @@
-:host {
-  display: block;
-}
-
 .btn {
-  padding: 1rem;
-  border-radius: 0.75rem;
-  height: 3.5rem;
-  width: max-content;
+  border-radius: 2.5rem;
+  width: 100%;
   min-width: 9rem;
   transition-property: color;
   transition-duration: 0.3s;
-  font-size: 1.25rem;
-  line-height: 2rem;
+  font-size: 1.1rem;
+  line-height: 1rem;
   display: grid;
   place-content: center;
   align-items: center;
   border-width: 2px;
+  height: 3.2rem;
+  padding: 0.3rem;
 
   &::first-letter {
     text-transform: capitalize;
+  }
+
+  @media (width > 1200px) {
+    height: 3.5rem;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    height: 3.5rem;
+    padding: 1rem;
   }
 }
 
@@ -33,15 +37,17 @@
   }
 
   &:active {
-    border-radius: 12px;
     background-color: #053b73;
     box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25) inset;
   }
 
   &:disabled {
     background-color: #a9a9a9;
-    cursor: not-allowed;
     border-color: #a9a9a9;
+
+    &:active {
+      box-shadow: initial;
+    }
   }
 }
 
@@ -50,17 +56,54 @@
   background-color: var(--primary-white);
   border-color: var(--primary-blue);
   letter-spacing: 0.1rem;
+
+  &:hover {
+    background-color: var(--primary-blue-light);
+    color: var(--primary-white);
+    border-color: var(--primary-blue-light);
+  }
+
+  &:active {
+    background-color: var(--primary-blue-light);
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25) inset;
+  }
 }
 
 .btn-basic--large {
+  width: 100%;
   border-radius: 2.5rem;
   font-size: 1.25rem;
   background-color: var(--primary-blue-light);
   color: var(--primary-white);
   padding: 0.75rem 2rem;
 
+  &:disabled {
+    background-color: var(--primary-blue);
+  }
+
   @media (width >= 768px) {
     padding: 0.75rem 7rem;
+  }
+}
+
+.btn-basic--light {
+  background-color: var(--primary-white);
+  border: solid 0.1rem var(--primary-blue);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  height: 2.5rem;
+
+  &:hover {
+    border: solid 0.1rem var(--primary-blue-light);
+    background-color: var(--primary-blue-light);
+    color: var(--primary-white);
+  }
+
+  &:active {
+    border: solid 0.1rem var(--primary-blue);
+    background-color: var(--primary-blue);
+    color: var(--primary-white);
   }
 }
 

@@ -28,6 +28,14 @@
     gap: 0.5rem;
   }
 
+  & .field-label {
+    user-select: none;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
   & .field-label:has(.field-button) {
     display: flex;
     justify-content: space-between;
@@ -81,7 +89,7 @@
 
   & .field-wrapperInput {
     &::before {
-      background-image: url('/assets/check.svg');
+      background-image: url('/assets/svg/check.svg');
     }
   }
 }
@@ -95,7 +103,7 @@
 
   & .field-wrapperInput {
     &::before {
-      background-image: url('/assets/warn.svg');
+      background-image: url('/assets/svg/warn.svg');
     }
   }
 }

@@ -8,12 +8,12 @@ import { DetailsCourse } from '../../../../interfaces/CourseInfo.interface';
 import { KeyValuePipe } from '@angular/common';
 import { TitleComponent } from 'app/shared/components/title/title.component';
 import { RatingComponent } from '../../../courses/components/rating/rating.component';
-import { TagsComponent } from '../tags/tags.component';
+import { ListTagComponent } from '../list-tag/list-tag.component';
 
 @Component({
   selector: 'app-presentation-course',
   standalone: true,
-  imports: [TitleComponent, TagsComponent, KeyValuePipe, RatingComponent],
+  imports: [TitleComponent, ListTagComponent, KeyValuePipe, RatingComponent],
   templateUrl: './presentation-course.component.html',
   styles: `
     :host {

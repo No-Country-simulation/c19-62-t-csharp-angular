@@ -6,6 +6,6 @@ export interface BasicButtonConfig {
   size?: SizeButton;
 }
 
-export type DesignButton = 'common' | 'selector' | 'large';
+export type DesignButton = 'common' | 'selector' | 'large' | 'light';
 export type TypeButton = 'button' | 'submit' | 'reset';
 export type SizeButton = 'base' | 'lg' | 'xl';

@@ -17,6 +17,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export default class NotFoundComponent {
   constructor(private readonly router: Router) {}
+
   public navigateTo(path: string): void {
     this.router.navigate([path]);
   }
