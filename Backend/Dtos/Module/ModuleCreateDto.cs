@@ -4,5 +4,7 @@ namespace Backend.Dtos
     {
         public short Number { get; set; }
         public string Name { get; set; } = string.Empty;
+
+        public int CourseId { get; set; }
     }
 }
