@@ -1,0 +1,28 @@
+<form class="form" [formGroup]="recoveryForm" (submit)="onSubmit()">
+  @for (field of fields; track field.name) {
+    <app-validated-input
+      class="relative"
+      [config]="{
+        type: field.type,
+        label: field.name,
+      }"
+      [parentForm]="recoveryForm"
+      [control]="field.control"
+      [formControlName]="field.control"
+    >
+    </app-validated-input>
+  }
+  <app-basic-button
+    class="realtive"
+    [isDisabled]="recoveryForm.invalid"
+    designBtn="large"
+    [btnConfig]="{
+      text: 'Restablecer contraseña',
+      type: 'submit',
+      size: 'base',
+      label: recoveryForm.invalid
+        ? 'completa los campos del formulario'
+        : 'restablecer contraseña',
+    }"
+  />
+</form>

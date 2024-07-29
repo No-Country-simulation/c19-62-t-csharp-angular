@@ -16,5 +16,6 @@ import { WrapperImageComponent } from 'app/shared/components/wrapper-image/wrapp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayoutComponent {
-  description = input.required<string>();
+  description = input<string>();
+  imageComplementary = input<string>();
 }

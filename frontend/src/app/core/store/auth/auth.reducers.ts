@@ -57,5 +57,12 @@ export const authReducer = createReducer(
       ...state,
       error: null,
     })
+  ),
+  on(
+    AUTH_ACTIONS.recoveryPassword,
+    (state): AuthState => ({
+      ...state,
+      isUserLoaded: true,
+    })
   )
 );

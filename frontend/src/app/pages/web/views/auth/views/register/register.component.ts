@@ -12,7 +12,6 @@ import { LetDirective } from '@ngrx/component';
 import { ErrorMessageComponent } from 'app/shared/components/error-message/error-message.component';
 import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-button.component';
 import AUTH_ACTIONS from 'app/core/store/auth/auth.actions';
-import { WrapperImageComponent } from 'app/shared/components/wrapper-image/wrapper-image.component';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +26,6 @@ import { WrapperImageComponent } from 'app/shared/components/wrapper-image/wrapp
     LetDirective,
     ErrorMessageComponent,
     BasicButtonComponent,
-    WrapperImageComponent,
   ],
   templateUrl: './register.component.html',
   styles: `
