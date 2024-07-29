@@ -3,6 +3,7 @@
   justify-content: flex-end;
 }
 
+
 @supports (animation-timeline: scroll()) {
   :host {
     animation: fixedTop linear forwards;
