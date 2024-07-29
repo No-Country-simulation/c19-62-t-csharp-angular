@@ -52,8 +52,7 @@ export class AuthEffects {
       ofType(AUTH_ACTIONS.AuthRegister),
       exhaustMap(({ credentials }) =>
         this.authService.register(credentials).pipe(
-          map((res) => {
-            console.log(res);
+          map(() => {
             return AUTH_ACTIONS.authLogin({
               credentials: {
                 email: credentials.email,
@@ -68,4 +67,30 @@ export class AuthEffects {
       )
     );
   });
+
+  public authRecoveryPassword = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AUTH_ACTIONS.recoveryPassword),
+      exhaustMap(({ email }) =>
+        this.authService.recoveryPassword({ email }).pipe(
+          map(() =>
+            AUTH_ACTIONS.redirectTo({ url: '/learn-teach/auth/login' })
+          ),
+          catchError((e: HttpErrorResponse) =>
+            of(AUTH_ACTIONS.authError({ error: e.message }))
+          )
+        )
+      )
+    );
+  });
+
+  public AuthRedirect = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AUTH_ACTIONS.redirectTo),
+        map(({ url }) => this.router.navigate([url]))
+      );
+    },
+    { dispatch: false }
+  );
 }

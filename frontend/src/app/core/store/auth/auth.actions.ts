@@ -22,6 +22,13 @@ const authError = createAction('[Auth] Error', props<{ error: string }>());
 
 const clearError = createAction('[Auth] Clear error');
 
+const redirectTo = createAction('[Auth] Redirect to', props<{ url: string }>());
+
+const recoveryPassword = createAction(
+  '[Auth] Recover password',
+  props<{ email: string }>()
+);
+
 const AUTH_ACTIONS = {
   authLogin,
   AuthRegister,
@@ -30,6 +37,8 @@ const AUTH_ACTIONS = {
   saveToken,
   authError,
   clearError,
+  recoveryPassword,
+  redirectTo,
 };
 
 export default AUTH_ACTIONS;
