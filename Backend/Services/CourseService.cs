@@ -13,22 +13,105 @@ namespace Backend.Services
         {
             try
             {
-                List<Course> course = await _context.Courses.ToListAsync();
+                var courses = await _context.Courses
+                    .Include(c => c.CourseTags)
+                         .ThenInclude(ct => ct.Tags)
+                    .Include(c => c.CourseModules)
+                         .ThenInclude(cm => cm.Module)
+                              .ThenInclude(m => m.ModuleResources)
+                                   .ThenInclude(mr => mr.Resource)
+                    .ToListAsync();
 
-                if (course.Count == 0)
+                if (courses.Count == 0)
                 {
-                    return new List<CourseGetDto>();
+                    return [];
                 }
 
-                List<CourseGetDto> courseGetDtos = course.Select(courseGetDto => new CourseGetDto
+                List<CourseGetDto> courseGetDtos = courses.Select(courseGetDto => new CourseGetDto
                 {
                     Id = courseGetDto.Id,
                     Title = courseGetDto.Title,
+                    Subtitle = courseGetDto.Subtitle,
                     Description = courseGetDto.Description,
-                    CategoryId = courseGetDto.CategoryId,
+                    CategoryId = courseGetDto.IdCategory,
+                    BulletPoints = courseGetDto.BulletPoints,
+                    DurationHours = courseGetDto.DurationHours,
+                    Prerequisites = courseGetDto.Prerequisites,
+                    TagsDtos = courseGetDto.CourseTags.Select(tagsDto => new TagDto
+                    {
+                        Id = tagsDto.Tags.Id,
+                        Name = tagsDto.Tags.Name,
+                    }).ToList(),
+                    ModuleDtos = courseGetDto.CourseModules.Select(moduleGetDto => new ModuleDto
+                    {
+                        Id = moduleGetDto.Id,
+                        Number = moduleGetDto.Module.Number,
+                        Name = moduleGetDto.Module.Name,
+                        ResourceDtos = moduleGetDto.Module.ModuleResources.Select(resourceDto => new ResourceDto
+                        {
+                            Id = resourceDto.Id,
+                            Name = resourceDto.Resource.Name,
+                            Type = resourceDto.Resource.Type,
+                            Link = resourceDto.Resource.Link,
+                        }).ToList()
+                    }).ToList()
                 }).ToList();
 
                 return courseGetDtos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al recuperar cursos: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<CourseGetDto?> GetById(int courseId)
+        {
+            try
+            {
+
+                var course = await _context.Courses
+                     .Include(c => c.CourseTags)
+                         .ThenInclude(ct => ct.Tags)
+                     .Include(c => c.CourseModules)
+                          .ThenInclude(cm => cm.Module)
+                                .ThenInclude(m => m.ModuleResources)
+                                      .ThenInclude(mr => mr.Resource)
+                     .FirstOrDefaultAsync(c => c.Id == courseId);
+
+                if (course == null)
+                {
+                    return null;
+                }
+
+                return new CourseGetDto
+                {
+                    Id = course.Id,
+                    Title = course.Title,
+                    Subtitle = course.Subtitle,
+                    Description = course.Description,
+                    CategoryId = course.IdCategory,
+                    BulletPoints = course.BulletPoints,
+                    DurationHours = course.DurationHours,
+                    Prerequisites = course.Prerequisites,
+                    TagsDtos = course.CourseTags.Select(tagsDto => new TagDto
+                    {
+                        Id = tagsDto.Tags.Id,
+                        Name = tagsDto.Tags.Name,
+                    }).ToList(),
+                    ModuleDtos = course.CourseModules.Select(moduleGetDto => new ModuleDto
+                    {
+                        Number = moduleGetDto.Module.Number,
+                        Name = moduleGetDto.Module.Name,
+                        ResourceDtos = moduleGetDto.Module.ModuleResources.Select(resourceDto => new ResourceDto
+                        {
+                            Name = resourceDto.Resource.Name,
+                            Type = resourceDto.Resource.Type,
+                            Link = resourceDto.Resource.Link,
+                        }).ToList()
+                    }).ToList()
+                };
             }
             catch (Exception ex)
             {

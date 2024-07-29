@@ -80,6 +80,27 @@ namespace Backend.Controllers
             }
         }
 
+        [Route("GetById")]
+        [HttpGet]
+        public async Task<IActionResult> GetById(int courseId)
+        {
+            try
+            {
+                var course = await _courseService.GetById(courseId);
+                if (course == null)
+                {
+                    return NotFound("No courses found");
+                }
+
+                return Ok(course);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving courses: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [Route("{courseId}")]
         [HttpGet]
         public async Task<IActionResult> GetWhere(int courseId)
