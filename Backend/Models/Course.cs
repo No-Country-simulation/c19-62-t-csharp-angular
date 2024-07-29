@@ -17,8 +17,7 @@ namespace Backend.Models
         // public string UserId { get; set; } = string.Empty;
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-
-
+        public Category Category{ get; set; }=null!;
         [Column(TypeName = "nvarchar(256)")]
         public string Title { get; set; } = string.Empty;
         [Column(TypeName = "nvarchar(256)")]
@@ -33,10 +32,6 @@ namespace Backend.Models
         public string Level { get; set; } = string.Empty;
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
-      
-        public int CategoryId {get;set;} 
-
-        public Category Category{ get; set; }=null!;
         
         [JsonIgnore]
         public ICollection<UserCourse> UserCourses { get; set; } = [];

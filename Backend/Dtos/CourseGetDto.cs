@@ -18,13 +18,8 @@ namespace Backend.Dtos
         public string Prerequisites { get; set; } = string.Empty;
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
-        public List<ModuleDto> ModuleDtos { get; set; } = new List<ModuleDto>();
-        public List<TagsDto> TagsDtos { get; set; } = new List<TagsDto>();
-        
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; } = string.Empty;
-
-
+        public List<ModuleResourceListDto> ModuleDtos { get; set; } = new List<ModuleResourceListDto>();
+        public List<TagDto> TagsDtos { get; set; } = new List<TagDto>();
         public int TagId { get; set; }
         public string TagName { get; set; } = string.Empty;
     }

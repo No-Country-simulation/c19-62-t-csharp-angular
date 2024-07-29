@@ -30,15 +30,15 @@ namespace Backend.Services
                 Title=courseGetDto.Title,
                 Subtitle=courseGetDto.Subtitle,
                 Description=courseGetDto.Description,
-                CategoryId=courseGetDto.IdCategory,
+                CategoryId=courseGetDto.CategoryId,
                 BulletPoints=courseGetDto.BulletPoints,
                 DurationHours=courseGetDto.DurationHours,
                 Prerequisites=courseGetDto.Prerequisites,
-                TagsDtos=courseGetDto.CourseTags.Select(tagsDto=>new TagsDto{
+                TagsDtos=courseGetDto.CourseTags.Select(tagsDto=>new TagDto{
                     Id=tagsDto.Tags.Id,
                     Name=tagsDto.Tags.Name,
                 }).ToList(),
-                ModuleDtos=courseGetDto.CourseModules.Select(moduleGetDto=>new ModuleDto {
+                ModuleDtos=courseGetDto.CourseModules.Select(moduleGetDto=>new ModuleResourceListDto {
                     Id=moduleGetDto.Id,
                     Number=moduleGetDto.Module.Number,
                     Name=moduleGetDto.Module.Name,
@@ -81,15 +81,15 @@ namespace Backend.Services
                 Title=course.Title,
                 Subtitle=course.Subtitle,
                 Description=course.Description,
-                CategoryId=course.IdCategory,
+                CategoryId=course.CategoryId,
                 BulletPoints=course.BulletPoints,
                 DurationHours=course.DurationHours,
                 Prerequisites=course.Prerequisites,
-                TagsDtos=course.CourseTags.Select(tagsDto=>new TagsDto{
+                TagsDtos=course.CourseTags.Select(tagsDto=>new TagDto{
                     Id=tagsDto.Tags.Id,
                     Name=tagsDto.Tags.Name,
                 }).ToList(),
-                ModuleDtos=course.CourseModules.Select(moduleGetDto=>new ModuleDto {
+                ModuleDtos=course.CourseModules.Select(moduleGetDto=>new ModuleResourceListDto {
                     Number=moduleGetDto.Module.Number,
                     Name=moduleGetDto.Module.Name,
                 ResourceDtos=moduleGetDto.Module.ModuleResources.Select(resourceDto=>new ResourceDto{
