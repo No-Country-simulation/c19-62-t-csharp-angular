@@ -1,0 +1,13 @@
+<article class="grid gap-4">
+  <app-title [contentTitle]="title()" [level]="level()" />
+  <ul
+    class="flex flex-col gap-3 text-lg list-inside"
+    [ngClass]="{
+      'list-disc': isViewMarker(),
+    }"
+  >
+    @for (data of listData(); track data) {
+      <li>{{ data }}</li>
+    }
+  </ul>
+</article>

@@ -1,0 +1,116 @@
+<figure
+  [ngClass]="[
+    'shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden w-fit h-fit',
+    customClass(),
+  ]"
+>
+  <div
+    class="m-w-72 h-56 sm:m-w-96 sm:h-72 xl:m-w-[500px] xl:h-[310px] relative grid place-content-center w-full"
+  >
+    <img
+      class="w-full object-fill"
+      ngSrc="assets/images/card-info.webp"
+      alt="Monitor con código en pantalla rodeado de bloques flotantes."
+      fill
+    />
+    <button class="z-10 hover:opacity-70 transition-opacity" type="button">
+      <app-play-svg [size]="100" />
+    </button>
+  </div>
+  <div class="p-6 flex flex-col gap-4">
+    <div class="flex flex-col gap-6">
+      <div class="flex justify-between items-center">
+        @if (isPaid()) {
+          <strong class="text-5xl">
+            {{ priceCourse() | currency }}
+          </strong>
+        } @else {
+          <app-rating
+            [size]="46"
+            [rating]="cardData().rating"
+            customClass="sm:gap-3"
+          />
+        }
+        <button
+          (click)="onClick()"
+          [title]="isFavoriteStream()"
+          [attr.aria-label]="isFavoriteStream()"
+          type="button"
+        >
+          @if (isFavorite()) {
+            <app-heart-fill-svg customClass="size-6 sm:size-10 xl:size-14" />
+          } @else {
+            <app-heart-svg customClass="size-6 sm:size-10 xl:size-14" />
+          }
+        </button>
+      </div>
+
+      @if (isPaid()) {
+        <div class="flex justify-around">
+          <app-basic-button
+            [btnConfig]="{ text: 'Comprar ahora', size: 'base' }"
+            designBtn="selector"
+          />
+          <app-basic-button
+            [btnConfig]="{ text: 'Añadir al carrito', size: 'base' }"
+            designBtn="common"
+          />
+        </div>
+      } @else {
+        <app-basic-button
+          class="mx-auto py-2"
+          [btnConfig]="{ text: 'Añadir al carrito' }"
+          designBtn="large"
+        />
+      }
+    </div>
+
+    <div
+      class="flex flex-col text-primary-blue-light gap-5 text-sm lg:text-base"
+    >
+      <app-paragraph [text]="durationStream()">
+        <app-clock-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph [text]="cardData().prerequisites">
+        <app-circle-check-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph
+        text="última actualización: "
+        [textComplementary]="'Julio de 2024' | date"
+      >
+        <app-update-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph [text]="typAccess()">
+        <app-infinite-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+      <app-paragraph [text]="typeCertificate()">
+        <app-trophy-svg
+          aria-hidden="true"
+          class="text-primary-blue"
+          [size]="iconSize"
+          [customClass]="sizeIcon"
+        />
+      </app-paragraph>
+    </div>
+  </div>
+</figure>

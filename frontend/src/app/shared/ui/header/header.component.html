@@ -1,32 +1,34 @@
 <header>
   <nav class="flex justify-between items-center py-6">
     <h1 aria-label="learn teach">
-      <app-main-logo customClass="h-12 w-36 xl:h-16 xl:w-52" />
+      <app-main-logo customClass="h-10 w-36 xl:h-14 xl:w-64" />
     </h1>
-    <div class="flex gap-4">
-      <app-basic-button
-        [designBtn]="'selector'"
-        [btnConfig]="{
-          text: 'cursos',
-          icon: 'assets/arrow.svg',
-          label: 'ver cursos',
-        }"
-      />
-      <app-search-bar />
+    <app-basic-button
+      class="hidden lg:block"
+      [designBtn]="'selector'"
+      [btnConfig]="{
+        text: 'Cursos',
+        icon: 'assets/arrow.svg',
+        label: 'ver cursos',
+      }"
+    />
+    <app-search-bar class="hidden sm:block" />
+    <div class="hidden lg:block">
+      @if (isLogged | async) {
+        <app-navbar-user />
+      } @else {
+        <div class="flex gap-8">
+          <app-basic-button
+            (click)="navigateTo('/learn-teach/auth/login')"
+            [btnConfig]="{ text: 'Ingresar' }"
+          />
+          <app-basic-button
+            (click)="navigateTo('/learn-teach/auth/register')"
+            [btnConfig]="{ text: 'Registrarse' }"
+          />
+        </div>
+      }
     </div>
-    @if ((isLogged | async) === false) {
-      <app-navbar-user />
-    } @else {
-      <div class="flex gap-8">
-        <app-basic-button
-          (click)="navigateTo('/learn-teach/auth/login')"
-          [btnConfig]="{ text: 'ingresar' }"
-        />
-        <app-basic-button
-          (click)="navigateTo('/learn-teach/auth/register')"
-          [btnConfig]="{ text: 'registrarse' }"
-        />
-      </div>
-    }
+    <app-dropdown-user-mobile class="block lg:hidden" />
   </nav>
 </header>

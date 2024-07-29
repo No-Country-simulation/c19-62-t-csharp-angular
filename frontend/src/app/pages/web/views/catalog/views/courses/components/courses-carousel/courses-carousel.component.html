@@ -1,0 +1,34 @@
+<article class="text-primary-blue-light">
+  <h3 class="text-3xl font-semibold tracking-wider">
+    {{ carrouselData().title || 'Cursos' }}
+  </h3>
+  <p #description class="py-3 text-xl tracking-wide">
+    {{ carrouselData().description || 'Los mas recientes' }}
+  </p>
+
+  @defer (on viewport(description)) {
+    <swiper-container
+      space-between="30"
+      loop="true"
+      breakpoints='{"400":{"slidesPerView":1},"640":{"slidesPerView":2},"1024":{"slidesPerView":3},"1200":{"slidesPerView":4}}'
+      class="mySwiper active:cursor-grab flex items-center justify-center"
+      autoplay
+    >
+      @for (item of data(); track $index) {
+        <swiper-slide>
+          <app-course-card [detailsCourse]="item" />
+        </swiper-slide>
+      } @empty {
+        <app-error-message />
+      }
+    </swiper-container>
+  } @placeholder {
+    <div class="flex gap-10 overflow-hidden">
+      @for (item of data(); track $index) {
+        <app-card-skeleton class="flex-[1_0_348px]" />
+      }
+    </div>
+  } @error {
+    <app-error-message />
+  }
+</article>

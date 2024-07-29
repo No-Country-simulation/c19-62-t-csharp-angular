@@ -1,9 +1,0 @@
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
-  @for (item of courses; track $index) {
-    @defer (on viewport()) {
-      <app-course-card />
-    } @placeholder (minimum 500ms) {
-      <app-card-skeleton />
-    }
-  }
-</div>

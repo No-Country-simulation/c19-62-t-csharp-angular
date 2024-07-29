@@ -1,0 +1,21 @@
+<button
+  class="btn"
+  [ngClass]="{
+    'btn-basic-common': designBtn() === 'common' || !designBtn(),
+    'btb-basic--selector': designBtn() === 'selector',
+    'btn-basic--large': designBtn() === 'large',
+    'btn-basic--base-size': btnConfig().size === 'base',
+    'btn-basic--light': designBtn() === 'light',
+  }"
+  [attr.title]="btnConfig().label"
+  [attr.aria-label]="btnConfig().label"
+  [type]="btnConfig().type || 'button'"
+  [disabled]="isDisabled()"
+>
+  <span class="flex gap-2 justify-center items-center">
+    {{ btnConfig().text }}
+    @if (btnConfig().icon && designBtn() === 'selector') {
+      <app-arrow-svg [size]="17" />
+    }
+  </span>
+</button>

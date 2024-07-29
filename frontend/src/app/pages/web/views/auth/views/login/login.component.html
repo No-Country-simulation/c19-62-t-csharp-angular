@@ -106,22 +106,16 @@
       <a class="underline text-right text-sm lg:justify-self-end" routerLink="/"
         >¿Olvidaste tu contraseña?</a
       >
-      <button
-        [title]="
-          loginForm.invalid
+      <app-basic-button
+        [isDisabled]="loginForm.invalid || auth.isLoading"
+        [btnConfig]="{
+          text: auth.isLoading ? 'Verificando ...' : 'Ingresar',
+          type: 'submit',
+          label: loginForm.invalid
             ? 'completa los campos del formulario'
-            : 'registrarse'
-        "
-        [disabled]="loginForm.invalid || auth.isLoading"
-        class="h-14 w-full disabled:cursor-not-allowed bg-[#1E548D] rounded-[40px] text-white tracking-wider font-medium disabled:bg-[#053B73] transition-colors"
-        type="submit"
-      >
-        @if (auth.isLoading) {
-          Verificando ...
-        } @else {
-          Ingresar
-        }
-      </button>
+            : 'registrarse',
+        }"
+      />
     </form>
   </article>
 </app-auth-layout>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LoaderComponent } from '../../shared/ui/loader/loader.component';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { AvatarComponent } from '../../shared/components/avatar/avatar.component';
 import { DataLink } from '../../shared/interfaces/DataLink.interface';
 
@@ -19,10 +19,10 @@ import { DataLink } from '../../shared/interfaces/DataLink.interface';
 export class UserProfileLayoutComponent {
   user = 'Luis García';
   userOptions: DataLink[] = [
-    { label: 'Perfil', link: '/profile' },
-    { label: 'Foto de perfil', link: '/my-photo' },
-    { label: 'Configuración de la cuenta', link: '/settings' },
-    { label: 'Métodos de pago', link: '/payments' },
-    { label: 'Mis cursos', link: '/courses' },
+    { text: 'Perfil', url: '/profile' },
+    { text: 'Foto de perfil', url: '/my-photo' },
+    { text: 'Configuración de la cuenta', url: '/settings' },
+    { text: 'Métodos de pago', url: '/payments' },
+    { text: 'Mis cursos', url: '/courses' },
   ];
 }

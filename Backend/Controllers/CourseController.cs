@@ -16,16 +16,20 @@ namespace Backend.Controllers
 
         [Route("GetAll")]
         [HttpGet]
-        public async Task<IActionResult> GetAll(){
-            try{
-                List<CourseGetDto> courseResponse=await _courseService.GetAll();
-                if (courseResponse.Count==0){
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                List<CourseGetDto> courseResponse = await _courseService.GetAll();
+                if (courseResponse.Count == 0)
+                {
                     return NotFound("No courses found");
                 }
 
                 return Ok(courseResponse);
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 Console.WriteLine($"Error retrieving courses: {ex.Message}");
                 return StatusCode(500, "Internal Server Error");
             }
@@ -50,9 +54,11 @@ namespace Backend.Controllers
 
         [Route("GetWhere")]
         [HttpGet]
-        public async Task<IActionResult> GetWhere(int courseId){
-            var course= await _courseService.GetWhere(courseId);
-            if (course==null){
+        public async Task<IActionResult> GetWhere(int courseId)
+        {
+            var course = await _courseService.GetWhere(courseId);
+            if (course == null)
+            {
                 return NotFound();
             }
 
@@ -61,27 +67,33 @@ namespace Backend.Controllers
 
         [Route("CreateCourse")]
         [HttpPost]
-        public async Task<IActionResult> CreateCourse(CourseInputDto courseInputDto){
-            var validationErrors=ValidateCourseInputDto(courseInputDto);
-            if (validationErrors.Any()){
-                return BadRequest(new{Errors = validationErrors});
+        public async Task<IActionResult> CreateCourse(CourseInputDto courseInputDto)
+        {
+            var validationErrors = ValidateCourseInputDto(courseInputDto);
+            if (validationErrors.Any())
+            {
+                return BadRequest(new { Errors = validationErrors });
             }
-            
-            try{
-                var response= await _courseService.Create(courseInputDto!);
 
-                if (response == null){
+            try
+            {
+                var response = await _courseService.Create(courseInputDto!);
+
+                if (response == null)
+                {
                     return BadRequest("Hubo un error al crear el curso");
                 }
 
-                return Created( string.Empty ,new {
+                return Created(string.Empty, new
+                {
                     Message = "Curso Registrado",
-                    Course=response
+                    Course = response
                 });
-            } 
-            catch(Exception ex){
+            }
+            catch (Exception ex)
+            {
                 // Log the exception details
-                _logger.LogError(ex, "Error al crear el curso.");   
+                _logger.LogError(ex, "Error al crear el curso.");
                 return StatusCode(500, "Ocurrió un error interno al crear el curso. Por favor, intente nuevamente más tarde.");
             }
         }
@@ -92,8 +104,8 @@ namespace Backend.Controllers
         {
             if (string.IsNullOrWhiteSpace(courseGetDto.Title) &&
             string.IsNullOrWhiteSpace(courseGetDto.CategoryName) &&
-            string.IsNullOrWhiteSpace(courseGetDto.NameTags)&&
-            string.IsNullOrWhiteSpace(courseGetDto.LevelCategory))
+            string.IsNullOrWhiteSpace(courseGetDto.TagName) &&
+            string.IsNullOrWhiteSpace(courseGetDto.Level))
             {
                 return BadRequest("Al menos uno de los criterios de búsqueda debe ser proporcionado.");
             }
@@ -102,7 +114,7 @@ namespace Backend.Controllers
             {
                 var courses = await _courseService.SearchCourses(courseGetDto);
 
-                if (courses == null || courses.Count==0)
+                if (courses == null || courses.Count == 0)
                 {
                     return NotFound("No se encontraron cursos que coincidan con los criterios de búsqueda.");
                 }
@@ -159,7 +171,7 @@ namespace Backend.Controllers
         {
             var errors = new List<string>();
 
-            if (dto.IdCategory == 0)
+            if (dto.CategoryId == 0)
                 errors.Add("IdCategory es requerido.");
 
             if (string.IsNullOrWhiteSpace(dto.Title))

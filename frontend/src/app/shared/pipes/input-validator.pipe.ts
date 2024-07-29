@@ -9,6 +9,7 @@ export enum BasicValidators {
   maxlength = 'La longitud maxima es: ',
   min = 'Requiere un valor mínimo de: ',
   max = 'Requiere un valor máximo de:',
+  passwordNoMatch = 'Las contraseñas no coinciden',
 }
 
 interface PipeParams {
@@ -27,7 +28,12 @@ export class InputValidatorPipe implements PipeTransform {
 
     const key = error as keyof typeof BasicValidators;
 
-    if (key === 'required' || key === 'email' || key === 'pattern') {
+    if (
+      key === 'required' ||
+      key === 'email' ||
+      key === 'pattern' ||
+      key === 'passwordNoMatch'
+    ) {
       return BasicValidators[key];
     }
 

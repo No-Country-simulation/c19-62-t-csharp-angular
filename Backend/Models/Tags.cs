@@ -4,17 +4,17 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    public class Tags
+    public class Tag
     {
         [Key]
         public int Id { get; set; }
 
 
-        [Column(TypeName = "varchar(256)")]
+        [Column(TypeName = "nvarchar(256)")]
         public string Name { get; set; } = string.Empty;
-        
-        
+
+
         [JsonIgnore]
-        public ICollection<CourseTags> CourseTags { get; set; } = [];
+        public ICollection<CourseTag> CourseTags { get; set; } = [];
     }
 }

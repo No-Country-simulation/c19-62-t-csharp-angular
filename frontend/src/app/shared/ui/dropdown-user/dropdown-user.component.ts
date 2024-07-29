@@ -9,11 +9,17 @@ import { RouterLink } from '@angular/router';
 import { ArrowSvgComponent } from '../../icons/arrow-svg.component';
 import { DataLink } from '../../interfaces/DataLink.interface';
 import { AvatarComponent } from '../../components/avatar/avatar.component';
+import { BodyDropdownComponent } from 'app/shared/components/body-dropdown.component';
 
 @Component({
   selector: 'app-dropdown-user',
   standalone: true,
-  imports: [AvatarComponent, RouterLink, ArrowSvgComponent],
+  imports: [
+    AvatarComponent,
+    RouterLink,
+    ArrowSvgComponent,
+    BodyDropdownComponent,
+  ],
   templateUrl: './dropdown-user.component.html',
   styles: `
     :host {
@@ -24,11 +30,11 @@ import { AvatarComponent } from '../../components/avatar/avatar.component';
 })
 export class DropdownUserComponent {
   dropdownOptions: DataLink[] = [
-    { label: 'Mi Perfil', link: '/profile' },
-    { label: 'Mis Cursos', link: '/courses' },
-    { label: 'Comunidad', link: '/community' },
-    { label: 'Ayuda', link: '/help' },
-    { label: 'Cerrar sesión', link: '/logout' },
+    { text: 'Mi Perfil', url: '/learn-teach/user/profile' },
+    { text: 'Mis Cursos', url: '/learn-teach/user/courses' },
+    { text: 'Comunidad', url: '/learn-teach/community' },
+    { text: 'Ayuda', url: '/learn-teach/help' },
+    { text: 'Cerrar sesión', url: '/logout' },
   ];
   isOpenDropdown = signal(false);
   labelDropdownStream = computed(() =>

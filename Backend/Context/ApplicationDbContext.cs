@@ -16,10 +16,10 @@ namespace Backend.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
 
-        public DbSet<CourseTags> CourseTags { get; set; }
+        public DbSet<CourseTag> CourseTags { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Tags> Tags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public DbSet<Module> Modules { get; set; }
 
@@ -46,19 +46,19 @@ namespace Backend.Context
             modelBuilder.Entity<Course>()
                 .HasOne(c => c.Category) // Referencia a Category
                 .WithMany(ca => ca.Courses) // Relación inversa en Category
-                .HasForeignKey(c => c.IdCategory) // Clave foránea en Course
+                .HasForeignKey(c => c.CategoryId) // Clave foránea en Course
                 .OnDelete(DeleteBehavior.Restrict); // Comportamiento al eliminar
 
-            modelBuilder.Entity<CourseTags>()
+            modelBuilder.Entity<CourseTag>()
                 .HasOne(ct => ct.Course)
                 .WithMany(c => c.CourseTags)
                 .HasForeignKey(ct => ct.CourseId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<CourseTags>()
+            modelBuilder.Entity<CourseTag>()
                 .HasOne(ct => ct.Tags)
                 .WithMany(t => t.CourseTags)
-                .HasForeignKey(ct => ct.IdTags)
+                .HasForeignKey(ct => ct.TagId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CourseModule>()

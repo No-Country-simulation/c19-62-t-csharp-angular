@@ -11,23 +11,23 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { PencilSvgComponent } from '../../../../../../shared/icons/pencil-svg/pencil-svg.component';
-import { BasicButtonComponent } from '../../../../../../shared/ui/basic-button/basic-button.component';
+import { BasicButtonComponent } from '../../../../../../shared/components/basic-button/basic-button.component';
 import { InputValidatorPipe } from '../../../../../../shared/pipes/input-validator.pipe';
 import { NgClass } from '@angular/common';
 import { ValidatedInputComponent } from '../../../../../../shared/components/validated-input/validated-input.component';
 import { FieldForm } from '../../../../../../shared/interfaces/FieldForm.interface';
+import { PencilSvgComponent } from '@icons/pencil-svg.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    PencilSvgComponent,
     BasicButtonComponent,
     ValidatedInputComponent,
     NgClass,
     InputValidatorPipe,
+    PencilSvgComponent,
   ],
   templateUrl: './profile.component.html',
   styles: `

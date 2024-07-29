@@ -1,0 +1,28 @@
+<article class="text-lg grid gap-20">
+  <div class="grid gap-10 max-w-lg">
+    <header class="grid gap-4">
+      <app-title [contentTitle]="detailsCourse().title" [level]="2" />
+      <p class="text-balance">{{ detailsCourse().overview }}</p>
+    </header>
+
+    <ul class="flex flex-col gap-2">
+      @for (info of primaryInfo() | keyvalue; track info.key) {
+        <li class="first-letter:uppercase">{{ info.key }}: {{ info.value }}</li>
+      }
+      <li class="flex gap-2 items-center">
+        Calificaciones: <app-rating [rating]="4" [size]="20" />
+      </li>
+      <li class="grid gap-4">
+        <span class="font-semibold">Tags</span>
+        <app-list-tag [tags]="detailsCourse().tags" />
+      </li>
+    </ul>
+  </div>
+
+  <div class="grid gap-4">
+    <app-title contentTitle="Descripción:" [level]="3" />
+    <p class="max-w-xl text-balance">
+      {{ detailsCourse().description }}
+    </p>
+  </div>
+</article>
