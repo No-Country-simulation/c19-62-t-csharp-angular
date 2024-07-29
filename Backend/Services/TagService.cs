@@ -2,23 +2,13 @@ using Backend.Context;
 using Backend.Dtos;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Services
 {
     public class TagsService(ApplicationDbContext context)
     {
         private readonly ApplicationDbContext _context = context;
-
-        public async Task<List<Tag>> GetAll()
-        {
-            return await _context.Tags.ToListAsync();
-        }
-
-        public async Task<Tag?> GetById(int id)
-        {
-            var result = await _context.Tags.FindAsync(id);
-            return result;
-        }
 
         public async Task<Tag> Create(TagCreateDto tagsDto)
         {
@@ -35,16 +25,26 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("hubo un error al crear el tags", ex);
+                throw new Exception("Hubo un error al crear el Tag", ex);
             }
 
             return tags;
         }
 
-        public async Task<Tag?> Update(TagUpdateDto tagDto)
+        public async Task<List<Tag>> GetAll()
+        {
+            return await _context.Tags.ToListAsync();
+        }
+
+        public async Task<Tag?> GetById(int id)
+        {
+            return await _context.Tags.FindAsync(id);
+        }
+
+        public async Task<Tag?> Update(TagDto tagDto)
         {
             var tag = await _context.Tags.FindAsync(tagDto.Id);
-            if (tag == null)
+            if (tag == null || tagDto.Name.IsNullOrEmpty())
                 return tag;
 
             tag.Name = tagDto.Name;
@@ -56,7 +56,7 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Hubo un error al actualizar el tag", ex);
+                throw new Exception("Hubo un error al actualizar el Tag", ex);
             }
 
             return tag;
@@ -76,7 +76,7 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Hubo un error al actualizar el tag", ex);
+                throw new Exception("Hubo un error al borrar el tag", ex);
             }
 
             return tag;
