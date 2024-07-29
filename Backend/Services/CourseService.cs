@@ -1,5 +1,7 @@
 using Backend.Context;
 using Backend.Dtos;
+using Backend.Dtos.Module;
+using Backend.Dtos.Resource;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 

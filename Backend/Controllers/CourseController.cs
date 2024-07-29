@@ -80,7 +80,7 @@ namespace Backend.Controllers
             }
         }
 
-        [Route("GetById")]
+        [Route("{courseId}")]
         [HttpGet]
         public async Task<IActionResult> GetById(int courseId)
         {
@@ -101,7 +101,7 @@ namespace Backend.Controllers
             }
         }
 
-        [Route("{courseId}")]
+        [Route("getWhere")]
         [HttpGet]
         public async Task<IActionResult> GetWhere(int courseId)
         {
@@ -293,7 +293,7 @@ namespace Backend.Controllers
             }
         }
 
-        [Route("Registration")]
+        [Route("register")]
         [HttpPost]
         public async Task<IActionResult> Registration(CourseRegistrationDto courseRegistrationDto)
         {
@@ -332,7 +332,7 @@ namespace Backend.Controllers
             }
         }
 
-        private List<string> ValidateCourseInputDto(CourseInputDto dto)
+        private static List<string> ValidateCourseInputDto(CourseInputDto dto)
         {
             var errors = new List<string>();
 
@@ -358,4 +358,3 @@ namespace Backend.Controllers
         }
     }
 }
-

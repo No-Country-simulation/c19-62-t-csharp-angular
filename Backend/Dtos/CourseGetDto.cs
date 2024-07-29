@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Backend.Models;
+using Backend.Dtos.Module;
+
 namespace Backend.Dtos
 {
         public class CourseGetDto
@@ -17,13 +14,12 @@ namespace Backend.Dtos
                 public string Level { get; set; } = string.Empty;
                 public short DurationHours { get; set; }
 
-
                 public int CategoryId { get; set; }
                 public string CategoryName { get; set; } = string.Empty;
                 public int TagId { get; set; }
                 public string TagName { get; set; } = string.Empty;
-                public List<ModuleDto> ModuleDtos { get; set; } = new List<ModuleDto>();
-                public List<TagsDto> TagsDtos { get; set; } = new List<TagsDto>();
 
+                public List<ModuleDto> ModuleDtos { get; set; } = [];
+                public List<TagDto> TagsDtos { get; set; } = [];
         }
 }

@@ -1,6 +1,7 @@
 using Backend.Context;
 using Backend.Models;
 using Backend.Dtos;
+using Backend.Dtos.Resource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
