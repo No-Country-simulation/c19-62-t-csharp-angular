@@ -1,25 +1,30 @@
 :host {
   display: flex;
   justify-content: flex-end;
-  animation: fixedTop linear forwards;
-  animation-timeline: scroll();
-  animation-range: 250px 500px;
 }
 
-@keyframes fixedTop {
-  50% {
-    position: fixed;
-    inset: 0 0 auto 0;
-    padding: 2rem;
-    width: 100%;
-    backdrop-filter: blur(0.2rem);
+@supports (animation-timeline: scroll()) {
+  :host {
+    animation: fixedTop linear forwards;
+    animation-timeline: scroll();
+    animation-range: 250px 500px;
   }
-  100% {
-    position: fixed;
-    inset: 0 0 auto 0;
-    background-color: rgba(66, 65, 65, 0.5);
-    padding: 2rem;
-    width: 100%;
-    backdrop-filter: blur(0.2rem);
+
+  @keyframes fixedTop {
+    50% {
+      position: fixed;
+      inset: 0 0 auto 0;
+      padding: 2rem;
+      width: 100%;
+      backdrop-filter: blur(0.2rem);
+    }
+    100% {
+      position: fixed;
+      inset: 0 0 auto 0;
+      background-color: rgba(66, 65, 65, 0.5);
+      padding: 2rem;
+      width: 100%;
+      backdrop-filter: blur(0.2rem);
+    }
   }
 }

@@ -1,35 +1,48 @@
-<section class="grid gap-8">
+<section class="grid gap-8" *ngrxLet="{ courseInfo: courseInfo$ } as data">
   <div class="grid grid-cols-2 gap-4">
-    @if (courseInfo$ | async; as courseInfo) {
-      <div class="flex flex-col gap-20 max-w-[38rem]">
-        <app-presentation-course [detailsCourse]="courseInfo.details" />
-        <app-syllabus [contentSyllabus]="courseInfo.syllabus" />
+    <div class="flex flex-col gap-20 max-w-[38rem]">
+      <app-presentation-course [detailsCourse]="data.courseInfo.details" />
+
+      @defer (on viewport()) {
+        <app-syllabus [contentSyllabus]="data.courseInfo.syllabus" />
+      } @placeholder {
+        <app-light-loader />
+      }
+
+      @defer (on viewport()) {
         <app-article-list
           [isViewMarker]="true"
           [level]="3"
-          [listData]="courseInfo.skillsToBeGained"
+          [listData]="data.courseInfo.skillsToBeGained"
           title="¿Que aprenderás?"
         />
+      } @placeholder {
+        <app-light-loader />
+      }
+
+      @defer (on viewport()) {
         <app-article-list
           [isViewMarker]="true"
           [level]="3"
-          [listData]="courseInfo.requirements"
+          [listData]="data.courseInfo.requirements"
           title="Requisitos:"
         />
-      </div>
-      <app-card-video
-        [cardData]="courseInfo.courseSummary"
-        customClass="sticky top-0 mx-auto"
-        [isPaid]="courseInfo?.isPaid"
-        [priceCourse]="courseInfo.paidInfo?.price"
-      />
-    } @else {
-      <p class="text-center grid-col-[1/end]">aquí debe ir un Skeleton</p>
-    }
+      } @placeholder {
+        <app-light-loader />
+      }
+    </div>
+
+    <app-card-video
+      [cardData]="data.courseInfo.courseSummary"
+      customClass="sticky top-0 mx-auto"
+      [isPaid]="data.courseInfo.isPaid"
+      [priceCourse]="data.courseInfo.paidInfo?.price"
+    />
   </div>
+
   @defer (on viewport()) {
     <app-community-info #community class="self-center" />
   } @placeholder {
-    <p>loading...</p>
+    <app-light-loader />
   }
 </section>

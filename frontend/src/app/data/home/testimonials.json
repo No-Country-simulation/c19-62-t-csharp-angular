@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Luis García",
+    "occupation": " Desarrollador Web",
+    "testimonial": "¡Los cursos son excelentes! Es una plataforma de aprendizaje ideal para quienes buscan consolidar conocimientos y aprender cosas nuevas.",
+    "avatar": "/assets/images/testimonial-1.webp"
+  },
+  {
+    "id": 2,
+    "name": "Carlos Pérez",
+    "occupation": "Analista de Datos",
+    "testimonial": "La plataforma me ayudó a adquirir habilidades valiosas en análisis de datos. ¡Muy recomendada!",
+    "avatar": "/assets/images/testimonial-1.webp"
+  },
+  {
+    "id": 3,
+    "name": "María Rodríguez",
+    "occupation": "Diseñadora Gráfica",
+    "testimonial": "La creatividad y calidad de los contenidos me sorprendieron. ¡Recomiendo esta plataforma!",
+    "avatar": "/assets/images/testimonial-1.webp"
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Curso de Desarrollo Web",
+    "overview": "Aprende a crear sitios web atractivos y funcionales.",
+    "instructor": "Juan Pérez",
+    "hoursContent": 40,
+    "level": "Intermedio",
+    "students": 1000,
+    "rating": 4.5,
+    "description": "Este curso te enseñará HTML, CSS, JavaScript y cómo construir aplicaciones web.",
+    "tags": ["Desarrollo web", "Frontend", "Backend"]
+  },
+  {
+    "title": "Curso de Diseño UX/UI",
+    "overview": "Diseña interfaces intuitivas y atractivas para aplicaciones y sitios web.",
+    "instructor": "María Rodríguez",
+    "hoursContent": 30,
+    "level": "Principiante",
+    "students": 800,
+    "rating": 4.2,
+    "description": "Explora principios de diseño, prototipado y herramientas como Figma o Sketch.",
+    "tags": ["Diseño", "Experiencia de usuario", "Interfaz de usuario"]
+  },
+  {
+    "title": "Curso de Programación en Python",
+    "overview": "Aprende a programar en uno de los lenguajes más versátiles y demandados.",
+    "instructor": "Carlos Gómez",
+    "hoursContent": 50,
+    "level": "Principiante",
+    "students": 1200,
+    "rating": 4.8,
+    "description": "Desde los conceptos básicos hasta proyectos prácticos con Python.",
+    "tags": ["Python", "Programación", "Desarrollo de software"]
+  }
+]

@@ -4,7 +4,8 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@icons/*": ["app/shared/icons/*"]
+      "@icons/*": ["app/shared/icons/*"],
+      "@data/*": ["app/data/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

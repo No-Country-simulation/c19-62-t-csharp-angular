@@ -1,0 +1,33 @@
+<app-flex-container>
+  <div class="flex flex-col gap-4" ngProjectAs="slot-1">
+    <header>
+      <app-title
+        customClass="text-primary-blue-light"
+        [level]="4"
+        contentTitle="Únete a nosotros como"
+        textEmphasis="Instructor"
+      />
+    </header>
+    <p
+      class="text-lg xl:text-2xl tracking-wide leading-normal xl:max-w-xl text-pretty"
+    >
+      Compartir lo que sabes puede impactar positivamente a muchos.
+    </p>
+    <app-basic-button
+      class="mt-10 max-w-96"
+      routerLink="/learn-teach/auth/register"
+      [btnConfig]="{
+        text: 'Comienza ahora',
+      }"
+      designBtn="common"
+    />
+  </div>
+  <app-wrapper-image
+    ngProjectAs="slot-2"
+    alt="person studying"
+    imageUrl="/assets/images/home-3.webp"
+    [isFill]="true"
+    [isPriority]="true"
+    customClass="w-full h-[18rem] sm:h-[30rem] lg:h-[22rem] lg:w-[28rem]  xl:w-[600px] xl:h-[450px] rounded-lg relative"
+  />
+</app-flex-container>

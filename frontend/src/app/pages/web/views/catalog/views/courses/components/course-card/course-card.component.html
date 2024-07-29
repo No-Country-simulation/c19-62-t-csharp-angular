@@ -1,5 +1,5 @@
-<article
-  class="max-w-[22.5rem] w-full rounded-xl border-[.15rem] border-mid-blue overflow-hidden mx-auto sm:m-auto"
+<figure
+  class="max-w-[22.5rem] w-full rounded-xl border-[.15rem] border-mid-blue overflow-hidden mx-auto sm:m-auto bg-light-white"
 >
   <app-wrapper-image
     imageUrl="/assets/images/placeholder-course.webp"
@@ -8,10 +8,10 @@
     [isFill]="true"
   />
   <div class="flex flex-col gap-6 p-4">
-    <header class="flex flex-col gap-1 text-xl">
-      <h3>Nombre del curso</h3>
+    <div class="flex flex-col gap-1 text-xl">
+      <figcaption>Nombre del curso</figcaption>
       <app-rating [size]="25" />
-    </header>
+    </div>
     <div class="max-w-48 flex justify-between gap-4">
       <div class="flex gap-4 items-center">
         <app-user-svg [size]="20" />
@@ -39,4 +39,4 @@
       }"
     />
   </div>
-</article>
+</figure>

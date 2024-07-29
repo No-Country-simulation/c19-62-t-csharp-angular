@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { HamburgerBarSvgComponent } from '@icons/hamburger-bar-svg.component';
-import { BodyDropdownComponent } from 'app/shared/components/body-dropdown.component';
+import { BodyDropdownComponent } from 'app/shared/components/body-dropdown/body-dropdown.component';
 
 import { DataLink } from 'app/shared/interfaces/DataLink.interface';
 
