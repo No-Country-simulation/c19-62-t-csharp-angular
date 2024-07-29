@@ -31,7 +31,7 @@ namespace Backend.Models
         public string Level { get; set; } = string.Empty;
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
-        public int IdCategory {get;set;} 
+        public int CategoryId {get;set;} 
         public Category Category{ get; set; }=null!;
         
         [JsonIgnore]
