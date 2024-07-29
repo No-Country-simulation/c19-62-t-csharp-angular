@@ -5,19 +5,22 @@
     Descubre nuestro cursos
     <app-divider class="pt-2" />
   </h2>
-  <div class="grid grid-rows-[auto_1fr] gap-10 grid-cols-1 h-full">
+  <div
+    class="grid grid-rows-[auto_1fr] gap-10 grid-cols-1 h-full"
+    *ngrxLet="{ courses: coursesList$ } as data"
+  >
     <app-course-filter-bar
       (click)="activeSearch()"
       class="justify-self-end z-10 row-[1/2]"
     />
     <div class="flex flex-col row-[2/3]">
       @if (!isSearchActive()) {
-        <app-gallery-carousel [courseList]="(coursesList | async) ?? []" />
+        <app-gallery-carousel [courseList]="data.courses" />
       }
 
       @defer (when isSearchActive()) {
         @if (isSearchActive()) {
-          <app-gallery-course [courseList]="(coursesList | async) ?? []" />
+          <app-gallery-course [courseList]="data.courses" />
         }
       } @loading (minimum 1s) {
         <div class="content-center mx-auto h-full">Loading...</div>

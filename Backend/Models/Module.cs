@@ -11,7 +11,7 @@ namespace Backend.Models
 
 
         [Column(TypeName = "smallint")]
-        public int Number { get; set; }
+        public short Number { get; set; }
         [Column(TypeName = "nvarchar(256)")]
         public string Name { get; set; } = string.Empty;
 

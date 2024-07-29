@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,16 +10,19 @@ import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-b
 import { ClockSvgComponent } from '@icons/clock-svg.component';
 import { DetailsCourse } from '../../../../interfaces/CourseInfo.interface';
 import { ListTagComponent } from '../../../course-detail/components/list-tag/list-tag.component';
+import { UserSvgComponent } from '@icons/user-svg.component';
+import { WrapperImageComponent } from 'app/shared/components/wrapper-image/wrapper-image.component';
 
 @Component({
   selector: 'app-course-card',
   standalone: true,
   imports: [
-    NgOptimizedImage,
     RatingComponent,
     BasicButtonComponent,
     ClockSvgComponent,
     ListTagComponent,
+    UserSvgComponent,
+    WrapperImageComponent,
   ],
   templateUrl: './course-card.component.html',
   styles: `

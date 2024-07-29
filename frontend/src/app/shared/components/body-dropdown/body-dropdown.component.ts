@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DataLink } from '../interfaces/DataLink.interface';
+import { DataLink } from '../../interfaces/DataLink.interface';
 
 @Component({
   selector: 'app-body-dropdown',

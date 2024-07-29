@@ -1,12 +1,17 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CourseFilterBarComponent } from './components/course-filter-bar/course-filter-bar.component';
 import { GalleryCourseComponent } from './components/gallery-course/gallery-course.component';
 import { GalleryCarouselComponent } from './components/gallery-carousel/gallery-carousel.component';
 import { DetailsCourse } from '../../interfaces/CourseInfo.interface';
-import { CourseApiService } from '../../services/course-api.service';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { Observable, of } from 'rxjs';
 import { DividerComponent } from 'app/shared/components/divider/divider.component';
+import { MockupService } from 'app/shared/services/mockup.service';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'app-courses',
@@ -15,8 +20,8 @@ import { DividerComponent } from 'app/shared/components/divider/divider.componen
     CourseFilterBarComponent,
     GalleryCourseComponent,
     GalleryCarouselComponent,
-    AsyncPipe,
     DividerComponent,
+    LetDirective,
   ],
   templateUrl: './courses.component.html',
   styles: `
@@ -26,12 +31,14 @@ import { DividerComponent } from 'app/shared/components/divider/divider.componen
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CoursesComponent {
-  coursesList: Observable<DetailsCourse[]>;
+export default class CoursesComponent implements OnInit {
+  coursesList$: Observable<DetailsCourse[]> = of([]);
   isSearchActive = signal(false);
 
-  constructor(private readonly courses: CourseApiService) {
-    this.coursesList = courses.fakeListCourse();
+  constructor(private readonly mockupService: MockupService) {}
+
+  ngOnInit(): void {
+    this.coursesList$ = this.mockupService.getListCourse();
   }
 
   public activeSearch(): void {

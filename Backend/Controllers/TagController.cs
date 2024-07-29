@@ -92,7 +92,7 @@ namespace Backend.Controllers
 
         [Route("")]
         [HttpPut]
-        public async Task<IActionResult> UpdateById(TagUpdateDto tagDto)
+        public async Task<IActionResult> UpdateById(TagDto tagDto)
         {
             if (tagDto.Name.IsNullOrEmpty())
                 return BadRequest("Los datos son requeridos");
@@ -130,7 +130,7 @@ namespace Backend.Controllers
                 var response = await _tagsService.Delete(tagId);
 
                 if (response == null)
-                    return BadRequest("Hubo un error al actualizar el Tag");
+                    return BadRequest("Hubo un error al borrar el Tag");
 
                 return Created(string.Empty, new
                 {

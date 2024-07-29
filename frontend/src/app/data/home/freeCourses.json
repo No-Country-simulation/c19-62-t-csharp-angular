@@ -1,0 +1,35 @@
+[
+  {
+    "title": "HTML para Principiantes",
+    "overview": "Una introducción completa al HTML.",
+    "instructor": "Laura García",
+    "hoursContent": 10,
+    "level": "Principiante",
+    "students": 1500,
+    "rating": 4.5,
+    "description": "Aprende los conceptos básicos del HTML, incluidos los elementos, atributos y mejores prácticas para crear páginas web.",
+    "tags": ["HTML", "Desarrollo Web", "Frontend"]
+  },
+  {
+    "title": "Técnicas Avanzadas de CSS",
+    "overview": "Domina técnicas avanzadas de CSS para diseño web moderno.",
+    "instructor": "Carlos Martínez",
+    "hoursContent": 15,
+    "level": "Avanzado",
+    "students": 1200,
+    "rating": 4.7,
+    "description": "Profundiza en CSS con selectores avanzados, animaciones, flexbox, grid y estrategias de diseño responsive.",
+    "tags": ["CSS", "Diseño Web", "Responsive"]
+  },
+  {
+    "title": "Fundamentos de JavaScript",
+    "overview": "Una guía completa de JavaScript para principiantes.",
+    "instructor": "Ana López",
+    "hoursContent": 20,
+    "level": "Principiante",
+    "students": 2000,
+    "rating": 4.8,
+    "description": "Comprende los conceptos básicos de JavaScript, incluyendo variables, funciones, eventos y manipulación del DOM.",
+    "tags": ["JavaScript", "Programación", "Frontend"]
+  }
+]

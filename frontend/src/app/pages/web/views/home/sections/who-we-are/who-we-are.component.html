@@ -1,0 +1,32 @@
+<app-flex-container [isColReverse]="true">
+  <div class="grid gap-8 xl:max-w-full" ngProjectAs="slot-1">
+    <header class="flex flex-col gap-2 w-fit lg:w-80 xl:max-w-md xl:w-full">
+      <app-title contentTitle="¿Qué es y quiénes somos?" [level]="3" />
+      <app-divider />
+    </header>
+    <div
+      class="text-lg xl:text-2xl tracking-wide leading-normal xl:max-w-xl text-pretty"
+    >
+      @for (paragraph of content; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </div>
+    <app-basic-button
+      class="max-w-96 w-full mx-auto"
+      routerLink="/learn-teach/catalog"
+      [btnConfig]="{
+        text: 'Comienza ahora',
+      }"
+      designBtn="common"
+    />
+  </div>
+
+  <app-wrapper-image
+    ngProjectAs="slot-2"
+    alt="person studying"
+    imageUrl="/assets/images/home-1.webp"
+    [isFill]="true"
+    [isPriority]="true"
+    customClass="w-full h-[18rem] sm:h-[30rem] lg:h-[22rem] lg:w-[28rem]  xl:w-[600px] xl:h-[450px] rounded-lg relative"
+  />
+</app-flex-container>
