@@ -16,7 +16,6 @@ import { FieldInput } from 'app/shared/interfaces/FieldInput.interface';
 import { InputValidatorPipe } from 'app/shared/pipes/input-validator.pipe';
 import factoryValidators from 'app/shared/utils/factoryValidators';
 import { AuthRecovery } from '../../interfaces/AuthRecovery.interface';
-import { AUTH_SELECTORS } from 'app/core/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-form-recovery',
