@@ -1,8 +1,15 @@
 <header>
   <nav class="flex justify-between items-center py-6">
-    <h1 aria-label="learn teach">
+    <header>
+      <h1
+        class="sr-only"
+        aria-level="1"
+        aria-label="Learn Teach,plataforma virtual de educación"
+      >
+        Learn Teach: plataforma virtual de educación
+      </h1>
       <app-main-logo customClass="h-10 w-36 xl:h-14 xl:w-64" />
-    </h1>
+    </header>
     <app-basic-button
       class="hidden lg:block"
       [designBtn]="'selector'"

@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Curso de Programación",
+    "overview": "Aprende a programar desde cero",
+    "instructor": "Juan Pérez",
+    "hoursContent": 20,
+    "level": "principiante",
+    "students": 1000,
+    "rating": 4.5,
+    "description": "Este curso te enseñará los fundamentos de la programación.",
+    "tags": ["programming", "beginner", "web"]
+  },
+  {
+    "title": "Curso de Diseño Web",
+    "overview": "Crea sitios web atractivos",
+    "instructor": "María Gómez",
+    "hoursContent": 15,
+    "level": "intermedio",
+    "students": 800,
+    "rating": 4.2,
+    "description": "Aprende a diseñar páginas web con HTML, CSS y JavaScript.",
+    "tags": ["web design", "frontend", "HTML", "CSS"]
+  },
+  {
+    "title": "Curso de Angular",
+    "overview": "Desarrollo de aplicaciones web con Angular",
+    "instructor": "Carlos Rodríguez",
+    "hoursContent": 30,
+    "level": "avanzado",
+    "students": 500,
+    "rating": 4.8,
+    "description": "Domina Angular y crea aplicaciones robustas y escalables.",
+    "tags": ["Angular", "frontend", "TypeScript"]
+  }
+]

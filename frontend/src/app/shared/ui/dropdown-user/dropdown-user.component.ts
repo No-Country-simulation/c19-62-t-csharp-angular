@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { ArrowSvgComponent } from '../../icons/arrow-svg.component';
 import { DataLink } from '../../interfaces/DataLink.interface';
 import { AvatarComponent } from '../../components/avatar/avatar.component';
-import { BodyDropdownComponent } from 'app/shared/components/body-dropdown.component';
+import { BodyDropdownComponent } from 'app/shared/components/body-dropdown/body-dropdown.component';
 
 @Component({
   selector: 'app-dropdown-user',

@@ -1,0 +1,31 @@
+<div>
+  <article class="flex flex-col gap-12">
+    <header class="grid gap-1">
+      <app-title
+        class="text-primary-blue-light"
+        [level]="4"
+        [contentTitle]="gridData().title"
+      >
+        <span class="text-mid-blue">{{ gridData().emphasis }}</span>
+      </app-title>
+      @if (gridData().description) {
+        <p class="py-2">{{ gridData().description }}</p>
+      }
+    </header>
+    <div
+      class="relative before:bg-primary-white before:inset-0 before:w-dvw before:absolute before:left-2/4 before:-translate-x-2/4 before:h-full before:-scale-x-150 before:z-10 before:block"
+    >
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 sm:2 gap-8 py-14">
+        @for (course of courses(); track course.title) {
+          <app-course-card class="z-10" [detailsCourse]="course" />
+        }
+      </div>
+    </div>
+    <app-basic-button
+      class="max-w-96 w-full mx-auto"
+      [routerLink]="gridData().link.url"
+      [btnConfig]="{ text: gridData().link.text }"
+      designBtn="common"
+    />
+  </article>
+</div>

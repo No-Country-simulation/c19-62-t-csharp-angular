@@ -1,1 +1,53 @@
-home
+<section
+  class="grid gap-8 lg:gap-24 lg:place-content-stretch pb-4 lg:pb-12"
+  *ngrxLet="{
+    freeCourses: freeCourses$,
+    trendingCourses: trendingCourses$,
+    popularCourses: popularCourses$,
+    testimonials: testimonials$,
+  } as data"
+>
+  <h2>
+    <app-main-logo
+      customClass="w-60 h-[3rem] md:w-[25rem] md:h-[5rem] lg:w-[35rem] lg:h-28 mx-auto"
+    />
+  </h2>
+
+  <app-who-we-are />
+
+  @defer (on viewport) {
+    <app-community-invitation />
+  } @placeholder {
+    <app-light-loader />
+  } @error {
+    <app-error-message [customMessage]="DEFER_ERROR_MESSAGE" />
+  }
+
+  @defer (on viewport) {
+    <app-courses-recommended
+      [freeCourses]="data.freeCourses"
+      [popularCourses]="data.popularCourses"
+      [trendingCourses]="data.trendingCourses"
+    />
+  } @placeholder {
+    <app-light-loader />
+  } @error {
+    <app-error-message [customMessage]="DEFER_ERROR_MESSAGE" />
+  }
+
+  @defer (on viewport) {
+    <app-work-with-us />
+  } @placeholder {
+    <app-light-loader />
+  } @error {
+    <app-error-message [customMessage]="DEFER_ERROR_MESSAGE" />
+  }
+
+  @defer (on viewport) {
+    <app-carousel-testimonials [testimonials]="data.testimonials" />
+  } @placeholder {
+    <app-light-loader />
+  } @error {
+    <app-error-message [customMessage]="DEFER_ERROR_MESSAGE" />
+  }
+</section>

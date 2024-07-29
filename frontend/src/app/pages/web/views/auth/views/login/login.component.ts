@@ -1,91 +1,46 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgClass, NgOptimizedImage } from '@angular/common';
-
-import { AuthCredentials } from '../../interfaces/AuthCredentials.interface';
-import { Store } from '@ngrx/store';
-import { LetDirective } from '@ngrx/component';
-import { AppState } from '../../../../../../core/store/app.state';
-import AUTH_ACTIONS from '../../../../../../core/store/auth/auth.actions';
-import { AUTH_SELECTORS } from '../../../../../../core/store/auth/auth.selectors';
-import { AuthLayoutComponent } from '../../../../../../layouts/auth-layout/auth-layout.component';
-import { InputValidatorPipe } from '../../../../../../shared/pipes/input-validator.pipe';
 import { MainLogoComponent } from '../../../../../../shared/components/main-logo/main-logo.component';
+import { FormLoginComponent } from '../../components/form-login/form-login.component';
+import { AuthLayoutComponent } from 'app/layouts/auth-layout/auth-layout.component';
+import { Store } from '@ngrx/store';
+import { AppState } from 'app/core/store/app.state';
+import { AUTH_SELECTORS } from 'app/core/store/auth/auth.selectors';
+import AUTH_ACTIONS from 'app/core/store/auth/auth.actions';
+import { LetDirective } from '@ngrx/component';
 import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-button.component';
+import { LoaderComponent } from 'app/shared/components/loader/loader.component';
+import { ErrorMessageComponent } from 'app/shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    InputValidatorPipe,
     RouterLink,
     MainLogoComponent,
-    NgClass,
+    FormLoginComponent,
     AuthLayoutComponent,
-    NgOptimizedImage,
     LetDirective,
     BasicButtonComponent,
+    LoaderComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LoginComponent {
-  isLoading$ = this.store.select(AUTH_SELECTORS.selectUserLoaded);
-  authError$ = this.store.select(AUTH_SELECTORS.selectError);
-  loginForm: FormGroup;
-  private isViewPassword = signal(false);
-  isViewPasswordStream = computed(() => this.isViewPassword());
-  typeInputStream = computed(() =>
-    this.isViewPassword() ? 'text' : 'password'
-  );
-  messageButtonStream = computed(() =>
-    this.isViewPassword() ? 'ocultar contraseña' : 'mostrar contraseña'
-  );
-  iconButtonStream = computed(() =>
-    this.isViewPassword() ? 'assets/eye-fill.svg' : 'assets/eye-off.svg'
-  );
+export default class LoginComponent implements OnDestroy {
+  readonly description =
+    'Bienvenido de vuelta, continuemos con tu aprendizaje.';
+  isSubmitted$ = this.store.select(AUTH_SELECTORS.selectUserLoaded);
+  isErrored$ = this.store.select(AUTH_SELECTORS.selectError);
 
-  constructor(
-    private readonly formConstructor: FormBuilder,
-    private readonly store: Store<AppState>
-  ) {
-    this.loginForm = this.formConstructor.nonNullable.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
+  constructor(private readonly store: Store<AppState>) {}
+
+  ngOnDestroy(): void {
+    this.store.dispatch(AUTH_ACTIONS.clearError());
   }
 
-  public getTypeError(object: ValidationErrors): string {
-    return Object.keys(object)[0] ?? '';
-  }
-
-  public onClick(): void {
-    this.isViewPassword.update((value) => !value);
-  }
-
-  public onSubmit(): void {
-    if (this.loginForm.invalid) return;
-
-    const credentials: AuthCredentials = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password,
-    };
-
-    this.store.dispatch(AUTH_ACTIONS.authLogin({ credentials }));
-    this.loginForm.reset();
+  public resetError(): void {
+    this.store.dispatch(AUTH_ACTIONS.clearError());
   }
 }

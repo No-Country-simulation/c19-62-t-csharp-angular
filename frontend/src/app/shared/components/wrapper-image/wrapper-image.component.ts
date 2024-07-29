@@ -30,4 +30,5 @@ export class WrapperImageComponent implements ImageProps {
   width = input<number>();
   height = input<number>();
   isFill = input<boolean>();
+  isPriority = input<boolean>(false);
 }

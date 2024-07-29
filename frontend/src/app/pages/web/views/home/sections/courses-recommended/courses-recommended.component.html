@@ -1,0 +1,25 @@
+<article class="grid gap-8">
+  <header class="w-fit">
+    <app-title [level]="3" contentTitle="Comienza a aprender ahora" />
+    <app-divider />
+  </header>
+  <div class="grid gap-8 lg:gap-24">
+    @if (popularCourses().length) {
+      <app-course-grid
+        [gridData]="popularGridCourse"
+        [courses]="popularCourses()"
+      />
+    }
+
+    @if (trendingCourses().length) {
+      <app-course-grid
+        [gridData]="trendingGridCourse"
+        [courses]="trendingCourses()"
+      />
+    }
+
+    @if (freeCourses().length) {
+      <app-course-grid [gridData]="freeGridCourse" [courses]="freeCourses()" />
+    }
+  </div>
+</article>

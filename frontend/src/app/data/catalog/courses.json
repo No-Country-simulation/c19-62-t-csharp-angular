@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Mastering Angular: De Principiante a Experto",
+    "overview": "Aprende a construir aplicaciones web modernas utilizando Angular.",
+    "instructor": "Juan Pérez",
+    "hoursContent": 40,
+    "level": "Intermedio",
+    "students": 1000,
+    "rating": 4.8,
+    "description": "Cubre desde los conceptos básicos hasta las técnicas avanzadas.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  },
+  {
+    "title": "Dominando TypeScript: Patrones y Buenas Prácticas",
+    "overview": "Profundiza en TypeScript y aprende a escribir código más limpio y eficiente.",
+    "instructor": "María Gómez",
+    "hoursContent": 20,
+    "level": "Avanzado",
+    "students": 500,
+    "rating": 4.9,
+    "description": "Explora patrones de diseño y estrategias avanzadas.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  },
+  {
+    "title": "Docker en Acción: Despliegue Eficiente de Aplicaciones",
+    "overview": "Aprende a usar Docker para crear, desplegar y gestionar contenedores.",
+    "instructor": "Carlos Rodríguez",
+    "hoursContent": 15,
+    "level": "Principiante",
+    "students": 300,
+    "rating": 4.7,
+    "description": "Ideal para desarrolladores y administradores de sistemas.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  },
+  {
+    "title": "Desarrollo Frontend con React",
+    "overview": "Crea componentes reutilizables y maneja el estado en aplicaciones React.",
+    "instructor": "Laura Martínez",
+    "hoursContent": 30,
+    "level": "Intermedio",
+    "students": 800,
+    "rating": 4.6,
+    "description": "Incluye pruebas unitarias y buenas prácticas.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  },
+  {
+    "title": "Programación Funcional con RxJS",
+    "overview": "Sumérgete en la programación reactiva utilizando RxJS.",
+    "instructor": "Andrés Soto",
+    "hoursContent": 25,
+    "level": "Avanzado",
+    "students": 400,
+    "rating": 4.9,
+    "description": "Trabaja con observables, operadores y flujos de datos.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  },
+  {
+    "title": "Optimización de Rendimiento en Aplicaciones Web",
+    "overview": "Descubre cómo mejorar la velocidad de tus aplicaciones web.",
+    "instructor": "Ana López",
+    "hoursContent": 18,
+    "level": "Intermedio",
+    "students": 250,
+    "rating": 4.7,
+    "description": "Desde técnicas de carga diferida hasta compresión de recursos.",
+    "tags": [
+      "React",
+      "Desarrollo Frontend",
+      "Contenedores",
+      "Programación Funcional"
+    ]
+  }
+]
