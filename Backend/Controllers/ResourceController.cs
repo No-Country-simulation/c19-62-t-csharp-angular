@@ -1,4 +1,5 @@
 using Backend.Dtos;
+using Backend.Dtos.Resource;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;

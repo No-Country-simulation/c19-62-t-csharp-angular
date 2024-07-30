@@ -26,7 +26,6 @@ namespace Backend.Controllers
         private readonly ApplicationDbContext _context = context;
         private readonly ILogger<CourseController> _logger = logger;
 
-
         [Route("")]
         [HttpPost]
         public async Task<IActionResult> CreateCourse(CourseInputDto courseInputDto)
@@ -82,6 +81,27 @@ namespace Backend.Controllers
         }
 
         [Route("{courseId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetById(int courseId)
+        {
+            try
+            {
+                var course = await _courseService.GetById(courseId);
+                if (course == null)
+                {
+                    return NotFound("No courses found");
+                }
+
+                return Ok(course);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving courses: {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [Route("getWhere")]
         [HttpGet]
         public async Task<IActionResult> GetWhere(int courseId)
         {
@@ -273,9 +293,9 @@ namespace Backend.Controllers
             }
         }
 
-        [Route("Registration")]
+        [Route("register")]
         [HttpPost]
-        public async Task<IActionResult>Registration(CourseRegistrationDto courseRegistrationDto)
+        public async Task<IActionResult> Registration(CourseRegistrationDto courseRegistrationDto)
         {
             if (string.IsNullOrEmpty(courseRegistrationDto!.UserId))
                 return BadRequest("El ID de usuario no puede ser vacío.");
@@ -312,7 +332,7 @@ namespace Backend.Controllers
             }
         }
 
-        private List<string> ValidateCourseInputDto(CourseInputDto dto)
+        private static List<string> ValidateCourseInputDto(CourseInputDto dto)
         {
             var errors = new List<string>();
 
@@ -338,4 +358,3 @@ namespace Backend.Controllers
         }
     }
 }
-

@@ -34,9 +34,9 @@ namespace Backend.Models
         [Column(TypeName = "smallint")]
         public short DurationHours { get; set; }
 
-        public int IdCategory {get;set;} 
-        public Category Category{ get; set; }=null!;
-        
+        public int IdCategory { get; set; }
+        public Category Category { get; set; } = null!;
+
         [JsonIgnore]
         public ICollection<UserCourse> UserCourses { get; set; } = [];
         [JsonIgnore]
