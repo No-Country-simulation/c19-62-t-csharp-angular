@@ -30,10 +30,10 @@ import { BodyDropdownComponent } from 'app/shared/components/body-dropdown/body-
 })
 export class DropdownUserComponent {
   dropdownOptions: DataLink[] = [
-    { text: 'Mi Perfil', url: '/learn-teach/user/profile' },
-    { text: 'Mis Cursos', url: '/learn-teach/user/courses' },
-    { text: 'Comunidad', url: '/learn-teach/community' },
-    { text: 'Ayuda', url: '/learn-teach/help' },
+    { text: 'Mi Perfil', url: '/user/profile' },
+    { text: 'Mis Cursos', url: '/user/courses' },
+    { text: 'Comunidad', url: '/community' },
+    { text: 'Ayuda', url: '/help' },
     { text: 'Cerrar sesión', url: '/logout' },
   ];
   isOpenDropdown = signal(false);

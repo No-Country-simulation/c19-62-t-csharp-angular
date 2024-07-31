@@ -41,6 +41,6 @@ export class CourseCardComponent {
   public onClick(course: string): void {
     if (!course) return;
 
-    this.router.navigate(['/learn-teach/catalog/courses', course]);
+    this.router.navigate(['/catalog/courses', course]);
   }
 }

@@ -1,0 +1,22 @@
+<main
+  class="grid grid-rows-[auto_1fr] overflow-x-hidden grid-cols-[1rem_1fr_1rem] min-h-dvh bg-[#F6F6F7] xl:grid-cols-[4rem_1fr_4rem]"
+>
+  <header
+    class="flex justify-between items-center col-[1/4] row-[1/2] px-8 z-20 shadow-[0px_3px_3px_0px_rgba(0,0,0,0.3)] py-6 text-2xl font-semibold"
+  >
+    <a class="flex gap-2 items-center" routerLink="/">
+      <app-arrow-svg class="rotate-180" [size]="15" />
+      Volver
+    </a>
+    <app-main-logo customClass="h-10 w-36 xl:h-14 xl:w-64" />
+
+    <button type="button">
+      <app-settings-svg [size]="35" />
+    </button>
+  </header>
+  <div class="col-[2/3] content-center h-full py-10">
+    <ng-content>
+      <app-loader />
+    </ng-content>
+  </div>
+</main>

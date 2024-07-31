@@ -29,7 +29,7 @@ export class CoursesRecommendedComponent {
       '¡Explora nuestros cursos más demandados! Adquirirás conocimientos que te serán de gran utilidad.',
     link: {
       text: 'Cursos más populares',
-      url: '/learn-teach/catalog/courses',
+      url: '/catalog/courses',
     },
   };
 
@@ -38,7 +38,7 @@ export class CoursesRecommendedComponent {
     emphasis: 'últimas tendencias',
     link: {
       text: 'Cursos nuevos',
-      url: '/learn-teach/catalog/courses',
+      url: '/catalog/courses',
     },
   };
 
@@ -48,7 +48,7 @@ export class CoursesRecommendedComponent {
     emphasis: 'cursos sin costo',
     link: {
       text: 'Cursos gratis',
-      url: '/learn-teach/catalog/courses',
+      url: '/catalog/courses',
     },
   };
 }
