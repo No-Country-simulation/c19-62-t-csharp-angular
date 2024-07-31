@@ -1,0 +1,45 @@
+<div class="flex flex-col text-primary-blue-light gap-3 text-sm lg:text-base">
+  <app-paragraph [text]="durationStream()">
+    <app-clock-svg
+      aria-hidden="true"
+      class="text-primary-blue"
+      [size]="iconSize"
+      [customClass]="sizeIcon"
+    />
+  </app-paragraph>
+  <app-paragraph [text]="listInfo().prerequisites">
+    <app-circle-check-svg
+      aria-hidden="true"
+      class="text-primary-blue"
+      [size]="iconSize"
+      [customClass]="sizeIcon"
+    />
+  </app-paragraph>
+  <app-paragraph
+    text="última actualización: "
+    [textComplementary]="'Julio de 2024' | date"
+  >
+    <app-update-svg
+      aria-hidden="true"
+      class="text-primary-blue"
+      [size]="iconSize"
+      [customClass]="sizeIcon"
+    />
+  </app-paragraph>
+  <app-paragraph [text]="typAccess()">
+    <app-infinite-svg
+      aria-hidden="true"
+      class="text-primary-blue"
+      [size]="iconSize"
+      [customClass]="sizeIcon"
+    />
+  </app-paragraph>
+  <app-paragraph [text]="typeCertificate()">
+    <app-trophy-svg
+      aria-hidden="true"
+      class="text-primary-blue"
+      [size]="iconSize"
+      [customClass]="sizeIcon"
+    />
+  </app-paragraph>
+</div>

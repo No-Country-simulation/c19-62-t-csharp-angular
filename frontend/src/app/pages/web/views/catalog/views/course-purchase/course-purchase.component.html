@@ -1,0 +1,19 @@
+<section class="grid gap-12">
+  <header class="w-fit">
+    <app-title [level]="2" contentTitle="Curso: Introducción de HTML y CSS" />
+    <app-divider />
+  </header>
+  <div
+    class="flex flex-col lg:flex-row lg:items-center gap-20 lg:gap-8 lg:justify-between"
+  >
+    <div class="flex flex-col gap-8">
+      <p>Un curso de (Nombre del instructor), Desarrollador Web</p>
+      <app-purchase-card [ratingCourse]="4" [priceCourse]="25" />
+    </div>
+    <app-course-content-card
+      class="justify-self-end"
+      [sections]="sections"
+      [listInfo]="courseSummary"
+    />
+  </div>
+</section>

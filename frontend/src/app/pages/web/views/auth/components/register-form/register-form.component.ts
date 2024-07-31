@@ -46,7 +46,9 @@ export class RegisterFormComponent {
       control: 'confirmPassword',
     },
   ];
-  private readonly REGEX = /^[a-zA-Z0-9._@-]+$/;
+  private readonly REGEX = /^[a-zA-Z0-9._@-\s]+$/;
+  private readonly PASSWORD_REGEX =
+    /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})[a-zA-Z0-9._@-\s]{8,}$/;
   private readonly basicValidators = factoryValidators({
     required: true,
     pattern: this.REGEX,
@@ -56,7 +58,9 @@ export class RegisterFormComponent {
     maxLength: 20,
   });
   private readonly passwordValidators = factoryValidators({
-    minLength: 7,
+    minLength: 8,
+    pattern: this.PASSWORD_REGEX,
+    required: true,
   });
 
   constructor(
@@ -68,7 +72,7 @@ export class RegisterFormComponent {
         name: ['', [...this.basicValidators, ...this.primaryValidators]],
         lastName: ['', [...this.basicValidators, ...this.primaryValidators]],
         email: ['', [...this.basicValidators, Validators.email]],
-        password: ['', [...this.basicValidators, ...this.passwordValidators]],
+        password: ['', [...this.passwordValidators]],
         confirmPassword: [''],
         terms: [false, [Validators.requiredTrue]],
       },
@@ -82,8 +86,6 @@ export class RegisterFormComponent {
   }
 
   public onSubmit(): void {
-    console.log(this.formRegister);
-
     if (this.formRegister.invalid) {
       return;
     }

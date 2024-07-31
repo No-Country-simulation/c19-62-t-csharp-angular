@@ -1,0 +1,17 @@
+<div class="text-primary-blue grid grid-cols-1 gap-8">
+  <header class="w-fit">
+    <app-title
+      [level]="3"
+      contentTitle="Otros cursos que pueden interesarte:"
+    />
+    <app-divider />
+  </header>
+  <app-courses-carousel
+    [data]="courses()"
+    [carrouselData]="{
+      title: 'Cursos de Desarrollo Web',
+      description:
+        'Explora nuestros cursos de desarrollo web y mantente al día con las últimas tendencias.',
+    }"
+  />
+</div>

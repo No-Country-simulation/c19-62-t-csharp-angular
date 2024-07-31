@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CoursesCarouselComponent } from '../courses-carousel/courses-carousel.component';
+
 import { DetailsCourse } from '../../../../interfaces/CourseInfo.interface';
+import { CoursesCarouselComponent } from 'app/shared/ui/courses-carousel/courses-carousel.component';
 
 @Component({
   selector: 'app-gallery-carousel',
