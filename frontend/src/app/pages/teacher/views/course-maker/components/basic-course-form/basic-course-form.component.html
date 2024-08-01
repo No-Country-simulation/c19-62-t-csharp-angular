@@ -1,0 +1,58 @@
+<form class="flex flex-col gap-4" [formGroup]="basicCourseForm">
+  <label for="title">
+    <p>Titulo</p>
+    <div
+      class="grid grid-cols-[1fr_auto] items-center bg-light-white border-[.1rem] border-primary-blue-light rounded-lg"
+    >
+      <input
+        class="border-none rounded-xl"
+        placeholder="Ponle un título a tu curso"
+        formControlName="title"
+        type="text"
+        name="title"
+        id="title"
+      />
+      <span class="px-2">
+        {{ basicCourseForm.controls['title'].value.length }}
+      </span>
+    </div>
+    <small>Te sugerimos un título claro y llamativo </small>
+  </label>
+
+  <label for="subTitle">
+    <p>Subtítulo del Curso</p>
+    <div
+      class="grid grid-cols-[1fr_auto] items-center bg-light-white border-[.1rem] border-primary-blue-light rounded-lg"
+    >
+      <input
+        class="border-none rounded-xl"
+        placeholder="Introduce un subtítulo para el curso"
+        formControlName="subTitle"
+        type="text"
+        name="subTitle"
+        id="subTitle"
+      />
+      <span class="px-2">
+        {{ basicCourseForm.controls['subTitle'].value.length }}
+      </span>
+    </div>
+    <small
+      >Introduce palabras claves y menciona las tres o cuatro áreas que
+      consideres más importantes</small
+    >
+  </label>
+
+  <label for="description">
+    <p>Descripción del curso</p>
+    <div>
+      <textarea
+        class="resize-none w-full border-primary-blue-light rounded-lg"
+        name="description"
+        formControlName="description"
+        id="description"
+        placeholder="Introduce una descripción para tu curso."
+      ></textarea>
+    </div>
+    <small>La descripción debe tener 200 palabras como mínimo.</small>
+  </label>
+</form>

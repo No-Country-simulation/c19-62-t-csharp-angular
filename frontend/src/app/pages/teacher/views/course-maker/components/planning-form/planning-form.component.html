@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()" class="max-w-4xl" [formGroup]="planningForm">
+  <fieldset class="grid gap-12">
+    <legend class="text-3xl font-semibold pb-8">Paso 1: Planeación</legend>
+    <app-basic-course-form />
+    <app-select-form />
+    <app-image-uploader />
+  </fieldset>
+</form>

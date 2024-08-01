@@ -10,12 +10,14 @@ export const APP_ROUTES: Routes = [
   {
     path: 'teacher',
     loadComponent: () => import('./pages/teacher/teacher.component'),
-    title: 'Managment',
+    loadChildren: () => import('./pages/teacher/teacher.routing'),
+    title: 'Management',
   },
+
   {
     path: 'cms',
     loadComponent: () => import('./pages/cms/cms.component'),
-    title: 'Managment content',
+    title: 'Management content',
   },
   {
     path: '**',
