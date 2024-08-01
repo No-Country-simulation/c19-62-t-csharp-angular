@@ -1,0 +1,7 @@
+<section
+  class="grid grid-cols-1 gap-16"
+  *ngrxLet="{ courses: coursesRecommended$ } as data"
+>
+  <app-presentation-intro [course]="course" />
+  <app-recommendations [courses]="data.courses" />
+</section>

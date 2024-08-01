@@ -2,11 +2,13 @@
   class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
   role="alert"
 >
-  <span class="block sm:inline"
-    >No se pudieron cargar los datos correctamente. Por favor, vuelve a intentar
-    más tarde.</span
-  >
   @if (customMessage()) {
-    <span class="block sm:inline">Error: {{ customMessage() }}</span>
+    <span class="block sm:inline">Error:</span>
+    <p>{{ customMessage() }}</p>
+  } @else {
+    <span class="block sm:inline"
+      >No se pudieron cargar los datos correctamente. Por favor, vuelve a
+      intentar más tarde.</span
+    >
   }
 </div>

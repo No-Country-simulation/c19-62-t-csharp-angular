@@ -8,6 +8,8 @@ export interface AvatarInfo {
   photo?: string;
 }
 
+type ImageType = 'src' | 'ngSrc';
+
 @Component({
   selector: 'app-avatar',
   standalone: true,
@@ -25,5 +27,6 @@ export class AvatarComponent {
     name: 'user',
     photo: '',
   });
+  typeImage = input<ImageType>('ngSrc');
   customClass = input<string>('');
 }

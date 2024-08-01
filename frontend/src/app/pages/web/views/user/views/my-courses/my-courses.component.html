@@ -1,0 +1,55 @@
+<section
+  class="flex flex-col gap-12 pb-8"
+  *ngrxLet="{
+    favorites: favoriteCourses$,
+    enrolled: enrolledCourse$,
+    completed: completedCourses$,
+  } as courses"
+>
+  <header class="flex justify-between items-center">
+    <div class="w-fit h-fit">
+      <app-title [level]="2" contentTitle="Mis Cursos" />
+      <app-divider />
+    </div>
+    <ul class="flex flex-col p-2 rounded-lg gap-2 bg-light-white">
+      @for (option of optionsFilter; track option.action) {
+        <li>
+          <button
+            class="px-1 min-w-36 rounded-lg tracking-wide transition-colors"
+            (click)="onChangeFilter(option.action)"
+            [ngClass]="{
+              'bg-light-blue': currentOptionFilter() === option.action,
+            }"
+            type="button"
+          >
+            {{ option.value }}
+          </button>
+        </li>
+      }
+    </ul>
+  </header>
+
+  <div class="flex flex-col gap-6">
+    @if (currentOptionFilter() === 'inProgress') {
+      @for (course of courses.enrolled; track $index) {
+        <app-course-progress-card />
+      } @empty {
+        <app-registration-message
+          btnText="Comienza ahora"
+          message="Aún no estás inscrito en ningún curso en Learn & Teach."
+        />
+      }
+    } @else {
+      @for (course of courses.completed; track $index) {
+        <app-course-progress-card />
+      } @empty {
+        <app-registration-message
+          btnText="Ver cursos 🤓"
+          message="Todavía no has completado algún curso"
+        />
+      }
+    }
+  </div>
+
+  <app-my-favorites [courses]="courses.favorites" />
+</section>

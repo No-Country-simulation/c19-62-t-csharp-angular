@@ -26,6 +26,11 @@ const WEB_ROUTES: Routes = [
     loadComponent: () => import('./views/user/user.component'),
     loadChildren: () => import('./views/user/user.routing'),
   },
+  {
+    path: 'user/my-courses',
+    loadComponent: () =>
+      import('./views/user/views/my-courses/my-courses.component'),
+  },
 ];
 
 export default WEB_ROUTES;

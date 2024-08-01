@@ -5,7 +5,14 @@
     (click)="toggleDropdown()"
     [attr.aria-label]="labelDropdownStream()"
   >
-    <app-avatar customClass="size-14" />
+    <app-avatar
+      customClass="size-14"
+      typeImage="src"
+      [avatarInfo]="{
+        name: userInfo()?.firstName ?? '' + userInfo()?.firstName,
+        photo: userInfo()?.image ?? '',
+      }"
+    />
     <app-arrow-svg [size]="24" class="rotate-90" />
   </button>
   @if (isOpenDropdown()) {

@@ -11,7 +11,7 @@ import { FooterComponent } from 'app/shared/ui/footer/footer.component';
       class="grid grid-rows-[auto_1fr] overflow-x-hidden grid-cols-[1rem_1fr_1rem] min-h-dvh bg-[#F6F6F7] xl:grid-cols-[4rem_1fr_4rem]"
     >
       <app-header class="col-[1/4] row-[1/2] px-8 z-20" />
-      <div class="col-[2/3] content-center py-10 min-h-dvh">
+      <div class="col-[2/3] py-10 min-h-dvh">
         <ng-content>
           <p class="text-center text-xl font-medium">Cargando ...</p>
         </ng-content>

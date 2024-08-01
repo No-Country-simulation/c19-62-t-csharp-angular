@@ -1,0 +1,15 @@
+<article class="grid gap-8 grid-cols-1">
+  <header class="flex items-center gap-2">
+    <app-heart-svg [size]="45" />
+    <h3 class="text-3xl font-semibold">Mis favoritos</h3>
+  </header>
+
+  @if (courses().length > 0) {
+    <app-carousel [carouselData]="courses()" />
+  } @else {
+    <app-registration-message
+      btnText="Ver cursos"
+      message="Aún no tienes marcado tus favoritos"
+    />
+  }
+</article>

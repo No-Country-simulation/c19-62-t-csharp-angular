@@ -1,0 +1,27 @@
+<figure
+  class="bg-light-white border-2 border-mid-blue rounded-xl flex flex-col w-full justify-center items-center p-2 py-4 md:p-4 md:py-8 lg:max-w-md gap-8"
+>
+  <div class="grid gap-4">
+    <figcaption class="flex flex-col justify-start gap-2">
+      <strong class="text-3xl"
+        >{{ priceCourse() | currency: 'USD' : 'symbol' : '1.0-0' }}
+        {{ CURRENCY_SYMBOL }}</strong
+      >
+      <span class="text-xl">Precio final del curso</span>
+    </figcaption>
+    <app-rating [rating]="ratingCourse()" [size]="40" />
+  </div>
+  <div class="flex gap-4 items-center flex-wrap justify-center">
+    @for (action of buttonsCard | keyvalue; track $index) {
+      <app-basic-button
+        [designBtn]="
+          action.value === buttonsCard.AddToCart ? 'common' : 'selector'
+        "
+        [btnConfig]="{
+          text: action.value,
+          size: 'base',
+        }"
+      />
+    }
+  </div>
+</figure>

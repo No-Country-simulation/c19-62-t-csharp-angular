@@ -3,3 +3,9 @@ export interface AuthResponse {
   token_type: string;
   expires_in: number;
 }
+
+export interface AuthErrorRegister {
+  id: number;
+  code: string;
+  description: string;
+}

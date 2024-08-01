@@ -18,6 +18,18 @@ const CATALOG_ROUTES: Routes = [
     title: 'Learn-teach | details course',
   },
   {
+    path: 'courses/:id/purchase',
+    loadComponent: () =>
+      import('./views/course-purchase/course-purchase.component'),
+    title: 'Learn-teach | purchase course',
+  },
+  {
+    path: 'courses/:id/purchase/purchase-success',
+    loadComponent: () =>
+      import('./views/welcome-course/welcome-course.component'),
+    title: 'Learn-teach | purchase course success',
+  },
+  {
     path: '**',
     redirectTo: 'courses',
     pathMatch: 'full',
