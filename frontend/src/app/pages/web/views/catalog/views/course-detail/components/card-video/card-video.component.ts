@@ -24,6 +24,7 @@ import { HeartFillSvgComponent } from '@icons/heart-fill-svg.component';
 import { CustomClass } from 'app/shared/interfaces/CustomClass.interface';
 import { PlaySvgComponent } from '@icons/play-svg.component';
 import { CourseSummary } from '../../../../interfaces/CourseInfo.interface';
+import { ListInfoComponent } from 'app/shared/components/list-info/list-info.component';
 
 @Component({
   selector: 'app-card-video',
@@ -44,6 +45,7 @@ import { CourseSummary } from '../../../../interfaces/CourseInfo.interface';
     NgClass,
     CurrencyPipe,
     DatePipe,
+    ListInfoComponent,
   ],
   templateUrl: './card-video.component.html',
   styles: `
@@ -64,26 +66,6 @@ export class CardVideoComponent implements CustomClass {
 
   isFavoriteStream = computed(() =>
     this.isFavorite() ? 'add to favorites' : 'remove from favorites'
-  );
-  private weeksLong = computed(
-    () => `${this.cardData().weeksLong > 1 ? 'semanas' : 'semana'}`
-  );
-  private hoursContent = computed(
-    () => `${this.cardData().hoursContent > 1 ? 'horas' : 'hora'}`
-  );
-  durationStream = computed(
-    () =>
-      `${this.cardData().weeksLong} ${this.weeksLong()}, con un total de ${this.cardData().hoursContent} ${this.hoursContent()} de contenido.`
-  );
-  typAccess = computed(() =>
-    this.cardData().access === 'permanent'
-      ? 'Acceso de por vida'
-      : 'Acceso temporal'
-  );
-  typeCertificate = computed(() =>
-    this.cardData().certificate
-      ? 'Certificado de finalización'
-      : 'Sin certificado al finalizar'
   );
 
   public onClick(): void {

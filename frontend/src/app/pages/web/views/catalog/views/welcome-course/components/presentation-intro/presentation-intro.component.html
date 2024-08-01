@@ -1,0 +1,47 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-y-16">
+  <div class="lg:col-[1/2]">
+    <header class="w-fit">
+      <app-title
+        [level]="2"
+        [contentTitle]="'Bienvenido al curso de ' + course()"
+      />
+      <app-divider />
+    </header>
+    <figure class="col-[2/3] flex flex-col gap-4 pt-8">
+      <figcaption class="text-base md:text-xl">
+        Ya estás inscrito en el curso y puedes comenzar a aprender. ¡Únete a
+        nuestras comunidades!
+      </figcaption>
+      <div class="gap-4 justify-between max-w-64 w-full pt-2 hidden lg:flex">
+        <a routerLink="/" href="#" target="_blank" rel="noopener noreferrer">
+          <app-discord-svg customClass="size-14 xl:size-16" />
+        </a>
+        <a routerLink="/" href="#" target="_blank" rel="noopener noreferrer">
+          <app-slack-svg customClass="size-14 xl:size-16" />
+        </a>
+      </div>
+    </figure>
+  </div>
+  <app-wrapper-image
+    class="lg:col-[2/3] lg:justify-self-end mx-auto lg:mx-initial"
+    imageUrl="assets/images/card-info.webp"
+    alt="Course cover"
+    [isFill]="true"
+    customClass="w-64 h-48  sm:w-[31rem] sm:h-[19.5rem] rounded-xl"
+  />
+  <div
+    class="lg:col-[1/3] lg:row-[2/3] flex flex-col justify-center items-center gap-4"
+  >
+    <app-basic-button
+      class="max-w-md mx-auto w-full"
+      customClass="max-w-md w-full"
+      routerLink="/"
+      [btnConfig]="{
+        text: 'Comienza ahora',
+      }"
+    />
+    <p class="text-xs text-center">
+      Haz clic en el botón "Comienza ahora" para empezar con el primer módulo.
+    </p>
+  </div>
+</div>

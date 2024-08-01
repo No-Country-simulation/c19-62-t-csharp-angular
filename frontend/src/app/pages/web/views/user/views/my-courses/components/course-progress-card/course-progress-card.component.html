@@ -1,0 +1,24 @@
+<figure
+  class="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] rounded-2xl bg-light-white grid grid-cols-2 p-4 md:p-6"
+>
+  <div class="border-r-2 border-r-light-blue flex gap-8">
+    <app-wrapper-image
+      customClass="w-44 h-24 rounded-2xl"
+      [isFill]="true"
+      imageUrl="assets/images/card-info.webp"
+      alt="banner course"
+    />
+    <figcaption class="font-semibold text-3xl max-w-xs leading-normal">
+      Curso: Introducción de HTML y CSS
+    </figcaption>
+  </div>
+  <div
+    class="flex flex-col justify-between items-end px-8 border-l-2 border-l-light-blue"
+  >
+    <div class="flex gap-2 items-center">
+      <app-play-svg class="text-primary-blue" [size]="45" />
+      <p class="font-semibold text-3xl">Sección 1: Introducción</p>
+    </div>
+    <span class="text-xl">{{ 0 | percent }}</span>
+  </div>
+</figure>

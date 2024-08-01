@@ -1,2 +1,57 @@
-<p>my-photo works!</p>
-,
+<section
+  class="flex flex-col justify-center items-center h-full gap-8"
+  *ngrxLet="{ user: infoUser$ } as data"
+>
+  <h3 class="text-3xl font-semibold">Foto de perfil</h3>
+  <div>
+    <label class="flex gap-1 items-center py-4 cursor-pointer" for="image">
+      <app-pencil-svg [size]="24" />
+      Agregar una foto de perfil
+      <input
+        #imageInput
+        (input)="onClick($event)"
+        class="hidden"
+        type="file"
+        name="image"
+        id="image"
+        accept="image/jpeg,image/png,image/gif"
+      />
+    </label>
+    <figure
+      class="max-w-md w-full grid place-content-center gap-8 border-mid-blue border-2 px-6 py-8 rounded-2xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
+    >
+      <app-avatar
+        class="border-2 border-mid-blue rounded-[50%] w-fit mx-auto"
+        customClass="size-36"
+        typeImage="src"
+        [avatarInfo]="{
+          name: data.user.firstName ?? '' + data.user.lastName,
+          photo: base64Image(),
+        }"
+      />
+      <div class="flex gap-8 justify-center items-center">
+        @for (btn of dataButtons; track btn.text) {
+          <app-basic-button
+            (click)="onAction(btn.action, imageInput)"
+            [designBtn]="btn.action === changeKey ? 'common' : 'selector'"
+            [btnConfig]="{
+              text: btn.text,
+            }"
+          />
+        }
+      </div>
+      <figcaption class="text-sm">
+        Tamaño máximo: 1MB Formatos compatibles: JPG, GIF o PNG.
+      </figcaption>
+    </figure>
+    <div class="w-fit mx-auto py-10">
+      <app-basic-button
+        designBtn="common"
+        [btnConfig]="{
+          text: 'Guardar cambios',
+          type: 'submit',
+        }"
+      />
+    </div>
+  </div>
+</section>

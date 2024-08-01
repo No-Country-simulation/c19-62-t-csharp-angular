@@ -26,6 +26,10 @@ const USER_ROUTES: Routes = [
     path: 'courses',
     loadComponent: () => import('./views/courses/courses.component'),
   },
+  {
+    path: 'logout',
+    loadComponent: () => import('./views/logout-modal/logout-modal.component'),
+  },
 ];
 
 export default USER_ROUTES;

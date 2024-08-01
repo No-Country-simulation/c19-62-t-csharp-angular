@@ -1,0 +1,23 @@
+<section class="flex flex-col justify-center items-center h-full gap-14">
+  <h3 class="text-3xl font-semibold">Cerrar sesión</h3>
+
+  <figure
+    class="max-w-md w-full grid place-content-center gap-16 border-mid-blue border-2 px-6 py-20 rounded-2xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
+  >
+    <figcaption class="text-center text-xl">
+      Si deseas salir haz clic en cerrar sesión o en cancelar si deseas seguir
+      aprendiendo.
+    </figcaption>
+    <div class="flex gap-8 justify-center items-center">
+      @for (option of optionsModal; track option.text) {
+        <app-basic-button
+          (click)="navigateTo(option)"
+          [designBtn]="option.text === btnKeyLogout ? 'common' : 'selector'"
+          [btnConfig]="{
+            text: option.text,
+          }"
+        />
+      }
+    </div>
+  </figure>
+</section>
