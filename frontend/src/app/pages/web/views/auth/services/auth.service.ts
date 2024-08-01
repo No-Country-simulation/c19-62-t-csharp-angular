@@ -6,8 +6,8 @@ import { AuthResponse } from '../interfaces/AuthResponse.interface';
 import { AuthRegister } from '../interfaces/AuthRegister.interface';
 import { RegisterResponse } from '../interfaces/RegisterResponse.interface';
 import { AuthRecovery } from '../interfaces/AuthRecovery.interface';
-import { environment } from 'environments/environment.development';
 import formatFormData from 'app/shared/utils/formatFormData';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',

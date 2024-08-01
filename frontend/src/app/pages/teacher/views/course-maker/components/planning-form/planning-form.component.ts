@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BasicCourseFormComponent } from '../basic-course-form/basic-course-form.component';
 import { SelectFormComponent } from '../select-form/select-form.component';
 import { ImageUploaderComponent } from '../image-uploader/image-uploader.component';
+import { JsonPipe } from '@angular/common';
+import { CourseContentFormComponent } from '../course-content-form/course-content-form.component';
 
 @Component({
   selector: 'app-planning-form',
@@ -12,6 +14,8 @@ import { ImageUploaderComponent } from '../image-uploader/image-uploader.compone
     BasicCourseFormComponent,
     SelectFormComponent,
     ImageUploaderComponent,
+    CourseContentFormComponent,
+    JsonPipe,
   ],
   templateUrl: './planning-form.component.html',
   styles: `
@@ -26,9 +30,17 @@ export class PlanningFormComponent {
 
   constructor(private readonly formConstructor: FormBuilder) {
     this.planningForm = this.formConstructor.nonNullable.group({
-      basic: [],
-      selector: [],
-      image: [],
+      basic: {
+        title: '',
+        subTitle: '',
+        description: '',
+      },
+      selector: {
+        language: '',
+        level: '',
+        category: '',
+        subCategory: '',
+      },
     });
   }
 

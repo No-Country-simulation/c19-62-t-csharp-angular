@@ -1,2 +1,58 @@
-<p>course-content-form works!</p>
-,
+<article
+  class="shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] p-4 bg-light-white rounded-xl grid gap-4"
+>
+  <header class="flex gap-8">
+    <h3 class="font-medium text-lg">Sección 1: Introducción</h3>
+    <div class="flex gap-2">
+      <button
+        class="hover:scale-110 transition-transform active:scale-90"
+        type="button"
+      >
+        <app-pencil-svg [size]="24" [isFilled]="true" />
+      </button>
+      <button
+        class="hover:scale-110 transition-transform active:scale-90"
+        type="button"
+      >
+        <app-trash-svg [size]="24" />
+      </button>
+    </div>
+  </header>
+  <div
+    class="border-2 border-primary-blue-light w-full p-2 rounded-md flex justify-between items-center"
+  >
+    <p>Tu descripcion</p>
+    <button
+      class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm flex gap-2 items-center hover:scale-105 transition-transform active:scale-90"
+      type="button"
+    >
+      <span class="font-semibold scale-125 block">+</span> contenido
+    </button>
+  </div>
+  <footer class="flex justify-between items-center">
+    <div class="flex gap-4">
+      @for (control of footerControls; track $index) {
+        <button
+          class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90"
+          type="button"
+        >
+          {{ control }}
+        </button>
+      }
+    </div>
+    <app-basic-button
+      class="max-w-56"
+      [btnConfig]="{
+        text: 'Eliminar sección',
+      }"
+    />
+  </footer>
+</article>
+<div class="max-w-56 my-8">
+  <app-basic-button
+    designBtn="selector"
+    [btnConfig]="{
+      text: 'Nueva sección',
+    }"
+  />
+</div>
