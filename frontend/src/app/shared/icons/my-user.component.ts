@@ -1,11 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, InputSignal, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  InputSignal,
+  input,
+} from '@angular/core';
 import { SvgProps } from '../interfaces/SvgProps.interface';
 
 @Component({
   selector: 'app-my-user',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `<svg
     [class]="customClass()"
     xmlns="http://www.w3.org/2000/svg"
