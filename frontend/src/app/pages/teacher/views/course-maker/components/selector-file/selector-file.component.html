@@ -1,0 +1,39 @@
+<div
+  formGroupName="selectorFileForm"
+  class="p-4 border-t-2 border-primary-blue-light animate-fadeIn flex justify-between gap-4"
+>
+  <div>Selecciona el tipo de contenido:</div>
+  <div class="flex gap-4 items-center">
+    @for (option of optionsResource; track option) {
+      <label
+        [for]="$index + option.label"
+        class="rounded-xl bg-primary-white flex justify-evenly items-center flex-col w-36 h-28 border-2 border-primary-blue-light cursor-pointer hover:text-primary-white hover:bg-primary-blue-light transition-colors has-[:checked]:bg-primary-blue-light has-[:checked]:text-primary-white"
+      >
+        @switch (option.type) {
+          @case ('video') {
+            <app-camera-svg [size]="46" />
+          }
+          @case ('document') {
+            <app-document-svg [size]="46" />
+          }
+          @case ('exam') {
+            <app-medal-svg [size]="46" />
+          }
+        }
+        <span
+          class="border-t-2 border-primary-blue-light w-full grid place-content-center pt-2 font-medium"
+          >{{ option.label }}</span
+        >
+        <input
+          formControlName="file"
+          class="hidden checked:bg-white"
+          hidden
+          type="radio"
+          name="type-resource"
+          [value]="option.type"
+          [id]="$index + option.label"
+        />
+      </label>
+    }
+  </div>
+</div>

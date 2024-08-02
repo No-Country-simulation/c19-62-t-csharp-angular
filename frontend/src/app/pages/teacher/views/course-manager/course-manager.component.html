@@ -1,2 +1,11 @@
-<p>course-manager works!</p>
-,
+<section class="flex flex-col gap-8 text-primary-blue-light">
+  <h2 class="text-2xl mdtext-4xl lg:text-6xl font-bold tracking-widest pb-4">
+    ¡Bienvenido, Luis García!
+  </h2>
+
+  @if (courses.length > 0) {
+    <app-my-courses [courses]="courses" />
+  } @else {
+    <app-induction-for-teacher />
+  }
+</section>

@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 export enum BasicValidators {
   required = 'Campo requerido',
   email = 'Formato de email invalido',
-  pattern = 'Formato invalido',
+  pattern = 'Formato invalido (Use mayúsculas ,minúsculas y números)',
   minlength = 'La longitud mínima es: ',
   maxlength = 'La longitud maxima es: ',
   min = 'Requiere un valor mínimo de: ',

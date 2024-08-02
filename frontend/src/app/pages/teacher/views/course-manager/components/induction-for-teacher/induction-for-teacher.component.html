@@ -1,0 +1,29 @@
+<div class="flex flex-col gap-8">
+  <p class="md:text-xl lg:text-2xl max-w-4xl">
+    Comienza junto a Learn & Teach tu nueva carrera como instructor o trae a la
+    plataforma tus clases para crecer junto a nosotros.
+  </p>
+  <div class="flex gap-8 flex-wrap md:flex-nowrap justify-between items-center">
+    <app-wrapper-image
+      class="mx-auto lg:mx-0"
+      imageUrl="assets/images/home-3.webp"
+      [isFill]="true"
+      customClass="w-[18rem] lg:w-[33rem] lg:h-[20rem] h-[12rem] xl:w-[38rem] xl:h-[25rem] rounded-xl"
+      alt=""
+    />
+    <ul class="lg:max-w-xl lg:text-xl list-disc flex flex-col gap-4">
+      @for (recommendations of listRecommendations; track $index) {
+        <li>
+          {{ recommendations }}
+        </li>
+      }
+    </ul>
+  </div>
+  <app-basic-button
+    routerLink="/teacher/course-maker"
+    class="max-w-md mx-auto w-full mt-12"
+    [btnConfig]="{
+      text: 'Comenzar a crear el curso',
+    }"
+  />
+</div>

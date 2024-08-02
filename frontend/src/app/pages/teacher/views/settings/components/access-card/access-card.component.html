@@ -1,0 +1,41 @@
+<figure
+  class="shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] flex flex-col rounded-xl px-4 py-6 h-full bg-light-white gap-4 lg:gap-10"
+>
+  <figcaption class="underline ext-lg lg:text-3xl font-semibold tracking-wider">
+    Inscripción
+  </figcaption>
+  <div class="max-w-md w-full relative text-primary-blue-light">
+    <button
+      (click)="changeViewDropdown()"
+      class="flex justify-between p-2 rounded-xl items-center px-6 border-[.1rem] border-primary-blue w-full text-base lg:text-2xl relative"
+      type="button"
+    >
+      {{ defaultValueSelect() }}
+      <app-arrow-svg
+        class="transition-transform pl-1"
+        [ngClass]="{
+          'rotate-90': !isViewDropdown(),
+          '-rotate-90': isViewDropdown(),
+        }"
+        [size]="15"
+      />
+    </button>
+    @if (isViewDropdown()) {
+      <ul
+        class="flex flex-col w-full shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] py-4 px-2 gap-6 bg-light-white absolute bottom-0 right-0 translate-y-[113%] text-lg rounded-2xl border-[.1rem] border-primary-blue animate-fadeIn"
+      >
+        @for (access of typeAccess; track $index) {
+          <li class="w-full">
+            <button
+              (click)="setValueAccess(access)"
+              class="block text-xl hover:bg-light-blue transition-colors text-nowrap text-left rounded-xl px-2 py-1 w-full"
+              type="button"
+            >
+              {{ access }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</figure>

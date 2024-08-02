@@ -7,7 +7,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AddResourceSvgComponent } from '@icons/add-resource-svg.component';
 import { CameraSvgComponent } from '@icons/camera-svg.component';
 import { DocumentSvgComponent } from '@icons/document-svg.component';
@@ -15,19 +15,6 @@ import { MedalSvgComponent } from '@icons/medal-svg.component';
 import { PencilSvgComponent } from '@icons/pencil-svg.component';
 import { TrashSvgComponent } from '@icons/trash-svg.component';
 import { BasicButtonComponent } from 'app/shared/components/basic-button/basic-button.component';
-interface Course {
-  title: string;
-  content: CourseContent[];
-}
-
-type ContentType = 'video' | 'document' | 'exam';
-
-interface CourseContent {
-  title: string;
-  description: string;
-  type: ContentType;
-  resource: string;
-}
 
 @Component({
   selector: 'app-course-content-form',
@@ -41,11 +28,14 @@ interface CourseContent {
     DocumentSvgComponent,
     MedalSvgComponent,
     AddResourceSvgComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './course-content-form.component.html',
   styles: `
-    :host {
-      display: block;
+    input:disabled {
+      border-color: transparent;
+      background-color: transparent;
+      caret-color: transparent;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -72,17 +62,21 @@ export class CourseContentFormComponent {
   index = signal(0);
   dialog = viewChild<ElementRef<HTMLDialogElement>>('dialog');
   sections: number[] = [];
-  courseContent = new FormControl<Course>({
-    title: '',
-    content: [
-      {
-        title: '',
-        description: '',
-        type: 'document',
-        resource: '',
-      },
-    ],
+  contentCourseForm = this.formConstructor.nonNullable.group({
+    title: [''],
+    content: this.formConstructor.array([
+      this.formConstructor.group({
+        subTitle: [''],
+        description: [''],
+        type: [''],
+        resource: [''],
+      }),
+    ]),
   });
+
+  constructor(private readonly formConstructor: FormBuilder) {
+    this.contentCourseForm.controls['title'].disable();
+  }
 
   public onAddSection(): void {
     this.sections.push(2);
@@ -107,5 +101,20 @@ export class CourseContentFormComponent {
 
   public closeDialog(): void {
     this.dialog()?.nativeElement.close();
+  }
+
+  public toggleEdit(control: string): void {
+    const isDisabled = this.contentCourseForm.get(control)?.disabled;
+    console.log(this.contentCourseForm.value);
+
+    if (isDisabled) {
+      return this.contentCourseForm.get(control)?.enable();
+    }
+
+    return this.contentCourseForm.get(control)?.disable();
+  }
+
+  public setValue(control: string, value: string): void {
+    return this.contentCourseForm.get(control)?.setValue(value);
   }
 }

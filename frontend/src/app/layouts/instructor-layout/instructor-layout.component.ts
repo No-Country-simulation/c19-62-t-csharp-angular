@@ -23,4 +23,8 @@ import { MainLogoComponent } from 'app/shared/components/main-logo/main-logo.com
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InstructorLayoutComponent {}
+export class InstructorLayoutComponent {
+  public goBack(): void {
+    window.history.back();
+  }
+}

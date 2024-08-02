@@ -1,8 +1,8 @@
 <article class="text-lg grid gap-20">
-  <div class="grid gap-10 max-w-lg">
+  <div class="grid gap-10 lg:max-w-lg">
     <header class="grid gap-4">
       <app-title [contentTitle]="detailsCourse().title" [level]="2" />
-      <p class="text-balance">{{ detailsCourse().overview }}</p>
+      <p class="lg:text-balance">{{ detailsCourse().overview }}</p>
     </header>
 
     <ul class="flex flex-col gap-2">
@@ -21,7 +21,7 @@
 
   <div class="grid gap-4">
     <app-title contentTitle="Descripción:" [level]="3" />
-    <p class="max-w-xl text-balance">
+    <p class="lg:max-w-xl text-balance">
       {{ detailsCourse().description }}
     </p>
   </div>

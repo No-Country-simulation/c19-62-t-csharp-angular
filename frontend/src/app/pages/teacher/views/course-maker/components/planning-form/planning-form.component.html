@@ -3,14 +3,16 @@
   class="max-w-4xl grid gap-8"
   [formGroup]="planningForm"
 >
-  <div class="grid gap-12">
-    <legend class="text-3xl font-semibold pb-8">Paso 1: Planeación</legend>
+  <div class="grid">
+    <legend class="xl lg:text-3xl font-semibold pb-8">
+      Paso 1: Planeación
+    </legend>
     <app-basic-course-form #firstStep formControlName="basic" ngSkipHydration />
     @defer (on interaction(firstStep)) {
       @if (planningForm.controls['basic'].valid) {
         <app-select-form
           #secondStep
-          class="animate-fadeIn"
+          class="animate-fadeIn pt-8"
           formControlName="selector"
         />
       }
@@ -21,13 +23,14 @@
         planningForm.controls['selector'].valid &&
         planningForm.controls['basic'].valid
       ) {
-        <app-image-uploader class="animate-fadeIn" />
+        <app-image-uploader class="animate-fadeIn pt-8" />
       }
     }
   </div>
 </form>
-<fieldset class="grid gap-12">
-  <legend class="text-3xl font-semibold pb-8">
+
+<fieldset class="flex flex-col gap-8">
+  <legend class="xl lg:text-3xl font-semibold pt-8">
     Paso 2: Contenido del curso
   </legend>
   <app-course-content-form />

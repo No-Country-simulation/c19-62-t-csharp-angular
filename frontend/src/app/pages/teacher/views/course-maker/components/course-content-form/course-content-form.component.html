@@ -1,21 +1,31 @@
-<form class="grid gap-8 max-h-[45rem] overflow-y-auto py-4">
-  @for (section of courseContent.value?.content; track $index) {
+<form
+  [formGroup]="contentCourseForm"
+  class="grid gap-8 max-h-[45rem] overflow-y-auto py-4"
+>
+  @for (section of contentCourseForm.value.content; track $index) {
     <article
       class="shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] p-4 bg-light-white rounded-xl grid gap-4 animate-fadeIn"
     >
-      <header class="flex gap-8">
-        <h3 class="font-medium text-lg">
-          Sección {{ $index + 1 }}:
-          {{ courseContent.value?.title || 'Tu titulo personalizado aquí' }}
+      <header class="flex items-center flex-wrap gap-4 md:gap-8">
+        <h3 class="font-medium text-lg flex items-center">
+          <span class="text-nowrap"> Sección {{ $index + 1 }}: </span>
+          <input
+            class="bg-[#EAEAEA] rounded-xl w-full"
+            formControlName="title"
+            type="text"
+            placeholder="Tu titulo personalizado aquí"
+          />
         </h3>
-        <div class="flex gap-4">
+        <div class="flex gap-4 items-center">
           <button
+            (click)="toggleEdit('title')"
             class="hover:scale-110 transition-transform active:scale-90"
             type="button"
           >
             <app-pencil-svg [size]="24" [isFilled]="true" />
           </button>
           <button
+            (click)="setValue('title', '')"
             class="hover:scale-110 transition-transform active:scale-90"
             type="button"
           >
@@ -23,98 +33,114 @@
           </button>
         </div>
       </header>
-      <div class="border-2 border-primary-blue-light w-full rounded-md">
-        <div class="p-2 flex justify-between items-center">
-          <p>Tu descripción</p>
-          <button
-            (click)="toggleView(isOpenContent)"
-            [ngClass]="{
-              'bg-primary-blue-light': isOpenContent(),
-              'text-primary-white': isOpenContent(),
-            }"
-            class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm flex gap-2 items-center hover:scale-105 transition-transform active:scale-90"
-            type="button"
-          >
-            <span class="font-semibold scale-125 block">{{
-              isOpenContent() ? '-' : '+'
-            }}</span>
-            contenido
-          </button>
-        </div>
-        @if (isOpenContent()) {
-          <div
-            class="p-4 border-t-2 border-primary-blue-light animate-fadeIn flex justify-between gap-4"
-          >
-            <div>Selecciona el tipo de contenido:</div>
-            <div class="flex gap-4 items-center">
-              @for (option of optionsResource; track option) {
-                <label
-                  [for]="$index + option.label"
-                  class="rounded-xl bg-primary-white flex justify-evenly items-center flex-col w-36 h-28 border-2 border-primary-blue-light cursor-pointer hover:text-primary-white hover:bg-primary-blue-light transition-colors has-[:checked]:bg-primary-blue-light has-[:checked]:text-primary-white"
-                >
-                  @switch (option.type) {
-                    @case ('video') {
-                      <app-camera-svg [size]="46" />
-                    }
-                    @case ('document') {
-                      <app-document-svg [size]="46" />
-                    }
-                    @case ('exam') {
-                      <app-medal-svg [size]="46" />
-                    }
-                  }
-                  <span
-                    class="border-t-2 border-primary-blue-light w-full grid place-content-center pt-2 font-medium"
-                    >{{ option.label }}</span
-                  >
-                  <input
-                    class="hidden checked:bg-white"
-                    hidden
-                    type="radio"
-                    name="type-resource"
-                    [value]="option.type"
-                    [id]="$index + option.label"
-                  />
-                </label>
-              }
+      <div formArrayName="content">
+        <div [formGroupName]="0">
+          <div class="border-2 border-primary-blue-light w-full rounded-md">
+            <div
+              class="p-2 flex flex-wrap md:flex-nowrap gap-4 justify-between items-center"
+            >
+              <input
+                class="w-full"
+                formControlName="description"
+                placeholder="Tu descripción"
+                type="text"
+                name=""
+                id=""
+              />
+              <button
+                (click)="toggleView(isOpenContent)"
+                [ngClass]="{
+                  'bg-primary-blue-light': isOpenContent(),
+                  'text-primary-white': isOpenContent(),
+                }"
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm flex gap-2 items-center hover:scale-105 transition-transform active:scale-90"
+                type="button"
+              >
+                <span class="font-semibold scale-125 block">{{
+                  isOpenContent() ? '-' : '+'
+                }}</span>
+                contenido
+              </button>
             </div>
+            @if (isOpenContent()) {
+              <div
+                class="p-4 border-t-2 border-primary-blue-light animate-fadeIn flex justify-between gap-4"
+              >
+                <div>Selecciona el tipo de contenido:</div>
+                <div class="flex gap-4 items-center">
+                  @for (option of optionsResource; track option) {
+                    <label
+                      [for]="$index + option.label"
+                      class="rounded-xl bg-primary-white flex justify-evenly items-center flex-col w-36 h-28 border-2 border-primary-blue-light cursor-pointer hover:text-primary-white hover:bg-primary-blue-light transition-colors has-[:checked]:bg-primary-blue-light has-[:checked]:text-primary-white"
+                    >
+                      @switch (option.type) {
+                        @case ('video') {
+                          <app-camera-svg [size]="46" />
+                        }
+                        @case ('document') {
+                          <app-document-svg [size]="46" />
+                        }
+                        @case ('exam') {
+                          <app-medal-svg [size]="46" />
+                        }
+                      }
+                      <span
+                        class="border-t-2 border-primary-blue-light w-full grid place-content-center pt-2 font-medium"
+                        >{{ option.label }}</span
+                      >
+                      <input
+                        formControlName="type"
+                        class="hidden checked:bg-white"
+                        hidden
+                        type="radio"
+                        name="type"
+                        [value]="option.type"
+                        [id]="$index + option.label"
+                      />
+                    </label>
+                  }
+                </div>
+              </div>
+            }
           </div>
-        }
-      </div>
-      <footer class="flex justify-between items-center">
-        <div class="flex gap-4">
-          <button
-            class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
-            (click)="setIndex(1)"
-            [ngClass]="{
-              'bg-primary-blue-light': index() === 1,
-              'text-primary-white': index() === 1,
-            }"
-            type="button"
+          <footer
+            class="flex flex-col gap-4 justify-between items-center pt-4 flex-wrap sm:flex-row"
           >
-            Descripción
-          </button>
-          <button
-            class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
-            [ngClass]="{
-              'bg-primary-blue-light': index() === 2,
-              'text-primary-white': index() === 2,
-            }"
-            type="button"
-            (click)="setIndex(2)"
-          >
-            Recursos
-          </button>
+            <div class="flex gap-4 flex-wrap">
+              <button
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
+                (click)="setIndex(1)"
+                [ngClass]="{
+                  'bg-primary-blue-light': index() === 1,
+                  'text-primary-white': index() === 1,
+                }"
+                type="button"
+              >
+                Descripción
+              </button>
+              <button
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
+                [ngClass]="{
+                  'bg-primary-blue-light': index() === 2,
+                  'text-primary-white': index() === 2,
+                }"
+                type="button"
+                (click)="setIndex(2)"
+              >
+                Recursos
+              </button>
+            </div>
+            <app-basic-button
+              class="max-w-56"
+              designBtn="warn"
+              (click)="toggleDialog()"
+              [btnConfig]="{
+                text: 'Eliminar sección',
+              }"
+            />
+          </footer>
         </div>
-        <app-basic-button
-          class="max-w-56"
-          designBtn="warn"
-          (click)="toggleDialog()"
-          [btnConfig]="{
-            text: 'Eliminar sección',
-          }"
-        />
-      </footer>
+      </div>
 
       @if (index() === 1) {
         <textarea

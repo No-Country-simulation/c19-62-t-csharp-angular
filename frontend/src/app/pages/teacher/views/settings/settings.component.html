@@ -1,2 +1,10 @@
-<p>settings works!</p>
-,
+<section class="flex flex-col gap-4">
+  <h2 class="text-xl md:text-2xl lg:text-6xl font-bold tracking-widest">
+    Configuración
+  </h2>
+  <div class="grid gap-8 md:grid-cols-2 md:gap-x-6 md:gap-y-24">
+    <app-card-status-course class="md:col-[1/2]" />
+    <app-access-card class="md:col-[2/3]" />
+    <app-permissions-manager-bar class="md:col-[1/3]" />
+  </div>
+</section>
