@@ -13,7 +13,7 @@ La plataforma de cursos en línea tiene como objetivo proporcionar a los estudia
 
 <!-- ## 🚀 Características y Funcionalidades: -->
 
-
+![home](https://github.com/user-attachments/assets/41d69df7-bce8-4ee0-bd52-c6068e0da0c0)
 
 ## 🛠️ Tecnologías Utilizadas:
 
