@@ -1,0 +1,201 @@
+<form
+  [formGroup]="contentCourseForm"
+  class="grid gap-8 max-h-[45rem] overflow-y-auto py-4"
+>
+  @for (section of contentCourseForm.value.content; track $index) {
+    <article
+      class="shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] p-4 bg-light-white rounded-xl grid gap-4 animate-fadeIn"
+    >
+      <header class="flex items-center flex-wrap gap-4 md:gap-8">
+        <h3 class="font-medium text-lg flex items-center">
+          <span class="text-nowrap"> Sección {{ $index + 1 }}: </span>
+          <input
+            class="bg-[#EAEAEA] rounded-xl w-full"
+            formControlName="title"
+            type="text"
+            placeholder="Tu titulo personalizado aquí"
+          />
+        </h3>
+        <div class="flex gap-4 items-center">
+          <button
+            (click)="toggleEdit('title')"
+            class="hover:scale-110 transition-transform active:scale-90"
+            type="button"
+          >
+            <app-pencil-svg [size]="24" [isFilled]="true" />
+          </button>
+          <button
+            (click)="setValue('title', '')"
+            class="hover:scale-110 transition-transform active:scale-90"
+            type="button"
+          >
+            <app-trash-svg [size]="24" />
+          </button>
+        </div>
+      </header>
+      <div formArrayName="content">
+        <div [formGroupName]="0">
+          <div class="border-2 border-primary-blue-light w-full rounded-md">
+            <div
+              class="p-2 flex flex-wrap md:flex-nowrap gap-4 justify-between items-center"
+            >
+              <input
+                class="w-full"
+                formControlName="description"
+                placeholder="Tu descripción"
+                type="text"
+                name=""
+                id=""
+              />
+              <button
+                (click)="toggleView(isOpenContent)"
+                [ngClass]="{
+                  'bg-primary-blue-light': isOpenContent(),
+                  'text-primary-white': isOpenContent(),
+                }"
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm flex gap-2 items-center hover:scale-105 transition-transform active:scale-90"
+                type="button"
+              >
+                <span class="font-semibold scale-125 block">{{
+                  isOpenContent() ? '-' : '+'
+                }}</span>
+                contenido
+              </button>
+            </div>
+            @if (isOpenContent()) {
+              <div
+                class="p-4 border-t-2 border-primary-blue-light animate-fadeIn flex justify-between gap-4"
+              >
+                <div>Selecciona el tipo de contenido:</div>
+                <div class="flex gap-4 items-center">
+                  @for (option of optionsResource; track option) {
+                    <label
+                      [for]="$index + option.label"
+                      class="rounded-xl bg-primary-white flex justify-evenly items-center flex-col w-36 h-28 border-2 border-primary-blue-light cursor-pointer hover:text-primary-white hover:bg-primary-blue-light transition-colors has-[:checked]:bg-primary-blue-light has-[:checked]:text-primary-white"
+                    >
+                      @switch (option.type) {
+                        @case ('video') {
+                          <app-camera-svg [size]="46" />
+                        }
+                        @case ('document') {
+                          <app-document-svg [size]="46" />
+                        }
+                        @case ('exam') {
+                          <app-medal-svg [size]="46" />
+                        }
+                      }
+                      <span
+                        class="border-t-2 border-primary-blue-light w-full grid place-content-center pt-2 font-medium"
+                        >{{ option.label }}</span
+                      >
+                      <input
+                        formControlName="type"
+                        class="hidden checked:bg-white"
+                        hidden
+                        type="radio"
+                        name="type"
+                        [value]="option.type"
+                        [id]="$index + option.label"
+                      />
+                    </label>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+          <footer
+            class="flex flex-col gap-4 justify-between items-center pt-4 flex-wrap sm:flex-row"
+          >
+            <div class="flex gap-4 flex-wrap">
+              <button
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
+                (click)="setIndex(1)"
+                [ngClass]="{
+                  'bg-primary-blue-light': index() === 1,
+                  'text-primary-white': index() === 1,
+                }"
+                type="button"
+              >
+                Descripción
+              </button>
+              <button
+                class="capitalize rounded-lg p-1 px-2 border-2 border-primary-blue-light text-sm hover:scale-105 transition-transform active:scale-90 hover:bg-primary-blue-light hover:text-primary-white"
+                [ngClass]="{
+                  'bg-primary-blue-light': index() === 2,
+                  'text-primary-white': index() === 2,
+                }"
+                type="button"
+                (click)="setIndex(2)"
+              >
+                Recursos
+              </button>
+            </div>
+            <app-basic-button
+              class="max-w-56"
+              designBtn="warn"
+              (click)="toggleDialog()"
+              [btnConfig]="{
+                text: 'Eliminar sección',
+              }"
+            />
+          </footer>
+        </div>
+      </div>
+
+      @if (index() === 1) {
+        <textarea
+          class="min-h-56 rounded-xl w-full resize-none placeholder:text-lg placeholder:font-medium font-medium placeholder:text-[#636363] animate-fadeIn"
+          placeholder="Introduce una descripción para esta clase"
+        ></textarea>
+      }
+
+      @if (index() === 2) {
+        <div class="w-full grid place-content-center animate-fadeIn">
+          <p class="text-center">Arrastra aquí el documento</p>
+          <label
+            class="border-[.15rem] border-primary-blue-light w-64 h-36 bg-primary-white border-dashed grid place-content-center hover:bg-[#c9d1da] transition-colors cursor-pointer"
+          >
+            <app-add-resource-svg />
+            <input class="hidden" [hidden]="true" type="file" name="" />
+          </label>
+        </div>
+      }
+    </article>
+  } @empty {
+    <p>Sin Secciones aún</p>
+  }
+</form>
+<div class="max-w-56 my-8">
+  <app-basic-button
+    (click)="onAddSection()"
+    designBtn="selector"
+    [btnConfig]="{
+      text: 'Nueva sección',
+    }"
+  />
+</div>
+
+<dialog
+  class="p-6 py-12 rounded-xl gap-8 backdrop:backdrop-blur-sm backdrop:bg-black/25 max-w-lg backdrop:pointer-events-none backdrop:select-none"
+  #dialog
+>
+  <p class="text-lg md:text-xl xl:text-2xl text-center">
+    ¿Seguro que quieres eliminar esta sección?
+  </p>
+  <div class="flex justify-center gap-16 pt-8">
+    <app-basic-button
+      designBtn="warn"
+      [btnConfig]="{
+        text: 'Eliminar',
+      }"
+    />
+
+    <app-basic-button
+      (click)="closeDialog()"
+      designBtn="selector"
+      [btnConfig]="{
+        text: 'Cancelar',
+      }"
+    />
+  </div>
+</dialog>

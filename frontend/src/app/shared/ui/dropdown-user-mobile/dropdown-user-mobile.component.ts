@@ -15,9 +15,9 @@ export class DropdownUserMobileComponent {
   isOpenDropdown = signal(false);
 
   dropdownOptions: DataLink[] = [
-    { text: 'Ingresar', url: '/learn-teach/auth/login' },
-    { text: 'Crear cuenta', url: '/learn-teach/auth/register' },
-    { text: 'Cursos', url: '/learn-teach/catalog' },
+    { text: 'Ingresar', url: '/auth/login' },
+    { text: 'Crear cuenta', url: '/auth/register' },
+    { text: 'Cursos', url: '/catalog' },
     { text: 'Sobre nosotros', url: 'community' },
     { text: 'FAQ', url: 'help' },
   ];

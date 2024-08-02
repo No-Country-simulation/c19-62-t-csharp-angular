@@ -53,7 +53,7 @@ module.exports = tseslint.config(
         'error',
         {
           template: 70,
-          styles: 5,
+          styles: 10,
         },
       ],
       '@angular-eslint/contextual-lifecycle': ['error'],

@@ -9,7 +9,7 @@
   @if (isMayorFive() && !isLoadAllSections()) {
     <button
       (click)="onClick()"
-      class="hover:underline text-primary-blue font-bold text-xl py-2 mx-auto text-center tracking-wide"
+      class="hover:underline text-primary-blue font-bold md:text-xl py-2 mx-auto text-center tracking-wide"
       type="button"
     >
       Ver {{ totalSections() - MAX_SECTIONS }}

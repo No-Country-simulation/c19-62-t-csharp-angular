@@ -1,4 +1,4 @@
-<header>
+<div>
   <nav class="flex justify-between items-center py-6">
     <header>
       <h1
@@ -26,11 +26,11 @@
       } @else {
         <div class="flex gap-8">
           <app-basic-button
-            (click)="navigateTo('/learn-teach/auth/login')"
+            (click)="navigateTo('/auth/login')"
             [btnConfig]="{ text: 'Ingresar' }"
           />
           <app-basic-button
-            (click)="navigateTo('/learn-teach/auth/register')"
+            (click)="navigateTo('/auth/register')"
             [btnConfig]="{ text: 'Registrarse' }"
           />
         </div>
@@ -38,4 +38,4 @@
     </div>
     <app-dropdown-user-mobile class="block lg:hidden" />
   </nav>
-</header>
+</div>

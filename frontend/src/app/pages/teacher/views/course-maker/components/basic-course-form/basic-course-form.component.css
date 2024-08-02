@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+.invalid-field {
+  color: #ef4444;
+  & :where(input, textarea) {
+    border-color: #ef4444;
+  }
+}

@@ -1,2 +1,53 @@
-<p>settings works!</p>
-,
+<section class="mx-auto max-w-md flex flex-col gap-10">
+  <h3 class="text-3xl font-semibold text-center">Configuración de la cuenta</h3>
+  <form class="grid gap-4" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <div>
+      <p class="flex gap-2 items-center">
+        <app-my-user [size]="18" /> Datos personales de la cuenta
+      </p>
+    </div>
+    <app-validated-input
+      class="relative"
+      [config]="{
+        type: 'password',
+        label: 'Contraseña actual  *',
+      }"
+      [parentForm]="settingsForm"
+      control="myPassword"
+      formControlName="myPassword"
+    ></app-validated-input>
+    <a
+      class="underline text-sm w-full text-right"
+      routerLink="/auth/recovery-password"
+      >¿Olvidaste tu contraseña?</a
+    >
+
+    <div>
+      <p class="flex gap-2 items-center py-4">
+        <app-lock-svg [size]="18" /> contraseña
+      </p>
+      <div class="flex gap-4 flex-col">
+        @for (field of fields.slice(1); track field.name) {
+          <app-validated-input
+            class="relative"
+            [config]="{
+              type: field.type,
+              label: field.name,
+            }"
+            [parentForm]="settingsForm"
+            [control]="field.control"
+            [formControlName]="field.control"
+          >
+          </app-validated-input>
+        }
+      </div>
+    </div>
+    <div class="max-w-60 mx-auto py-4">
+      <app-basic-button
+        [isDisabled]="settingsForm.invalid"
+        [btnConfig]="{ text: 'Guardar cambios', type: 'submit' }"
+        designBtn="common"
+      />
+    </div>
+  </form>
+</section>

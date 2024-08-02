@@ -1,0 +1,21 @@
+<figure
+  class="flex max-w-5xl rounded-xl shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)]"
+>
+  <app-wrapper-image
+    customClass="w-80 h-48 rounded-xl"
+    imageUrl="assets/images/home-3.webp"
+    [isFill]="true"
+    alt="cover course"
+  />
+  <div class="pl-8 py-3 flex flex-col justify-between">
+    <figcaption class="font-semibold text-3xl">Titulo de curso</figcaption>
+    <p class="text-xl">Curso publicado</p>
+    <div class="flex gap-8 items-center">
+      <app-basic-button
+        [btnConfig]="{ text: 'Editar curso' }"
+        designBtn="selector"
+      />
+      <app-basic-button [btnConfig]="{ text: 'Eliminar curso' }" />
+    </div>
+  </div>
+</figure>

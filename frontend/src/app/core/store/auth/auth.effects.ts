@@ -42,7 +42,7 @@ export class AuthEffects {
             of(
               AUTH_ACTIONS.saveToken({ token: access_token }),
               USER_ACTIONS.getUserData({ email: credentials.email }),
-              AUTH_ACTIONS.redirectTo({ url: '/learn-teach/user/profile' })
+              AUTH_ACTIONS.redirectTo({ url: '/user/profile' })
             )
           ),
           catchError((e: HttpErrorResponse) =>
@@ -90,9 +90,7 @@ export class AuthEffects {
       ofType(AUTH_ACTIONS.recoveryPassword),
       exhaustMap(({ email }) =>
         this.authService.recoveryPassword({ email }).pipe(
-          map(() =>
-            AUTH_ACTIONS.redirectTo({ url: '/learn-teach/auth/login' })
-          ),
+          map(() => AUTH_ACTIONS.redirectTo({ url: '/auth/login' })),
           catchError((e: HttpErrorResponse) =>
             of(AUTH_ACTIONS.authError({ error: e.message }))
           )

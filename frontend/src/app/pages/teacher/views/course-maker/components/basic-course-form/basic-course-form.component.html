@@ -1,0 +1,82 @@
+<form novalidate class="flex flex-col gap-8" [formGroup]="basicCourseForm">
+  <label
+    [ngClass]="{
+      'invalid-field':
+        basicCourseForm.controls['title'].invalid &&
+        basicCourseForm.controls['title'].dirty,
+    }"
+    for="title"
+  >
+    <p>Título</p>
+    <div class="grid grid-cols-[1fr_auto] items-center">
+      <input
+        (blur)="onTouched?.()"
+        class="pr-16 col-[1/3] row-[1/2] rounded-lg border-primary-blue-light disabled:border-red-400"
+        placeholder="Ponle un título a tu curso"
+        formControlName="title"
+        type="text"
+        name="title"
+        id="title"
+      />
+      <span
+        class="w-12 grid place-content-center col-[2/3] row-[1/2] border-l-[.1rem] border-primary-blue"
+      >
+        {{ basicCourseForm.controls['title'].value.length }}
+      </span>
+    </div>
+    <small>Te sugerimos un título claro y llamativo</small>
+  </label>
+
+  <label
+    for="subTitle"
+    [ngClass]="{
+      'invalid-field':
+        basicCourseForm.controls['subTitle'].invalid &&
+        basicCourseForm.controls['subTitle'].dirty,
+    }"
+  >
+    <p>Subtítulo del Curso</p>
+    <div class="grid grid-cols-[1fr_auto] items-center">
+      <input
+        (blur)="onTouched?.()"
+        class="pr-16 col-[1/3] row-[1/2] rounded-lg border-primary-blue-light"
+        placeholder="Introduce un subtítulo para el curso"
+        formControlName="subTitle"
+        type="text"
+        name="subTitle"
+        id="subTitle"
+      />
+      <span
+        class="w-12 grid place-content-center col-[2/3] row-[1/2] border-l-[.1rem] border-primary-blue"
+      >
+        {{ basicCourseForm.controls['subTitle'].value.length }}
+      </span>
+    </div>
+    <small>
+      Introduce palabras clave y menciona las tres o cuatro áreas que consideres
+      más importantes
+    </small>
+  </label>
+
+  <label
+    [ngClass]="{
+      'invalid-field':
+        basicCourseForm.controls['description'].invalid &&
+        basicCourseForm.controls['description'].dirty,
+    }"
+    for="description"
+  >
+    <p>Descripción del curso</p>
+    <div>
+      <textarea
+        class="resize-none w-full border-primary-blue-light rounded-lg text-current"
+        (blur)="onTouched?.()"
+        name="description"
+        formControlName="description"
+        id="description"
+        placeholder="Introduce una descripción para tu curso."
+      ></textarea>
+    </div>
+    <small>La descripción debe tener 200 palabras como mínimo.</small>
+  </label>
+</form>
