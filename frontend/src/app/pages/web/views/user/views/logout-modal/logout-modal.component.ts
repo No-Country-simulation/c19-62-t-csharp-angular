@@ -15,8 +15,8 @@ import { DataLink } from 'app/shared/interfaces/DataLink.interface';
 export default class LogoutModalComponent {
   btnKeyLogout = 'Cerrar sesión';
   optionsModal: DataLink[] = [
-    { text: 'Cancelar', url: '/learn-teach/user/profile' },
-    { text: 'Cerrar sesión', url: '/learn-teach' },
+    { text: 'Cancelar', url: '/user/profile' },
+    { text: 'Cerrar sesión', url: '/' },
   ];
 
   constructor(private readonly store: Store<AppState>) {}

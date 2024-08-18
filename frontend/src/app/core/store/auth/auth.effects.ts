@@ -12,6 +12,8 @@ import { AuthService } from '../../../pages/web/views/auth/services/auth.service
 import { AuthErrorRegister } from 'app/pages/web/views/auth/interfaces/AuthResponse.interface';
 import listFormat from 'app/shared/utils/listFormat';
 import USER_ACTIONS from '../user/user.actions';
+import { LocalStorageService } from 'app/shared/services/local-storage.service';
+import { TokenService } from 'app/shared/services/token.service';
 
 @Injectable()
 export class AuthEffects {
@@ -19,7 +21,9 @@ export class AuthEffects {
     private readonly actions$: Actions,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly store: Store<AppState>
+    private readonly store: Store<AppState>,
+    private readonly localStorage: LocalStorageService,
+    private readonly tokenService: TokenService
   ) {}
 
   public auditToken$ = createEffect(() => {
@@ -42,7 +46,7 @@ export class AuthEffects {
             of(
               AUTH_ACTIONS.saveToken({ token: access_token }),
               USER_ACTIONS.getUserData({ email: credentials.email }),
-              AUTH_ACTIONS.redirectTo({ url: '/user/profile' })
+              AUTH_ACTIONS.redirectTo({ url: '/user/my-photo' })
             )
           ),
           catchError((e: HttpErrorResponse) =>
@@ -98,6 +102,31 @@ export class AuthEffects {
       )
     );
   });
+
+  public authLogout = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AUTH_ACTIONS.authLogout),
+        map(() => {
+          this.tokenService.removeToken();
+          this.router.navigate(['/home']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  public saveToken = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AUTH_ACTIONS.saveToken),
+        map(({ token }) => {
+          this.tokenService.saveToken(token);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   public AuthRedirect = createEffect(
     () => {

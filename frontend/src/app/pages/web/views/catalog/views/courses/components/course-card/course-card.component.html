@@ -9,17 +9,17 @@
   />
   <div class="flex flex-col gap-6 p-4">
     <div class="flex flex-col gap-1 text-xl">
-      <figcaption>Nombre del curso</figcaption>
+      <figcaption>{{ detailsCourse().title }}</figcaption>
       <app-rating [size]="25" />
     </div>
     <div class="max-w-48 flex justify-between gap-4">
       <div class="flex gap-4 items-center">
         <app-user-svg [size]="20" />
-        <span>80</span>
+        <span>{{ detailsCourse().students }}</span>
       </div>
       <div class="flex gap-4 items-center">
         <app-clock-svg [size]="20" />
-        <span>5 hs</span>
+        <span>{{ detailsCourse().hoursContent }} hs</span>
       </div>
     </div>
     <app-list-tag
@@ -27,8 +27,8 @@
       [tags]="tags()"
     />
     <div class="flex flex-col gap-1 items-start">
-      <p>Descripción breve</p>
-      <p>Por: Profesor</p>
+      <p>Descripción breve: {{ detailsCourse().overview }}</p>
+      <p>Por: {{ detailsCourse().instructor }}</p>
     </div>
     <app-basic-button
       class="px-3"
