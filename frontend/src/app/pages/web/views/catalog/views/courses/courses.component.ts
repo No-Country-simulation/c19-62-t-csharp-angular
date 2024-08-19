@@ -7,11 +7,11 @@ import {
 import { CourseFilterBarComponent } from './components/course-filter-bar/course-filter-bar.component';
 import { GalleryCourseComponent } from './components/gallery-course/gallery-course.component';
 import { GalleryCarouselComponent } from './components/gallery-carousel/gallery-carousel.component';
-import { DetailsCourse } from '../../interfaces/CourseInfo.interface';
-import { Observable, of } from 'rxjs';
+import { DetailsCourse, Level } from '../../interfaces/CourseInfo.interface';
+import { Observable, map, of } from 'rxjs';
 import { DividerComponent } from 'app/shared/components/divider/divider.component';
-import { MockupService } from 'app/shared/services/mockup.service';
 import { LetDirective } from '@ngrx/component';
+import { CourseApiService } from '../../services/course-api.service';
 
 @Component({
   selector: 'app-courses',
@@ -34,11 +34,26 @@ import { LetDirective } from '@ngrx/component';
 export default class CoursesComponent implements OnInit {
   coursesList$: Observable<DetailsCourse[]> = of([]);
   isSearchActive = signal(false);
+  course: DetailsCourse[] = [];
 
-  constructor(private readonly mockupService: MockupService) {}
+  constructor(private readonly courseService: CourseApiService) {}
 
   ngOnInit(): void {
-    this.coursesList$ = this.mockupService.getListCourse();
+    this.coursesList$ = this.courseService.getAllCourses().pipe(
+      map(({ $values }) => {
+        return $values.map((v) => ({
+          title: v.title,
+          overview: v.subtitle,
+          instructor: 'Por definir',
+          hoursContent: v.durationHours,
+          level: v.level as Level,
+          students: 1000,
+          rating: 0,
+          description: v.description,
+          tags: v.tagsDtos.$values as unknown as string[],
+        }));
+      })
+    );
   }
 
   public activeSearch(): void {

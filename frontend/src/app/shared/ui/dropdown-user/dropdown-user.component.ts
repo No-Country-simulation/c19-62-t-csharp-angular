@@ -38,7 +38,6 @@ export class DropdownUserComponent {
     { text: 'Mis Cursos', url: '/user/courses' },
     { text: 'Comunidad', url: '/community' },
     { text: 'Ayuda', url: '/help' },
-    { text: 'Cerrar sesión', url: '/logout' },
   ];
   isOpenDropdown = signal(false);
   labelDropdownStream = computed(() =>
